@@ -3,7 +3,7 @@
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
          simulationTime='20'
-         nSamples="10"
+         nSamples="100"
          verbosity='2'>
         
         <!--stepper spec='GillespieStepper' /-->
@@ -12,12 +12,12 @@
 
         <model spec='Model' id='model'>
         
-            <populationType spec='PopulationType' typeName="G" dim="2 2 2 100" id="G"/>
-            <populationType spec='PopulationType' typeName="P" dim="2 2 2 100" id="P"/>
-            <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 100" id="GP"/>
-            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 100" id="GP1"/>
-            <populationType spec='PopulationType' typeName="SG" dim="100" id="SG"/>
-            <populationType spec='PopulationType' typeName="SP" dim="100" id="SP"/>
+            <populationType spec='PopulationType' typeName="G" dim="2 2 2 3000" id="G"/>
+            <populationType spec='PopulationType' typeName="P" dim="2 2 2 3000" id="P"/>
+            <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 3000" id="GP"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 3000" id="GP1"/>
+            <populationType spec='PopulationType' typeName="SG" dim="3000" id="SG"/>
+            <populationType spec='PopulationType' typeName="SP" dim="3000" id="SP"/>
             
 
         	<!-- Replication reactions -->
@@ -26,54 +26,54 @@
                 	G[i1,j1,k1,l1] + P[i2,j2,k2,l1] + S[l1] ->  G[i0,j0,k0,l1] + G[i1,j1,k1,l1] + P[i2,j2,k2,l1]
             </reaction>-->
             
-            <reaction spec='Reaction' reactionName="Replication" rate="0.99" 
+            <reaction spec='Reaction' reactionName="Replication" rate="0.99"
                 rateMultiplier="exp(-i2-j2-k2)">
                 	G[i1,j1,k1,l1] + P[i2,j2,k2,l1] + SG[l1] ->  2G[i1,j1,k1,l1] + P[i2,j2,k2,l1]
             </reaction>
 
-            <reaction spec='Reaction' reactionName="Replication-1mutant" rate="0.01" 
+            <reaction spec='Reaction' reactionName="Replication-1mutant" rate="0.01"
                 rateMultiplier="exp(-i2-j2-k2)">
                 	G[i1,j1,k1,l1] + P[i2,j2,k2,l1] + SG[l1] ->  G[i0,j0,k0,l1] + G[i1,j1,k1,l1] + P[i2,j2,k2,l1]
                 	<predicate spec='Predicate' exp="sum(abs([i1,j1,k1]-[i0,j0,k0]))=1"/>
             </reaction>
             
-            <!-- Degradation (death) reactions -->            
-            <reaction spec='Reaction' reactionName="DegradationG" rate="0.05">
+            <!-- Degradation (death) reactions -->
+            <reaction spec='Reaction' reactionName="DegradationG" rate="0.0001">
                 	G[i1,j1,k1,l1] -> SG[l1]
             </reaction>
 
-            <reaction spec='Reaction' reactionName="DegradationP" rate="0.05">
+            <reaction spec='Reaction' reactionName="DegradationP" rate="0.0001">
                 	P[i1,j1,k1,l1] -> SP[l1]
             </reaction>
-            <reaction spec='Reaction' reactionName="DegradationGP" rate="0.05">
+            <reaction spec='Reaction' reactionName="DegradationGP" rate="0.0001">
                 	GP[i1,j1,k1,a1,l1] -> SG[l1]
             </reaction>
 
-            <reaction spec='Reaction' reactionName="DegradationGP1" rate="0.05">
+            <reaction spec='Reaction' reactionName="DegradationGP1" rate="0.0001">
                 	GP1[i1,j1,k1,a1,aa1,l1] -> SG[l1]
             </reaction>
-                        
-            <!-- Migration reactions -->
-            <reaction spec='Reaction' reactionName="MigrationG" rate="0.25">
+
+            <!-- Diffusion (migration) reactions -->
+            <reaction spec='Reaction' reactionName="DiffusionG" rate="0.0001">
                 <predicate spec='Predicate' exp="abs(l1-l2)=1"/> <!-- || abs(l1-l2)==50"/>-->
                 	G[i1,j1,k1,l1] + SG[l2] -> G[i1,j1,k1,l2] + SG[l1]
             </reaction>
-            
-            <reaction spec='Reaction' reactionName="MigrationP" rate="0.25">
+
+            <reaction spec='Reaction' reactionName="DiffusionP" rate="0.0001">
                 <predicate spec='Predicate' exp="abs(l1-l2)=1"/> <!-- || abs(l1-l2)==50"/>-->
                 	P[i1,j1,k1,l1] + SP[l2] -> P[i1,j1,k1,l2] + SP[l1]
             </reaction>
-            
-           <reaction spec='Reaction' reactionName="MigrationGP" rate="0.25">
+
+           <reaction spec='Reaction' reactionName="DiffusionGP" rate="0.0001">
                 <predicate spec='Predicate' exp="abs(l1-l2)=1"/> <!-- || abs(l1-l2)==50"/>-->
                 	GP[i1,j1,k1,a1,l1] + SG[l2] -> GP[i1,j1,k1,a1,l2] + SG[l1]
             </reaction>
 
-       		<reaction spec='Reaction' reactionName="MigrationGP1" rate="0.25">
+       		<reaction spec='Reaction' reactionName="DiffusionGP1" rate="0.0001">
                 <predicate spec='Predicate' exp="abs(l1-l2)=1"/> <!-- || abs(l1-l2)==50"/>-->
                 	GP1[i1,j1,k1,a1,aa1,l1] + SG[l2] -> GP1[i1,j1,k1,a1,aa1,l2] + SG[l1]
             </reaction>
-            
+
             <!-- Translation reactions -->
             <!-- key(i,j) = {{1,1,0},{0,1,0},{1,0,1},{0,1,1}}[i + j << 1]
             <reaction spec='Reaction' reactionName="Translation0" rate="0.5" rateMultiplier="exp(-sum(abs(key(i1,a1)-[i2,j2,k2])))">
@@ -81,81 +81,81 @@
             </reaction> -->
 
 				<!-- Attachment of first aa -->
-				
+
 				<!-- ideal catalyst 110 -->
-            	<reaction spec='Reaction' reactionName="TranslationG_00" rate="1.0" rateMultiplier="exp(-sum(abs([1,1,0]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationG_00" rate="0.001" rateMultiplier="exp(-sum(abs([1,1,0]-[i2,j2,k2])))">
                 		G[0,j1,k1,l1] + P[i2,j2,k2,l1] + SP[l1] -> GP[0,j1,k1,0,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 011 -->
-            	<reaction spec='Reaction' reactionName="TranslationG_11" rate="1.0" rateMultiplier="exp(-sum(abs([0,1,1]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationG_11" rate="0.001" rateMultiplier="exp(-sum(abs([0,1,1]-[i2,j2,k2])))">
                 		G[1,j1,k1,l1] + P[i2,j2,k2,l1] + SP[l1] -> GP[1,j1,k1,1,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 101 -->
-            	<reaction spec='Reaction' reactionName="TranslationG_01" rate="1.0" rateMultiplier="exp(-sum(abs([1,0,1]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationG_01" rate="0.001" rateMultiplier="exp(-sum(abs([1,0,1]-[i2,j2,k2])))">
                 		G[0,j1,k1,l1] + P[i2,j2,k2,l1] + SP[l1] -> GP[0,j1,k1,1,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 010 -->
-            	<reaction spec='Reaction' reactionName="TranslationG_10" rate="1.0" rateMultiplier="exp(-sum(abs([0,1,0]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationG_10" rate="0.001" rateMultiplier="exp(-sum(abs([0,1,0]-[i2,j2,k2])))">
                 		G[1,j1,k1,l1] + P[i2,j2,k2,l1] + SP[l1] -> GP[1,j1,k1,0,l1] + P[i2,j2,k2,l1]
             	</reaction>
-            
+
             	<!-- Attachment of second aa -->
-            	
+
 				<!-- ideal catalyst 110 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP_00" rate="1.0" rateMultiplier="exp(-sum(abs([1,1,0]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationGP_00" rate="0.001" rateMultiplier="exp(-sum(abs([1,1,0]-[i2,j2,k2])))">
                 		GP[i1,0,k1,a1,l1] + P[i2,j2,k2,l1] -> GP1[i1,0,k1,a1,0,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 011 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP_11" rate="1.0" rateMultiplier="exp(-sum(abs([0,1,1]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationGP_11" rate="0.001" rateMultiplier="exp(-sum(abs([0,1,1]-[i2,j2,k2])))">
                 		GP[i1,1,k1,a1,l1] + P[i2,j2,k2,l1] -> GP1[i1,1,k1,a1,1,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 101 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP_01" rate="1.0" rateMultiplier="exp(-sum(abs([1,0,1]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationGP_01" rate="0.001" rateMultiplier="exp(-sum(abs([1,0,1]-[i2,j2,k2])))">
                 		GP[i1,0,k1,a1,l1] + P[i2,j2,k2,l1] -> GP1[i1,0,k1,a1,1,l1] + P[i2,j2,k2,l1]
             	</reaction>
 				<!-- ideal catalyst 010 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP_10" rate="1.0" rateMultiplier="exp(-sum(abs([0,1,0]-[i2,j2,k2])))">
+            	<reaction spec='Reaction' reactionName="TranslationGP_10" rate="0.001" rateMultiplier="exp(-sum(abs([0,1,0]-[i2,j2,k2])))">
                 		GP[i1,1,k1,a1,l1] + P[i2,j2,k2,l1] -> GP1[i1,1,k1,a1,0,l1] + P[i2,j2,k2,l1]
             	</reaction>
-            
+
             	<!-- Attachment of third aa (implicit) and release of finished protein product -->
-                
-                <!-- ideal catalyst 110 -->        
-            	<reaction spec='Reaction' reactionName="TranslationGP1_00" rate="1.0">
+
+                <!-- ideal catalyst 110 -->
+            	<reaction spec='Reaction' reactionName="TranslationGP1_00" rate="0.001">
                 		GP1[i1,j1,0,l1,a1,aa1] + P[i2,j2,k2,l1] -> G[i1,j1,0,l1] + P[i2,j2,k2,l1] + P[i2,j2,0,l1]
             	</reaction>
             	<!-- ideal catalyst 011 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP1_11" rate="1.0">
+            	<reaction spec='Reaction' reactionName="TranslationGP1_11" rate="0.001">
                 		GP1[i1,j1,1,l1,a1,aa1] + P[i2,j2,k2,l1] -> G[i1,j1,1,l1] + P[i2,j2,k2,l1] + P[i2,j2,1,l1]
             	</reaction>
             	<!-- ideal catalyst 101 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP1_01" rate="1.0">
+            	<reaction spec='Reaction' reactionName="TranslationGP1_01" rate="0.001">
                 		GP1[i1,j1,0,l1,a1,aa1] + P[i2,j2,k2,l1] -> G[i1,j1,0,l1] + P[i2,j2,k2,l1] + P[i2,j2,1,l1]
             	</reaction>
             	<!-- ideal catalyst 010 -->
-            	<reaction spec='Reaction' reactionName="TranslationGP1_10" rate="1.0">
+            	<reaction spec='Reaction' reactionName="TranslationGP1_10" rate="0.001">
                 		GP1[i1,j1,1,l1,a1,aa1] + P[i2,j2,k2,l1] -> G[i1,j1,1,l1] + P[i2,j2,k2,l1] + P[i2,j2,0,l1]
             	</reaction>
         </model>
 
         <initialState spec='InitState'>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@G" location="2 2 2 25"/>
+            <populationSize spec='PopulationSize' size='500'>
+                <population spec='Population' type="@G" location="2 2 2 3000"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@P" location="2 2 2 25"/>
+            <populationSize spec='PopulationSize' size='3000'>
+                <population spec='Population' type="@P" location="2 2 2 3000"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@GP" location="2 2 2 2 25"/>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP" location="2 2 2 2 3000"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@GP1" location="2 2 2 2 2 25"/>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP1" location="2 2 2 2 2 3000"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@SG" location="25"/>
+            <populationSize spec='PopulationSize' size='300'>
+                <population spec='Population' type="@SG" location="3000"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@SP" location="25"/>
+            <populationSize spec='PopulationSize' size='300'>
+                <population spec='Population' type="@SP" location="3000"/>
             </populationSize>
         </initialState>
         
