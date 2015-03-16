@@ -38,7 +38,7 @@
                 ]]>
             </function>
 
-            <!-- Replication reaction, i and j are genes, a is protein with replicase activity -->
+            <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
                 <rateMultiplier spec='RateMultiplier'> 
                     exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.01)
