@@ -12,11 +12,13 @@
 
         <model spec='Model' id='model'>
         
+            <!-- Genes, proteins, gene-protein complexes -->
             <populationType spec='PopulationType' typeName="G" dim="2 2 2 51" id="G"/>
             <populationType spec='PopulationType' typeName="P" dim="2 2 2 51" id="P"/>
             <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 51" id="GP"/>
             <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 51" id="GP1"/>
 
+	    <!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
             <populationType spec='PopulationType' typeName="SG" dim="51" id="SG"/>
             <populationType spec='PopulationType' typeName="SP" dim="51" id="SP"/>
 
@@ -26,12 +28,12 @@
             <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
             <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
             
-	    <!-- Translation enzyme lookup, i is nucleotide, j is amino acid, returns optimal protein catalyst sequence -->
-            <function spec='Function' id="key" params="i j">
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence -->
+            <function spec='Function' id="key" params="i a">
                 <![CDATA[
-                  i==0 && j==0 ?  {1,1,0}
-                : i==1 && j==1 ?  {0,1,1}
-                : i==0 && j==1 ?  {1,0,1}
+                  i==0 && a==0 ?  {1,1,0}
+                : i==1 && a==1 ?  {0,1,1}
+                : i==0 && a==1 ?  {1,0,1}
                 :                 {0,1,0}
                 ]]>
             </function>
@@ -41,8 +43,7 @@
                 <rateMultiplier spec='RateMultiplier'> 
                     exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.01)
                 </rateMultiplier>
-
-                G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SG[l1] ->  G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SG[l1] ->  G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
             </reaction>
             
             <!-- Translation reactions -->
