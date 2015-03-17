@@ -17,6 +17,12 @@
             <populationType spec='PopulationType' typeName="P" dim="2 2 2 51" id="P"/>
             <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 2 2 2 2 2 2 51" id="GP"/>
             <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 2 2 2 2 2 2 51" id="GP1"/>
+            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP2"/>
+            <populationType spec='PopulationType' typeName="GP3" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP3"/>
+            <populationType spec='PopulationType' typeName="GP4" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP4"/>
+            <populationType spec='PopulationType' typeName="GP5" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP5"/>
+            <populationType spec='PopulationType' typeName="GP6" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP6"/>
+            <populationType spec='PopulationType' typeName="GP7" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 51" id="GP7"/>
 
 	    <!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
             <populationType spec='PopulationType' typeName="SG" dim="51" id="SG"/>
