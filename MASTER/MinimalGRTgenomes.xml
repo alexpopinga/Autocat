@@ -96,7 +96,8 @@
 
             <reaction spec='Reaction' reactionName="Translation8" rate="5.0">
                 <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i9,e9),{a1,a2,a3}))"/>
-                GP7[i1,i2,i3,i4,i5,i6,i7,i8,i9,e1,e2,e2,e3,e4,e5,e6,e7,e8,l1] + P[a1,a2,a3,l1] -> G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[e1,e2,e3,l1] + P[a1,a2,a3,l1]
+                GP7[i1,i2,i3,i4,i5,i6,i7,i8,i9,e1,e2,e2,e3,e4,e5,e6,e7,e8,l1] + P[a1,a2,a3,l1] -> 
+                G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[e1,e2,e3,l1] + P[e4,e5,e6,l1] + P[e7,e8,e9,l1] + P[a1,a2,a3,l1]
             </reaction>
 
             <!-- Diffusion (migration) reactions -->
