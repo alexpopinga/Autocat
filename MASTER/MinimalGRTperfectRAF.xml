@@ -36,29 +36,32 @@
 
             <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	G[i1,i2,i3] + P[0,0,0] ->  2G[i1,i2,i3] + P[0,0,0]
+            </reaction>            
+            <!--<reaction spec='Reaction' reactionName="Replication" rate="1">
                 	G[0,0,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,1,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[0,1,0] + P[0,0,0] ->  2G[0,1,0] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,0,1] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[0,0,1] + P[0,0,0] ->  2G[0,0,1] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,0,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[1,0,0] + P[0,0,0] ->  2G[1,0,0] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,0,1] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[1,0,1] + P[0,0,0] ->  2G[1,0,1] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,1,1] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[0,1,1] + P[0,0,0] ->  2G[0,1,1] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,1,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[1,1,0] + P[0,0,0] ->  2G[1,1,0] + P[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,1,1] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
-            </reaction>
+                	G[1,1,1] + P[0,0,0] ->  2G[1,1,1] + P[0,0,0]
+            </reaction>-->
             
             <!-- Translation reactions -->
             <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
