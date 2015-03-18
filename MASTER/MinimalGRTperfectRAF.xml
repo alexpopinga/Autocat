@@ -36,48 +36,72 @@
 
             <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[i1,i2,i3] + P[0,0,0] ->  2G[i1,i2,i3] + P[0,0,0]
+                	G[i1,i2,i3] + P[a,a,a] ->  2G[i1,i2,i3] + P[a,a,a]
             </reaction>            
             <!--<reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,0,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
+                	G[0,0,0] + P[a,a,a] ->  2G[0,0,0] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,1,0] + P[0,0,0] ->  2G[0,1,0] + P[0,0,0]
+                	G[0,1,0] + P[a,a,a] ->  2G[0,1,0] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,0,1] + P[0,0,0] ->  2G[0,0,1] + P[0,0,0]
+                	G[0,0,1] + P[a,a,a] ->  2G[0,0,1] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,0,0] + P[0,0,0] ->  2G[1,0,0] + P[0,0,0]
+                	G[1,0,0] + P[a,a,a] ->  2G[1,0,0] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,0,1] + P[0,0,0] ->  2G[1,0,1] + P[0,0,0]
+                	G[1,0,1] + P[a,a,a] ->  2G[1,0,1] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,1,1] + P[0,0,0] ->  2G[0,1,1] + P[0,0,0]
+                	G[0,1,1] + P[a,a,a] ->  2G[0,1,1] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,1,0] + P[0,0,0] ->  2G[1,1,0] + P[0,0,0]
+                	G[1,1,0] + P[a,a,a] ->  2G[1,1,0] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,1,1] + P[0,0,0] ->  2G[1,1,1] + P[0,0,0]
+                	G[1,1,1] + P[a,a,a] ->  2G[1,1,1] + P[a,a,a]
             </reaction>-->
             
-            <!-- Translation reactions -->
+            <!-- Translation reactions -->            
             <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
-                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>
-                G[i1,i2,i3] + P[0,0,0] -> GP[i1,i2,i3,e1] + P[0,0,0]
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                G[0,0,0] + P[b,b,a] -> GP[0,0,0,a] + P[b,b,a]
             </reaction>
-
             <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
-                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i2,e2),{a1,a2,a3}))"/>
-                GP[i1,i2,i3,e1] + P[0,0,0] -> GP1[i1,i2,i3,e1,e2] + P[0,0,0]
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP[0,0,0,a] + P[b,b,a] -> GP1[0,0,0,a,a] + P[b,b,a]
             </reaction>
-
             <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
-                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i3,e3),{a1,a2,a3}))"/>
-                GP1[i1,i2,i3,e1,e2] + P[0,0,0] -> G[i1,i2,i3] + P[e1,e2,e3] + P[0,0,0]
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP1[0,0,0,a,a] + P[b,b,a] -> G[0,0,0] + P[a,a,a] + P[b,b,a]
             </reaction>
+            
+            <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                G[0,1,1] + P[b,b,a] -> GP[0,1,1,a] + P[b,b,a]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP[0,1,1,a] + P[a,b,b] -> GP1[0,1,1,a,b] + P[a,b,b]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP1[0,1,1,a,b] + P[a,b,b] -> G[0,1,1] + P[a,b,b] + P[a,b,b]
+            </reaction> 
+              
+            <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                G[1,1,0] + P[a,b,b] -> GP[1,1,0,b] + P[a,b,b]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP[1,1,0,b] + P[a,b,b] -> GP1[1,1,0,b,b] + P[a,b,b]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
+                <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
+                GP1[1,1,0,b,b] + P[b,b,a] -> G[1,1,0] + P[b,b,a] + P[b,b,a]
+            </reaction>                  
             
             <!-- Degradation reactions -->
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.05">
@@ -85,7 +109,7 @@
             </reaction>
 
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.05">
-                P[0,0,0] -> 0
+                P[a,a,a] -> 0
             </reaction>
 
         </model>
