@@ -2,7 +2,7 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='20'
+         simulationTime='30'
          nSamples="100"
          verbosity='2'>
         
@@ -19,35 +19,41 @@
             <populationType spec='PopulationType' typeName="GP1" dim="1 1 1 1 1" id="GP1"/>
 
             <!-- Replication reaction -->
-            <reaction spec='Reaction' reactionName="Replication" rate="0.2">
+            <reaction spec='Reaction' reactionName="Replication" rate="0.1">
                 G[0,0,0] + P[0,0,0] ->  2G[0,0,0] + P[0,0,0]
             </reaction> 
                         
-            <!-- Translation reactions           
-            <reaction spec='Reaction' reactionName="Translation0" rate="0.2">
+            <!-- Translation reactions -->           
+            <reaction spec='Reaction' reactionName="Translation0" rate="0.1">
                 G[0,0,0] + P[0,0,0] -> GP[0,0,0,0] + P[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="0.2">
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.1">
                 GP[0,0,0,0] + P[0,0,0] -> GP1[0,0,0,0,0] + P[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="0.2">
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.1">
                 GP1[0,0,0,0,0] + P[0,0,0] -> G[0,0,0] + P[0,0,0] + P[0,0,0]
-            </reaction> -->
+            </reaction>
             
             <!-- Degradation reactions -->
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.15">
                 2G[0,0,0] -> G[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.15">
                 2P[0,0,0] -> P[0,0,0]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.15">
+                2GP[0,0,0,0] -> GP[0,0,0,0]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.15">
+                2GP1[0,0,0,0,0] -> GP1[0,0,0,0,0]
             </reaction>
         </model>
 
         <initialState spec='InitState'>
-            <populationSize spec='PopulationSize' size='3'>
+            <populationSize spec='PopulationSize' size='100'>
                 <population spec='Population' type="@G" location="0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='3'>
+            <populationSize spec='PopulationSize' size='300'>
                 <population spec='Population' type="@P" location="0 0 0"/>
             </populationSize>            
             <populationSize spec='PopulationSize' size='0'>
