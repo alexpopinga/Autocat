@@ -113,22 +113,22 @@
             
             <!-- Degradation reactions -->
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                G1[0,0,0] -> 0
+                2G1[0,0,0] -> G1[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                G2[0,1,1] -> 0
+                2G2[0,1,1] -> G2[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                G3[1,1,0] -> 0
+                2G3[1,1,0] -> G3[0,0,0]
             </reaction>            
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                P1[0,0,0] -> 0
+                2P1[0,0,0] -> P1[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                P2[1,1,0] -> 0
+                2P2[1,1,0] -> P2[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                P3[0,1,1] -> 0
+                2P3[0,1,1] -> P3[0,0,0]
             </reaction>        
         </model>
 
