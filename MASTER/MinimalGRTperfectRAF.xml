@@ -109,7 +109,7 @@
             </reaction>
 
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.05">
-                P[a,a,a] -> 0
+                P[a1,a2,a3] -> 0
             </reaction>
 
         </model>
