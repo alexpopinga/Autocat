@@ -27,39 +27,39 @@
             <reaction spec='Reaction' reactionName="Translation0" rate="0.1">
                 G[0,0,0] + P[0,0,0] -> GP[0,0,0,0] + P[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="0.1">
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.2">
                 GP[0,0,0,0] + P[0,0,0] -> GP1[0,0,0,0,0] + P[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="0.1">
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.2">
                 GP1[0,0,0,0,0] + P[0,0,0] -> G[0,0,0] + P[0,0,0] + P[0,0,0]
             </reaction>
             
             <!-- Degradation reactions -->
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.15">
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
                 2G[0,0,0] -> G[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.15">
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
                 2P[0,0,0] -> P[0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.15">
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.05">
                 2GP[0,0,0,0] -> GP[0,0,0,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.15">
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.05">
                 2GP1[0,0,0,0,0] -> GP1[0,0,0,0,0]
             </reaction>
         </model>
 
         <initialState spec='InitState'>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@G" location="0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='300'>
+            <populationSize spec='PopulationSize' size='30'>
                 <population spec='Population' type="@P" location="0 0 0"/>
             </populationSize>            
-            <populationSize spec='PopulationSize' size='0'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@GP" location="0 0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='0'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@GP1" location="0 0 0 0 0"/>
             </populationSize>     
         </initialState>
