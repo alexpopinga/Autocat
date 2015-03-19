@@ -3,7 +3,7 @@
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
          simulationTime='20'
-         nSamples="100"
+         nSamples="10"
          verbosity='2'>
         
         <!--stepper spec='GillespieStepper' /-->
@@ -13,10 +13,18 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="G" dim="2 2 2" id="G"/>
-            <populationType spec='PopulationType' typeName="P" dim="2 2 2" id="P"/>
-            <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2" id="GP"/>
-            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2" id="GP1"/>
+            <populationType spec='PopulationType' typeName="G1" dim="2 2 2" id="G1"/>
+            <populationType spec='PopulationType' typeName="G2" dim="2 2 2" id="G2"/>
+            <populationType spec='PopulationType' typeName="G3" dim="2 2 2" id="G3"/>
+            <populationType spec='PopulationType' typeName="P1" dim="2 2 2" id="P1"/>
+            <populationType spec='PopulationType' typeName="P2" dim="2 2 2" id="P2"/>
+            <populationType spec='PopulationType' typeName="P3" dim="2 2 2" id="P3"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2" id="GP1"/>
+            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2" id="GP2"/>
+            <populationType spec='PopulationType' typeName="GP3" dim="2 2 2 2" id="GP3"/>
+            <populationType spec='PopulationType' typeName="GPP1" dim="2 2 2 2 2" id="GPP1"/>
+            <populationType spec='PopulationType' typeName="GPP2" dim="2 2 2 2 2" id="GPP2"/>
+            <populationType spec='PopulationType' typeName="GPP3" dim="2 2 2 2 2" id="GPP3"/>
 
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
@@ -35,13 +43,19 @@
             </function>
 
             <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[i1,i2,i3] + P[a,a,a] ->  2G[i1,i2,i3] + P[a,a,a]
-            </reaction>            
             <!--<reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,0,0] + P[a,a,a] ->  2G[0,0,0] + P[a,a,a]
+                	G[i1,i2,i3] + P[a,a,a] ->  2G[i1,i2,i3] + P[a,a,a]
+            </reaction>-->            
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	G1[0,0,0] + P1[0,0,0] ->  2G1[0,0,0] + P1[0,0,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	G2[0,1,1] + P1[0,0,0] ->  2G2[0,1,1] + P1[0,0,0]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	G3[1,1,0] + P1[0,0,0] ->  2G3[1,1,0] + P1[0,0,0]
+            </reaction>
+            <!--<reaction spec='Reaction' reactionName="Replication" rate="1">
                 	G[0,1,0] + P[a,a,a] ->  2G[0,1,0] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
@@ -54,79 +68,107 @@
                 	G[1,0,1] + P[a,a,a] ->  2G[1,0,1] + P[a,a,a]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[0,1,1] + P[a,a,a] ->  2G[0,1,1] + P[a,a,a]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	G[1,1,0] + P[a,a,a] ->  2G[1,1,0] + P[a,a,a]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
                 	G[1,1,1] + P[a,a,a] ->  2G[1,1,1] + P[a,a,a]
             </reaction>-->
             
             <!-- Translation reactions -->            
             <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                G[0,0,0] + P[b,b,a] -> GP[0,0,0,a] + P[b,b,a]
+                G1[0,0,0] + P2[1,1,0] -> GP1[0,0,0,0] + P2[1,1,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP[0,0,0,a] + P[b,b,a] -> GP1[0,0,0,a,a] + P[b,b,a]
+                GP1[0,0,0,0] + P2[1,1,0] -> GPP1[0,0,0,0,0] + P2[1,1,0]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP1[0,0,0,a,a] + P[b,b,a] -> G[0,0,0] + P[a,a,a] + P[b,b,a]
+                GPP1[0,0,0,0,0] + P2[1,1,0] -> G1[0,0,0] + P1[0,0,0] + P2[1,1,0]
             </reaction>
             
-            <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation3" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                G[0,1,1] + P[b,b,a] -> GP[0,1,1,a] + P[b,b,a]
+                G2[0,1,1] + P2[1,1,0] -> GP2[0,1,1,0] + P2[1,1,0]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation4" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP[0,1,1,a] + P[a,b,b] -> GP1[0,1,1,a,b] + P[a,b,b]
+                GP2[0,1,1,0] + P3[0,1,1] -> GPP2[0,1,1,0,1] + P3[0,1,1]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation5" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP1[0,1,1,a,b] + P[a,b,b] -> G[0,1,1] + P[a,b,b] + P[a,b,b]
+                GPP2[0,1,1,0,1] + P3[0,1,1] -> G2[0,1,1] + P3[0,1,1] + P3[0,1,1]
             </reaction> 
               
-            <reaction spec='Reaction' reactionName="Translation0" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation6" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                G[1,1,0] + P[a,b,b] -> GP[1,1,0,b] + P[a,b,b]
+                G3[1,1,0] + P3[0,1,1] -> GP3[1,1,0,1] + P3[0,1,1]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation7" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP[1,1,0,b] + P[a,b,b] -> GP1[1,1,0,b,b] + P[a,b,b]
+                GP3[1,1,0,1] + P3[0,1,1] -> GPP3[1,1,0,1,1] + P3[0,1,1]
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="5.0">
+            <reaction spec='Reaction' reactionName="Translation8" rate="5.0">
                 <!--<rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3}))"/>-->
-                GP1[1,1,0,b,b] + P[b,b,a] -> G[1,1,0] + P[b,b,a] + P[b,b,a]
+                GPP3[1,1,0,1,1] + P2[1,1,0] -> G3[1,1,0] + P2[1,1,0] + P2[1,1,0]
             </reaction>                  
             
             <!-- Degradation reactions -->
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.05">
-                G[i1,i2,i3] -> 0
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                G1[0,0,0] -> 0
             </reaction>
-
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.05">
-                P[a1,a2,a3] -> 0
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                G2[0,1,1] -> 0
             </reaction>
-
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                G3[1,1,0] -> 0
+            </reaction>            
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                P1[0,0,0] -> 0
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                P2[1,1,0] -> 0
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                P3[0,1,1] -> 0
+            </reaction>        
         </model>
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@G" location="0 0 0"/>
+                <population spec='Population' type="@G1" location="0 0 0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@P" location="0 0 0"/>
+                <population spec='Population' type="@G2" location="0 1 1"/>
+            </populationSize>            
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@G3" location="1 1 0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@GP" location="0 0 0 0"/>
+                <population spec='Population' type="@P1" location="0 0 0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='1000'>
-                <population spec='Population' type="@GP1" location="0 0 0 0 0"/>
+                <population spec='Population' type="@P2" location="1 1 0"/>
             </populationSize>
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@P3" location="0 1 1"/>
+            </populationSize>            
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GP1" location="0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GP2" location="0 1 1 0"/>
+            </populationSize>            
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GP3" location="1 1 0 1"/>
+            </populationSize>            
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GPP1" location="0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GPP2" location="0 1 1 0 1"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='1000'>
+                <population spec='Population' type="@GPP3" location="1 1 0 1 1"/>
+            </populationSize>        
         </initialState>
         
         <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
