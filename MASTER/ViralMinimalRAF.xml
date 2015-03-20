@@ -18,49 +18,55 @@
             <populationType spec='PopulationType' typeName="a" dim="1" id="a"/>
             <populationType spec='PopulationType' typeName="aa" dim="1" id="aa"/>
 
-            <!-- Replication reaction -->
+            <!-- Food-generated replication reaction (not initially catalysed) -->
+            <reaction spec='Reaction' reactionName="FoodGenerated" rate="0.1">
+                2n -> nn
+            </reaction> 
+
+            <!-- Replication reaction (catalysed by template and replicase) -->
             <reaction spec='Reaction' reactionName="Replication" rate="0.1">
-                2n + aa -> nn + aa
+                2n + nn + aa -> 2(nn) + aa
             </reaction> 
                         
-            <!-- Translation reactions -->           
+            <!-- Food-generated translation reaction (not initially catalysed) -->           
             <reaction spec='Reaction' reactionName="Translation0" rate="0.1">
-                G[0,0,0] + P[0,0,0] -> GP[0,0,0,0] + P[0,0,0]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="0.2">
-                GP[0,0,0,0] + P[0,0,0] -> GP1[0,0,0,0,0] + P[0,0,0]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="0.2">
-                GP1[0,0,0,0,0] + P[0,0,0] -> G[0,0,0] + P[0,0,0] + P[0,0,0]
+                2a -> aa
             </reaction>
             
-            <!-- Degradation reactions -->
+            <!-- Translation reaction (catalysed by coding template and translatase) -->  
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.2">
+                2a + aa + nn -> 2(aa) + nn
+            </reaction>
+
+            <!-- Degradation reactions (spontaneous) -->
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                2G[0,0,0] -> G[0,0,0]
+                nn -> 2n
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                2P[0,0,0] -> P[0,0,0]
+                aa -> 2a
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.05">
-                2GP[0,0,0,0] -> GP[0,0,0,0]
+            
+            <!-- Degradation reactions (catalysed by "collisions") -->
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                2(nn) -> 4n
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.05">
-                2GP1[0,0,0,0,0] -> GP1[0,0,0,0,0]
-            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                2(aa) -> 4a
+            </reaction>        
         </model>
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize' size='10'>
-                <population spec='Population' type="@G" location="0 0 0"/>
+                <population spec='Population' type="@n" location="0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='30'>
-                <population spec='Population' type="@P" location="0 0 0"/>
+                <population spec='Population' type="@nn" location="0"/>
             </populationSize>            
             <populationSize spec='PopulationSize' size='10'>
-                <population spec='Population' type="@GP" location="0 0 0 0"/>
+                <population spec='Population' type="@a" location="0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='10'>
-                <population spec='Population' type="@GP1" location="0 0 0 0 0"/>
+                <population spec='Population' type="@aa" location="0"/>
             </populationSize>     
         </initialState>
         
