@@ -2,11 +2,12 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='20'>
+         simulationTime='10'
+         nSamples='100'>
         
-        <!--stepper spec='GillespieStepper' /-->
-        <!--stepper spec='SALStepper' stepSize="0.1" /-->
-        <stepper spec='RateEquationStepper' stepSize="1" />
+        <stepper spec='GillespieStepper'/> 
+        <!--<stepper spec='SALStepper' stepSize="0.1" />
+        <stepper spec='RateEquationStepper' stepSize="0.1" />-->
 
         <model spec='Model' id='model'>
         
@@ -16,23 +17,23 @@
             <population spec='Population' populationName="a" id="a"/>
             <population spec='Population' populationName="P" id="P"/>
 
-            <!-- Food-generated replication reaction (not initially catalysed) -->
-            <reaction spec='Reaction' reactionName="FoodGeneratedReplication" rate="1">
+            <!-- Food-generated replication reaction (not initially catalysed) --> 
+            <reaction spec='Reaction' reactionName="FoodGeneratedReplication" rate="0.001">
                 2n -> G
-            </reaction> 
+            </reaction>
 
             <!-- Replication reaction (catalysed by template and replicase) -->
-            <reaction spec='Reaction' reactionName="CatalysedReplication" rate="1">
+            <reaction spec='Reaction' reactionName="CatalysedReplication" rate="0.001">
                 2n + G + P -> 2G + P
             </reaction>  
                         
             <!-- Food-generated translation reaction (not initially catalysed) -->           
-            <reaction spec='Reaction' reactionName="FoodGeneratedTranslation" rate="3">
+            <reaction spec='Reaction' reactionName="FoodGeneratedTranslation" rate="0.001">
                 2a -> P
             </reaction>
             
             <!-- Translation reaction (catalysed by coding template and translatase) -->  
-            <reaction spec='Reaction' reactionName="CatalysedTranslation" rate="3">
+            <reaction spec='Reaction' reactionName="CatalysedTranslation" rate="0.001">
                 2a + P + G -> 2P + G
             </reaction>
 
@@ -46,16 +47,16 @@
             
             <!-- Degradation reactions (catalysed by "collisions") -->
             <reaction spec='Reaction' reactionName="DeathToG" rate="1">
-                2G -> 4n
+                2G -> G + 2n
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToP" rate="1">
-                2P -> 4a
+                2P -> P + 2a
             </reaction>        
         </model>
 
         <initialState spec='InitState'>
-            <populationSize spec='PopulationSize' population='@n' size='10'/>
-            <populationSize spec='PopulationSize' population='@a' size='30'/>
+            <populationSize spec='PopulationSize' population='@n' size='100'/>
+            <populationSize spec='PopulationSize' population='@a' size='100'/>
             <populationSize spec='PopulationSize' population='@G' size='0'/>
             <populationSize spec='PopulationSize' population='@P' size='0'/>
         </initialState>
