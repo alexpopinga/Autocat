@@ -1,0 +1,133 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <run spec='Trajectory'
+         simulationTime='10000'
+         nSamples="200">
+        
+        <stepper spec='GillespieStepper'/>
+        <!--stepper spec='SALStepper' stepSize="0.1" /-->
+        <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
+
+        <model spec='Model' id='model'>
+        
+        	<!---->
+        
+            <!-- Genes, proteins, gene-protein complexes -->
+            <population spec='Population' populationName="ggg" id="ggg"/>
+            <population spec='Population' populationName="gcc" id="gcc"/>
+            <population spec='Population' populationName="ccg" id="ccg"/>
+            <population spec='Population' populationName="aaa" id="aaa"/>
+            <population spec='Population' populationName="bba" id="bba"/>
+            <population spec='Population' populationName="abb" id="abb"/>
+            <population spec='Population' populationName="ggga" id="ggga"/>
+            <population spec='Population' populationName="gcca" id="gcca"/>
+            <population spec='Population' populationName="ccgb" id="ccgb"/>
+            <population spec='Population' populationName="gggaa" id="gggaa"/>
+            <population spec='Population' populationName="gccab" id="gccab"/>
+            <population spec='Population' populationName="ccgbb" id="ccgbb"/>
+            
+	    	<!-- Spaces to be occupied by genes (1S) or proteins (3S) -->
+			<population spec='Population' populationName="S" id="S"/>
+
+            <!-- Replication reactions -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.005">
+                	S + ggg + aaa ->  2ggg + aaa
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.005">
+                	S + gcc + aaa ->  2gcc + aaa
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.005">
+                	S + ccg + aaa ->  2ccg + aaa
+            </reaction>
+
+            
+            <!-- Translation reactions -->            
+            <reaction spec='Reaction' reactionName="Translation0" rate="0.005">
+                S + ggg + bba -> ggga + bba
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.005">
+                S + ggga + bba -> gggaa + bba
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.005">
+                S + gggaa + bba -> ggg + aaa + bba
+            </reaction>
+            
+            <reaction spec='Reaction' reactionName="Translation3" rate="0.005">
+                S + gcc + bba -> gcca + bba
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation4" rate="0.005">
+                S + gcca + abb -> gccab + abb
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation5" rate="0.005">
+                S + gccab + abb -> gcc + abb + abb
+            </reaction> 
+              
+            <reaction spec='Reaction' reactionName="Translation6" rate="0.005">
+                S + ccg + abb -> ccgb + abb
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation7" rate="0.005">
+                S + ccgb + abb -> ccgbb + abb
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation8" rate="0.005">
+                S + ccgbb + bba -> ccg + bba + bba
+            </reaction>                  
+            
+            <!-- Degradation reactions -->
+            <reaction spec='Reaction' reactionName="DeathToggg" rate="0.003">
+                ggg -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathTogcc" rate="0.003">
+                gcc -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToccg" rate="0.003">
+                ccg -> S
+            </reaction>            
+            <reaction spec='Reaction' reactionName="DeathToaaa" rate="0.003">
+                aaa -> 3S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathTobba" rate="0.003">
+                bba -> 3S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToabb" rate="0.003">
+                abb -> 3S
+            </reaction>   
+            <reaction spec='Reaction' reactionName="DeathToggga" rate="0.003">
+                ggga -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathTogcca" rate="0.003">
+                gcca -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToccgb" rate="0.003">
+                ccgb -> S
+            </reaction>            
+            <reaction spec='Reaction' reactionName="DeathTogggaa" rate="0.003">
+                gggaa -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathTogccab" rate="0.003">
+                gccab -> S
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToccgbb" rate="0.003">
+                ccgbb -> S
+            </reaction>         
+        </model>
+
+        <initialState spec='InitState'>
+            <populationSize spec='PopulationSize' population='@S' size='300'/>
+            <populationSize spec='PopulationSize' population='@ggg' size='100'/>
+            <populationSize spec='PopulationSize' population='@gcc' size='100'/>
+            <populationSize spec='PopulationSize' population='@ccg' size='100'/>
+            <populationSize spec='PopulationSize' population='@aaa' size='100'/>
+            <populationSize spec='PopulationSize' population='@bba' size='100'/>
+            <populationSize spec='PopulationSize' population='@abb' size='100'/>
+            <populationSize spec='PopulationSize' population='@ggga' size='0'/>
+            <populationSize spec='PopulationSize' population='@gggaa' size='0'/>
+            <populationSize spec='PopulationSize' population='@gcca' size='0'/>
+            <populationSize spec='PopulationSize' population='@gccab' size='0'/>
+            <populationSize spec='PopulationSize' population='@ccgb' size='0'/>
+            <populationSize spec='PopulationSize' population='@ccgbb' size='0'/>
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>
