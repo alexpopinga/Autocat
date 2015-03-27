@@ -1,2 +1,2 @@
-# BANGS
-Bayesian Autocatalytic Networks for General Systems
+# Autocat
+Stochastic Modelling of Autocatalytic Systems
