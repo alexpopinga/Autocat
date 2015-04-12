@@ -27,99 +27,101 @@
             <population spec='Population' populationName="gccab" id="gccab"/>
             <population spec='Population' populationName="ccgbb" id="ccgbb"/>
             
-	    	<!-- Spaces to be occupied by genes (1S) or proteins (3S) -->
-			<population spec='Population' populationName="S" id="S"/>
+	    	<!-- Spaces to be occupied by genes (1S) or proteins (3Saa) -->
+			<population spec='Population' populationName="SG" id="SG"/>
+			<population spec='Population' populationName="Saa" id="Saa"/>
 
             <!-- Replication reactions -->
             <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	S + ggg + aaa ->  2ggg + aaa
+                	SG + ggg + aaa ->  2ggg + aaa
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	S + gcc + aaa ->  2gcc + aaa
+                	SG + gcc + aaa ->  2gcc + aaa
             </reaction>
             <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	S + ccg + aaa ->  2ccg + aaa
+                	SG + ccg + aaa ->  2ccg + aaa
             </reaction>
 
             
             <!-- Translation reactions -->            
-            <reaction spec='Reaction' reactionName="Translation0" rate="0.005">
-                S + ggg + bba -> ggga + bba
+            <reaction spec='Reaction' reactionName="Translation0" rate="0.01">
+                Saa + ggg + bba -> ggga + bba
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation1" rate="0.005">
-                S + ggga + bba -> gggaa + bba
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.01">
+                Saa + ggga + bba -> gggaa + bba
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation2" rate="0.005">
-                S + gggaa + bba -> ggg + aaa + bba
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.01">
+                Saa + gggaa + bba -> ggg + aaa + bba
             </reaction>
             
-            <reaction spec='Reaction' reactionName="Translation3" rate="0.005">
-                S + gcc + bba -> gcca + bba
+            <reaction spec='Reaction' reactionName="Translation3" rate="0.01">
+                Saa + gcc + bba -> gcca + bba
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation4" rate="0.005">
-                S + gcca + abb -> gccab + abb
+            <reaction spec='Reaction' reactionName="Translation4" rate="0.01">
+                Saa + gcca + abb -> gccab + abb
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation5" rate="0.005">
-                S + gccab + abb -> gcc + abb + abb
+            <reaction spec='Reaction' reactionName="Translation5" rate="0.01">
+                Saa + gccab + abb -> gcc + abb + abb
             </reaction> 
               
-            <reaction spec='Reaction' reactionName="Translation6" rate="0.005">
-                S + ccg + abb -> ccgb + abb
+            <reaction spec='Reaction' reactionName="Translation6" rate="0.01">
+                Saa + ccg + abb -> ccgb + abb
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation7" rate="0.005">
-                S + ccgb + abb -> ccgbb + abb
+            <reaction spec='Reaction' reactionName="Translation7" rate="0.01">
+                Saa + ccgb + abb -> ccgbb + abb
             </reaction>
-            <reaction spec='Reaction' reactionName="Translation8" rate="0.005">
-                S + ccgbb + bba -> ccg + bba + bba
+            <reaction spec='Reaction' reactionName="Translation8" rate="0.01">
+                Saa + ccgbb + bba -> ccg + bba + bba
             </reaction>                  
             
             <!-- Degradation reactions -->
             <reaction spec='Reaction' reactionName="DeathToggg" rate="0.003">
-                ggg -> S
+                ggg -> SG
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTogcc" rate="0.003">
-                gcc -> S
+                gcc -> SG
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToccg" rate="0.003">
-                ccg -> S
+                ccg -> SG
             </reaction>            
             <reaction spec='Reaction' reactionName="DeathToaaa" rate="0.003">
-                aaa -> 3S
+                aaa -> 3Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTobba" rate="0.003">
-                bba -> 3S
+                bba -> 3Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToabb" rate="0.003">
-                abb -> 3S
+                abb -> 3Saa
             </reaction>   
             <reaction spec='Reaction' reactionName="DeathToggga" rate="0.003">
-                ggga -> S
+                ggga -> SG + Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTogcca" rate="0.003">
-                gcca -> S
+                gcca -> SG + Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToccgb" rate="0.003">
-                ccgb -> S
+                ccgb -> SG + Saa
             </reaction>            
             <reaction spec='Reaction' reactionName="DeathTogggaa" rate="0.003">
-                gggaa -> S
+                gggaa -> SG + 2Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTogccab" rate="0.003">
-                gccab -> S
+                gccab -> SG + 2Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToccgbb" rate="0.003">
-                ccgbb -> S
+                ccgbb -> SG + 2Saa
             </reaction>         
         </model>
 
         <initialState spec='InitState'>
-            <populationSize spec='PopulationSize' population='@S' size='300'/>
-            <populationSize spec='PopulationSize' population='@ggg' size='100'/>
-            <populationSize spec='PopulationSize' population='@gcc' size='100'/>
-            <populationSize spec='PopulationSize' population='@ccg' size='100'/>
-            <populationSize spec='PopulationSize' population='@aaa' size='100'/>
-            <populationSize spec='PopulationSize' population='@bba' size='100'/>
-            <populationSize spec='PopulationSize' population='@abb' size='100'/>
+            <populationSize spec='PopulationSize' population='@SG' size='600'/>
+            <populationSize spec='PopulationSize' population='@Saa' size='1800'/>
+            <populationSize spec='PopulationSize' population='@ggg' size='200'/>
+            <populationSize spec='PopulationSize' population='@gcc' size='200'/>
+            <populationSize spec='PopulationSize' population='@ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@aaa' size='200'/>
+            <populationSize spec='PopulationSize' population='@bba' size='200'/>
+            <populationSize spec='PopulationSize' population='@abb' size='200'/>
             <populationSize spec='PopulationSize' population='@ggga' size='0'/>
             <populationSize spec='PopulationSize' population='@gggaa' size='0'/>
             <populationSize spec='PopulationSize' population='@gcca' size='0'/>
