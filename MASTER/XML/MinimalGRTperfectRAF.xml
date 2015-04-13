@@ -10,80 +10,66 @@
         <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
 
         <model spec='Model' id='model'>
-        
-        	<!---->
-        
-            <!-- Genes, proteins, gene-protein complexes -->
-            <population spec='Population' populationName="ggg" id="ggg"/>
-            <population spec='Population' populationName="gcc" id="gcc"/>
-            <population spec='Population' populationName="ccg" id="ccg"/>
+
+            <!-- Proteins -->
             <population spec='Population' populationName="aaa" id="aaa"/>
             <population spec='Population' populationName="bba" id="bba"/>
             <population spec='Population' populationName="abb" id="abb"/>
-            <population spec='Population' populationName="ggga" id="ggga"/>
-            <population spec='Population' populationName="gcca" id="gcca"/>
-            <population spec='Population' populationName="ccgb" id="ccgb"/>
-            <population spec='Population' populationName="gggaa" id="gggaa"/>
-            <population spec='Population' populationName="gccab" id="gccab"/>
-            <population spec='Population' populationName="ccgbb" id="ccgbb"/>
+
+            <!-- Genome -->
+            <population spec='Population' populationName="ggg_gcc_ccg" id="ggg_gcc_ccg"/>
+
+            <!-- Genome-aminoAcid complexes -->
+            <population spec='Population' populationName="ggg_a_gcc_ccg" id="ggg_a_gcc_ccg"/>
+            <population spec='Population' populationName="ggg_aa_gcc_ccg" id="ggg_aa_gcc_ccg"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_ccg" id="ggg_aaa_gcc_ccg"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_a_ccg" id="ggg_aaa_gcc_a_ccg"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_ab_ccg" id="ggg_aaa_gcc_ab_ccg"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_abb_ccg" id="ggg_aaa_gcc_abb_ccg"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_abb_ccg_b" id="ggg_aaa_gcc_abb_ccg_b"/>
+            <population spec='Population' populationName="ggg_aaa_gcc_abb_ccg_bb" id="ggg_aaa_gcc_abb_ccg_bb"/>
             
-	    	<!-- Spaces to be occupied by genes (1S) or proteins (3Saa) -->
+	    	<!-- Spaces to be occupied by genomes (SG) or proteins (3Saa) -->
 			<population spec='Population' populationName="SG" id="SG"/>
 			<population spec='Population' populationName="Saa" id="Saa"/>
 
-            <!-- Replication reactions -->
+            <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	SG + ggg + aaa ->  2ggg + aaa
-            </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	SG + gcc + aaa ->  2gcc + aaa
-            </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="0.005">
-                	SG + ccg + aaa ->  2ccg + aaa
+                	SG + ggg_gcc_ccg + aaa ->  2ggg_gcc_ccg + aaa
             </reaction>
 
-            
             <!-- Translation reactions -->            
             <reaction spec='Reaction' reactionName="Translation0" rate="0.01">
-                Saa + ggg + bba -> ggga + bba
+                Saa + ggg_gcc_ccg + bba -> ggg_a_gcc_ccg + bba
             </reaction>
             <reaction spec='Reaction' reactionName="Translation1" rate="0.01">
-                Saa + ggga + bba -> gggaa + bba
+                Saa + ggg_a_gcc_ccg + bba -> ggg_aa_gcc_ccg + bba
             </reaction>
             <reaction spec='Reaction' reactionName="Translation2" rate="0.01">
-                Saa + gggaa + bba -> ggg + aaa + bba
+                Saa + ggg_aa_gcc_ccg + bba -> ggg_aaa_gcc_ccg + bba
             </reaction>
             
             <reaction spec='Reaction' reactionName="Translation3" rate="0.01">
-                Saa + gcc + bba -> gcca + bba
+                Saa + ggg_aaa_gcc_ccg + bba -> ggg_aaa_gcc_a_ccg + bba
             </reaction>
             <reaction spec='Reaction' reactionName="Translation4" rate="0.01">
-                Saa + gcca + abb -> gccab + abb
+                Saa + ggg_aaa_gcc_a_ccg + abb -> ggg_aaa_gcc_ab_ccg + abb
             </reaction>
             <reaction spec='Reaction' reactionName="Translation5" rate="0.01">
-                Saa + gccab + abb -> gcc + abb + abb
+                Saa + ggg_aaa_gcc_ab_ccg + abb -> ggg_aaa_gcc_abb_ccg + abb
             </reaction> 
               
             <reaction spec='Reaction' reactionName="Translation6" rate="0.01">
-                Saa + ccg + abb -> ccgb + abb
+                Saa + ggg_aaa_gcc_abb_ccg_b + abb -> ggg_aaa_gcc_abb_ccg_b + abb
             </reaction>
             <reaction spec='Reaction' reactionName="Translation7" rate="0.01">
-                Saa + ccgb + abb -> ccgbb + abb
+                Saa + ggg_aaa_gcc_abb_ccg_b + abb -> ggg_aaa_gcc_abb_ccg_bb + abb
             </reaction>
             <reaction spec='Reaction' reactionName="Translation8" rate="0.01">
-                Saa + ccgbb + bba -> ccg + bba + bba
+                Saa + ggg_aaa_gcc_abb_ccg_bb + bba -> ggg_gcc_ccg + bba + aaa + abb + bba
             </reaction>                  
             
             <!-- Degradation reactions -->
-            <reaction spec='Reaction' reactionName="DeathToggg" rate="0.003">
-                ggg -> SG
-            </reaction>
-            <reaction spec='Reaction' reactionName="DeathTogcc" rate="0.003">
-                gcc -> SG
-            </reaction>
-            <reaction spec='Reaction' reactionName="DeathToccg" rate="0.003">
-                ccg -> SG
-            </reaction>            
             <reaction spec='Reaction' reactionName="DeathToaaa" rate="0.003">
                 aaa -> 3Saa
             </reaction>
@@ -92,42 +78,53 @@
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToabb" rate="0.003">
                 abb -> 3Saa
-            </reaction>   
-            <reaction spec='Reaction' reactionName="DeathToggga" rate="0.003">
-                ggga -> SG + Saa
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToggg" rate="0.003">
+                ggg_gcc_ccg -> SG
+            </reaction>
+
+            <!-- Genome-aminoAcid complex degradation negligible (think of them as phase transitions) -->
+            <!--<reaction spec='Reaction' reactionName="DeathToggga" rate="0.003">
+                ggg_a_gcc_ccg -> SG + Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTogcca" rate="0.003">
-                gcca -> SG + Saa
+                ggg_aa_gcc_ccg -> SG + 2Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToccgb" rate="0.003">
-                ccgb -> SG + Saa
+                ggg_aaa_gcc_ccg -> SG + 3Saa
             </reaction>            
             <reaction spec='Reaction' reactionName="DeathTogggaa" rate="0.003">
-                gggaa -> SG + 2Saa
+                ggg_aaa_gcc_a_ccg -> SG + 4Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathTogccab" rate="0.003">
-                gccab -> SG + 2Saa
+                ggg_aaa_gcc_ab_ccg -> SG + 5Saa
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToccgbb" rate="0.003">
-                ccgbb -> SG + 2Saa
-            </reaction>         
+                ggg_aaa_gcc_abb_ccg -> SG + 6Saa
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToccgbb" rate="0.003">
+                ggg_aaa_gcc_abb_ccg_b -> SG + 7Saa
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToccgbb" rate="0.003">
+                ggg_aaa_gcc_abb_ccg_bb -> SG + 8Saa
+            </reaction>-->
         </model>
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize' population='@SG' size='600'/>
             <populationSize spec='PopulationSize' population='@Saa' size='1800'/>
-            <populationSize spec='PopulationSize' population='@ggg' size='200'/>
-            <populationSize spec='PopulationSize' population='@gcc' size='200'/>
-            <populationSize spec='PopulationSize' population='@ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_gcc_ccg' size='200'/>
             <populationSize spec='PopulationSize' population='@aaa' size='200'/>
             <populationSize spec='PopulationSize' population='@bba' size='200'/>
             <populationSize spec='PopulationSize' population='@abb' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggga' size='0'/>
-            <populationSize spec='PopulationSize' population='@gggaa' size='0'/>
-            <populationSize spec='PopulationSize' population='@gcca' size='0'/>
-            <populationSize spec='PopulationSize' population='@gccab' size='0'/>
-            <populationSize spec='PopulationSize' population='@ccgb' size='0'/>
-            <populationSize spec='PopulationSize' population='@ccgbb' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_a_gcc_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aa_gcc_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_a_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ab_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_b' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_bb' size='200'/>
         </initialState>
         
         <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
