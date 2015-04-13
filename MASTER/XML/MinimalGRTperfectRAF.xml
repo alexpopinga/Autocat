@@ -117,14 +117,14 @@
             <populationSize spec='PopulationSize' population='@aaa' size='200'/>
             <populationSize spec='PopulationSize' population='@bba' size='200'/>
             <populationSize spec='PopulationSize' population='@abb' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_a_gcc_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aa_gcc_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_a_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ab_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_b' size='200'/>
-            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_bb' size='200'/>
+            <populationSize spec='PopulationSize' population='@ggg_a_gcc_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aa_gcc_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_a_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_ab_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_b' size='0'/>
+            <populationSize spec='PopulationSize' population='@ggg_aaa_gcc_abb_ccg_bb' size='0'/>
         </initialState>
         
         <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
