@@ -6,9 +6,9 @@
          nSamples="10"
          verbosity='2'>
         
-        <!--stepper spec='GillespieStepper' /-->
+        <stepper spec='GillespieStepper'/>
         <!--stepper spec='SALStepper' stepSize="0.1" /-->
-        <stepper spec='RateEquationStepper' stepSize="0.1" />
+        <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
 
         <model spec='Model' id='model'>
         
@@ -97,10 +97,10 @@
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize' size='200'>
-                <population spec='Population' type="@SG"/>
+                <population spec='Population' type="@SG" location="10"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='300'>
-                <population spec='Population' type="@SP"/>
+                <population spec='Population' type="@SP" location="10"/>
             </populationSize>
 
             <populationSize spec='PopulationSize' size='10'>
