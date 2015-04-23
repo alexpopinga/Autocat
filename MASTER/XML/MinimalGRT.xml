@@ -6,9 +6,9 @@
          nSamples="10"
          verbosity='2'>
         
-        <!--stepper spec='GillespieStepper' /-->
+        <stepper spec='GillespieStepper'/>
         <!--stepper spec='SALStepper' stepSize="0.1" /-->
-        <stepper spec='RateEquationStepper' stepSize="0.1" />
+        <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
 
         <model spec='Model' id='model'>
         
