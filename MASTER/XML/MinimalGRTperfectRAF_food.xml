@@ -2,7 +2,7 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='50000'
+         simulationTime='1000000'
          nSamples="200">
         
         <stepper spec='GillespieStepper'/>
@@ -159,10 +159,10 @@
 
         <initialState spec='InitState'>
             <!--<populationSize spec='PopulationSize' population='@S' size='500'/>-->
-            <populationSize spec='PopulationSize' population='@g' size='100'/>
-            <populationSize spec='PopulationSize' population='@c' size='100'/>
-            <populationSize spec='PopulationSize' population='@a' size='100'/>
-            <populationSize spec='PopulationSize' population='@b' size='100'/>            
+            <populationSize spec='PopulationSize' population='@g' size='400'/>
+            <populationSize spec='PopulationSize' population='@c' size='800'/>
+            <populationSize spec='PopulationSize' population='@a' size='200'/>
+            <populationSize spec='PopulationSize' population='@b' size='200'/>            
             <populationSize spec='PopulationSize' population='@ggg' size='0'/>
             <populationSize spec='PopulationSize' population='@gcc' size='0'/>
             <populationSize spec='PopulationSize' population='@ccg' size='0'/>
