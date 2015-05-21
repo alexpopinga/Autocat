@@ -142,19 +142,103 @@
                 <population spec='Population' type="@SP" location="8"/>
             </populationSize>            
             
+            <!-- Genomes -->
             <populationSize spec='PopulationSize' size='2'>
                 <population spec='Population' type="@G" location="0 0 0 0 1 1 1 1 0 0"/>
             </populationSize>
-
             
-            <populationSize spec='PopulationSize' size='200'>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 1 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 0 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 1 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 1 0 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 0 0 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 0 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="1 1 1 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 1 0 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="1 0 0 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="1 0 1 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 1 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 1 1 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="1 1 0 0 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 0 0 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 1 1 0 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 1 1 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 1 0 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 1 0 0 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 1 0 1 1 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G" location="0 0 0 0 0 1 1 1 0 0"/>
+            </populationSize>
+            
+            <!-- Proteins -->
+            <populationSize spec='PopulationSize' size='100'>
                 <population spec='Population' type="@P" location="0 0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='200'>
+            <populationSize spec='PopulationSize' size='100'>
                 <population spec='Population' type="@P" location="0 1 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='200'>
+            <populationSize spec='PopulationSize' size='100'>
                 <population spec='Population' type="@P" location="1 1 0 0"/>
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='100'>
+                <population spec='Population' type="@P" location="1 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='100'>
+                <population spec='Population' type="@P" location="0 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='100'>
+                <population spec='Population' type="@P" location="1 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='100'>
+                <population spec='Population' type="@P" location="1 0 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='100'>
+                <population spec='Population' type="@P" location="0 0 1 0"/>
             </populationSize>
             
             <populationSize spec='PopulationSize' size='0'>
