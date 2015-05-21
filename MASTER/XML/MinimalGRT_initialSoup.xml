@@ -1,0 +1,217 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <run spec='Trajectory'
+         simulationTime='1000'
+         nSamples="100">
+         <!--verbosity='2'-->
+        
+        <stepper spec='GillespieStepper'/>
+        <!--stepper spec='SALStepper' stepSize="0.1" /-->
+        <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
+
+        <model spec='Model' id='model'>
+        
+            <!-- Genes, proteins, gene-protein complexes -->
+            <populationType spec='PopulationType' typeName="G" dim="2 2 2 9" id="G"/>
+            <populationType spec='PopulationType' typeName="P" dim="2 2 2 9" id="P"/>
+            <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 9" id="GP"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 9" id="GP1"/>
+
+	    	<!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
+            <populationType spec='PopulationType' typeName="SG" dim="9" id="SG"/>
+            <populationType spec='PopulationType' typeName="SP" dim="9" id="SP"/>
+
+            <!-- Hamming distance between two vectors -->
+            <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
+            
+            <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
+            <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
+            
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence -->
+            <function spec='Function' id="key" params="i a">
+                <![CDATA[
+                  i==0 && a==0 ?  {1,1,0}
+                : i==1 && a==1 ?  {0,1,1}
+                : i==0 && a==1 ?  {1,0,1}
+                :                 {0,1,0}
+                ]]>
+            </function>
+
+            <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.1">
+                <rateMultiplier spec='RateMultiplier'> 
+                    exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.01)
+                </rateMultiplier>
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SG[l1] ->  G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
+            </reaction>
+            
+            <!-- Translation reactions -->
+            <reaction spec='Reaction' reactionName="Translation0" rate="0.1">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3})/1.8)"/>
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SP[l1] -> GP[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1]
+            </reaction>
+
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.1">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i2,e2),{a1,a2,a3})/1.8)"/>
+                	GP[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] -> GP1[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1]
+            </reaction>
+
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.1">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i3,e3),{a1,a2,a3})/1.8)"/>
+                	GP1[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1] -> G[i1,i2,i3,l1] + P[e1,e2,e3,l1] + P[a1,a2,a3,l1]
+            </reaction>
+
+            <!-- Diffusion (migration) reactions -->
+            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+                	G[i1,i2,i3,l1] + SG[l2] -> G[i1,i2,i3,l2] + SG[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+                	P[a1,a2,a3,l1] + SP[l2] -> P[a1,a2,a3,l2] + SP[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+                	GP[i1,i2,i3,e1,l1] + SP[l2] -> GP[i1,i2,i3,e1,l2] + SP[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+                	GP1[i1,i2,i3,e1,e2,l1] -> GP1[i1,i2,i3,e1,e2,l2]
+            </reaction>
+                        
+            <!-- Degradation reactions -->
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                G[i1,i2,i3,l1] -> SG[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                P[a1,a2,a3,l1] -> SP[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+                GP[i1,i2,i3,e1,l1] -> SP[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+                2GP1[i1,i2,i3,e1,e2,l1] -> GP1[i1,i2,i3,e1,e2,l1]
+            </reaction>        
+        </model>
+
+        <initialState spec='InitState'>
+        	<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="1"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="1"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="2"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="2"/>
+            </populationSize>
+        	<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="3"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="3"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="4"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="4"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="5"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="5"/>
+            </populationSize>
+        	<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="6"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="6"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="7"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="7"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="8"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="8"/>
+            </populationSize>            
+            
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="0 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="1 1 0 0"/>
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="1 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="0 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="1 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="1 0 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@G" location="0 0 1 0"/>
+            </populationSize>
+
+            
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="0 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="1 1 0 0"/>
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="1 1 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="0 1 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="1 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="1 0 1 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+                <population spec='Population' type="@P" location="0 0 1 0"/>
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP" location="0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP1" location="0 0 0 0 0 0"/>
+            </populationSize>
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>
