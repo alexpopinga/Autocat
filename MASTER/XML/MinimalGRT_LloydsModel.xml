@@ -2,8 +2,8 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='10000'
-         nSamples="1000">
+         simulationTime='10'
+         nSamples="10">
          <!--verbosity='2'-->
         
         <stepper spec='GillespieStepper'/>
@@ -13,14 +13,20 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="G" dim="2 2 2 300" id="G"/>
-            <populationType spec='PopulationType' typeName="P" dim="2 2 2 300" id="P"/>
-            <populationType spec='PopulationType' typeName="GP" dim="2 2 2 2 300" id="GP"/>
-            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 300" id="GP1"/>
+            <populationType spec='PopulationType' typeName="G" dim="2 2 2 2 2 2 2 2 2 9" id="G"/>
+            <populationType spec='PopulationType' typeName="P" dim="2 2 2 9" id="P"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 2 2 2 2 2 9" id="GP1"/>
+            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 2 2 2 2 2 2 9" id="GP2"/>
+            <populationType spec='PopulationType' typeName="GP3" dim="2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP3"/>
+            <populationType spec='PopulationType' typeName="GP4" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP4"/>
+            <populationType spec='PopulationType' typeName="GP5" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP5"/>
+            <populationType spec='PopulationType' typeName="GP6" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP6"/>
+            <populationType spec='PopulationType' typeName="GP7" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP7"/>
+            <populationType spec='PopulationType' typeName="GP8" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 9" id="GP8"/>
 
 	    	<!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
-            <populationType spec='PopulationType' typeName="SG" dim="300" id="SG"/>
-            <populationType spec='PopulationType' typeName="SP" dim="300" id="SP"/>
+            <populationType spec='PopulationType' typeName="SG" dim="9" id="SG"/>
+            <populationType spec='PopulationType' typeName="SP" dim="9" id="SP"/>
 
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
@@ -43,47 +49,76 @@
                 <rateMultiplier spec='RateMultiplier'> 
                     exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.01)
                 </rateMultiplier>
-                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SG[l1] ->  G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] + SG[l1] ->  
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,j4,j5,j6,j7,j8,j9,l1]
             </reaction>
             
             <!-- Translation reactions -->
             <reaction spec='Reaction' reactionName="Translation" rate="0.1">
                 <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3})/0.1)"/>
-                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SP[l1] -> G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + P[e1,e2,e3,l1]
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] + SP[l1] + SP[l1] + SP[l1] -> 
+                	GP1[i1,i2,i3,e1,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e2),{a1,a2,a3})/0.1)"/>
+                	GP1[i1,i2,i3,e1,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP2[i1,i2,i3,e1,e2,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e3),{a1,a2,a3})/0.1)"/>
+                	GP2[i1,i2,i3,e1,e2,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP3[i1,i2,i3,e1,e2,e3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e4),{a1,a2,a3})/0.1)"/>
+                	GP3[i1,i2,i3,e1,e2,e3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP4[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e5),{a1,a2,a3})/0.1)"/>
+                	GP4[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP5[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e6),{a1,a2,a3})/0.1)"/>
+                	GP5[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP6[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e7),{a1,a2,a3})/0.1)"/>
+                	GP6[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,l1] + P[a1,a2,a3,l1] -> 
+                	GP7[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,e7,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e8),{a1,a2,a3})/0.1)"/>
+                	GP7[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,e7,l1] + P[a1,a2,a3,l1] -> 
+                	GP8[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,e7,e8,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation" rate="0.9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e9),{a1,a2,a3})/0.1)"/>
+                	GP8[i1,i2,i3,e1,e2,e3,i4,i5,i6,e4,e5,e6,i7,i8,i9,e7,e8,l1] + P[a1,a2,a3,l1] -> 
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + P[a1,a2,a3,l1] + P[e1,e2,e3,l1] + P[e4,e5,e6,l1] + P[e7,e8,e9,l1]
             </reaction>
 
 
             <!-- Diffusion (migration) reactions -->
             <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
-                	G[i1,i2,i3,l1] + SG[l2] -> G[i1,i2,i3,l2] + SG[l1]
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[9]"/>
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + SG[l2] -> G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + SG[l1]
             </reaction>
             <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[9]"/>
                 	P[a1,a2,a3,l1] + SP[l2] -> P[a1,a2,a3,l2] + SP[l1]
             </reaction>
-            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
-                	GP[i1,i2,i3,e1,l1] + SP[l2] -> GP[i1,i2,i3,e1,l2] + SP[l1]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
-                	GP1[i1,i2,i3,e1,e2,l1] -> GP1[i1,i2,i3,e1,e2,l2]
-            </reaction>
+
                         
             <!-- Degradation reactions -->
             <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                G[i1,i2,i3,l1] -> SG[l1]
+                	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] -> SG[l1]
             </reaction>
             <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                P[a1,a2,a3,l1] -> SP[l1]
-            </reaction>
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
-                GP[i1,i2,i3,e1,l1] -> SP[l1]
-            </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
-                2GP1[i1,i2,i3,e1,e2,l1] -> GP1[i1,i2,i3,e1,e2,l1]
-            </reaction>        
+                	P[a1,a2,a3,l1] -> SP[l1]
+            </reaction>     
         </model>
 
         <initialState spec='InitState'>
@@ -242,10 +277,28 @@
             </populationSize>
             
             <populationSize spec='PopulationSize' size='0'>
-                <population spec='Population' type="@GP" location="0 0 0 0 0"/>
+                <population spec='Population' type="@GP1" location="0 0 0 0 0 0 0 0 0 0 0"/>
             </populationSize>
             <populationSize spec='PopulationSize' size='0'>
-                <population spec='Population' type="@GP1" location="0 0 0 0 0 0"/>
+                <population spec='Population' type="@GP2" location="0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP3" location="0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP4" location="0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP5" location="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP6" location="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP7" location="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+                <population spec='Population' type="@GP8" location="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
             </populationSize>
         </initialState>
         
