@@ -2,9 +2,8 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='1000'
-         nSamples="100">
-         <!--verbosity='2'-->
+         simulationTime='10'
+         nSamples="10">
         
         <stepper spec='GillespieStepper'/>
         <!--stepper spec='SALStepper' stepSize="0.1" /-->
@@ -172,60 +171,12 @@
         </model>
 
         <initialState spec='InitState'>
-        	<populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="0"/>
+            <populationSize spec='PopulationSize'>
+                SG[3] := 1000
             </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="0"/>
+            <populationSize spec='PopulationSize'>
+                SP[3] := 1000
             </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="1"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="1"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="2"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="2"/>
-            </populationSize>
-        	<!--<populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="3"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="3"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="4"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="4"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="5"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="5"/>
-            </populationSize>
-        	<populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="6"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="6"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="7"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="7"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='5000'>
-                <population spec='Population' type="@SG" location="8"/>
-            </populationSize>
-            <populationSize spec='PopulationSize' size='8000'>
-                <population spec='Population' type="@SP" location="8"/>
-            </populationSize>-->           
             
             <populationSize spec='PopulationSize' size='200'>
                 <population spec='Population' type="@G" location="0 0 0 0 1 1 1 1 0 0"/>
