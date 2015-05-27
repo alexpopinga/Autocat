@@ -2,8 +2,8 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='10'
-         nSamples="10">
+         simulationTime='1'
+         nSamples="1">
         
         <stepper spec='GillespieStepper'/>
         <!--stepper spec='SALStepper' stepSize="0.1" /-->
@@ -12,20 +12,20 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="G" dim="2 2 2 2 2 2 2 2 2 4" id="G"/>
-            <populationType spec='PopulationType' typeName="P" dim="2 2 2 4" id="P"/>
-            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 2 2 2 2 2 4" id="GP1"/>
-            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 2 2 2 2 2 2 4" id="GP2"/>
-            <populationType spec='PopulationType' typeName="GP3" dim="2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP3"/>
-            <populationType spec='PopulationType' typeName="GP4" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP4"/>
-            <populationType spec='PopulationType' typeName="GP5" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP5"/>
-            <populationType spec='PopulationType' typeName="GP6" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP6"/>
-            <populationType spec='PopulationType' typeName="GP7" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP7"/>
-            <populationType spec='PopulationType' typeName="GP8" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4" id="GP8"/>
+            <populationType spec='PopulationType' typeName="G" dim="2 2 2 2 2 2 2 2 2 2" id="G"/>
+            <populationType spec='PopulationType' typeName="P" dim="2 2 2 2" id="P"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 2 2 2 2 2 2 2" id="GP1"/>
+            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 2 2 2 2 2 2 2" id="GP2"/>
+            <populationType spec='PopulationType' typeName="GP3" dim="2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP3"/>
+            <populationType spec='PopulationType' typeName="GP4" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP4"/>
+            <populationType spec='PopulationType' typeName="GP5" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP5"/>
+            <populationType spec='PopulationType' typeName="GP6" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP6"/>
+            <populationType spec='PopulationType' typeName="GP7" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP7"/>
+            <populationType spec='PopulationType' typeName="GP8" dim="2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2" id="GP8"/>
 
 	    	<!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
-            <populationType spec='PopulationType' typeName="SG" dim="4" id="SG"/>
-            <populationType spec='PopulationType' typeName="SP" dim="4" id="SP"/>
+            <populationType spec='PopulationType' typeName="SG" dim="2" id="SG"/>
+            <populationType spec='PopulationType' typeName="SP" dim="2" id="SP"/>
 
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
@@ -143,11 +143,11 @@
 
             <!-- Diffusion (migration) reactions -->
             <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[4]"/>
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[2]"/>
                 	G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + SG[l2] -> G[i1,i2,i3,i4,i5,i6,i7,i8,i9,l1] + SG[l1]
             </reaction>
             <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[4]"/>
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[2]"/>
                 	P[a1,a2,a3,l1] + SP[l2] -> P[a1,a2,a3,l2] + SP[l1]
             </reaction>
 
@@ -163,10 +163,10 @@
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize'>
-                SG[4] := 1000
+                SG[2] := 5000
             </populationSize>
             <populationSize spec='PopulationSize'>
-                SP[4] := 1000
+                SP[2] := 8000
             </populationSize>
             
             <populationSize spec='PopulationSize' size='200'>

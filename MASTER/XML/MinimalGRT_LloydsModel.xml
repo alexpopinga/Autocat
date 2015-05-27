@@ -4,7 +4,6 @@
     <run spec='Trajectory'
          simulationTime='100'
          nSamples="100">
-         <!--verbosity='2'-->
         
         <stepper spec='GillespieStepper'/>
         <!--stepper spec='SALStepper' stepSize="0.1" /-->
@@ -123,10 +122,10 @@
 
         <initialState spec='InitState'>
             <populationSize spec='PopulationSize'>
-                SG[3] := 1000
+                SG[3] := 5000
             </populationSize>
             <populationSize spec='PopulationSize'>
-                SP[3] := 1000
+                SP[3] := 8000
             </populationSize>
             
             <!-- Genomes -->
