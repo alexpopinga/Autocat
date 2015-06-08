@@ -2,12 +2,12 @@
 
 <beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
     <run spec='Trajectory'
-         simulationTime='1000'
-         nSamples="1000">
+         simulationTime='20'
+         nSamples="10">
          <!--verbosity='2'-->
         
         <!--<stepper spec='GillespieStepper'/>-->
-        <stepper spec='TauLeapingStepper' stepSize="0.1" />
+        <stepper spec='SALStepper' stepSize="0.0001" />
         <!--<stepper spec='RateEquationStepper' stepSize="0.1" />-->
 
         <model spec='Model' id='model'>
@@ -39,7 +39,7 @@
             </function>
 
             <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
-            <reaction spec='Reaction' reactionName="Replication" rate="0.1">
+            <reaction spec='Reaction' reactionName="Replication" rate="0.001">
                 <rateMultiplier spec='RateMultiplier'> 
                     exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.01)
                 </rateMultiplier>
@@ -48,8 +48,8 @@
             </reaction>
             
                         
-            <!-- Translation reactions -->
-            <reaction spec='Reaction' reactionName="Translation" rate="0.1">
+            <!-- Translation reactions
+            <reaction spec='Reaction' reactionName="Translation" rate="1">
                 <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i1,e1),{a1,a2,a3})/0.1)"/>
                 	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SP[l1] -> 
                 	GP1[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] + G[i1,i2,i3,l1] <!-- 'Release' gene here, as GP1 is distinct species -->
@@ -63,24 +63,24 @@
                 <rateMultiplier spec='RateMultiplier' value="exp(-HD(key(i3,e3),{a1,a2,a3})/0.1)"/>
                 	GP2[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1] -> 
                 	P[e1,e2,e3,l1] + P[a1,a2,a3,l1]
-            </reaction>
+            </reaction> -->
 
-            <!-- Diffusion (migration) reactions -->
-            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.01">
+            <!-- Diffusion (migration) reactions
+            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.1">
                 <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
                 	G[i1,i2,i3,l1] + SG[l2] -> G[i1,i2,i3,l1] + SG[l1]
             </reaction>
-            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.01">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==G_dim[3]"/>
+            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.1">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==P_dim[3]"/>
                 	P[a1,a2,a3,l1] + SP[l2] -> P[a1,a2,a3,l2] + SP[l1]
-            </reaction>
+            </reaction> -->
 
                         
             <!-- Degradation reactions   -->   
-            <reaction spec='Reaction' reactionName="DeathToG" rate="0.1">
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
                 	G[i1,i2,i3,l1] -> SG[l1]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="0.1">
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
                 	P[a1,a2,a3,l1] -> SP[l1]
             </reaction> 
         </model>
@@ -152,47 +152,47 @@
                 <population spec='Population' type="@G" location="0 1 0 0"/>
             </populationSize>
             
-            <populationSize spec='PopulationSize' size='2'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@G" location="1 0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='2'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@G" location="1 1 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='2'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@G" location="1 1 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='2'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@G" location="1 0 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='2'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@G" location="0 0 1 0"/>
             </populationSize>
             
             
             <!-- Proteins -->
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@P" location="0 0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@P" location="0 1 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='10'>
                 <population spec='Population' type="@P" location="1 1 0 0"/>
             </populationSize>
             
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@P" location="1 1 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@P" location="0 1 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@P" location="1 0 0 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@P" location="1 0 1 0"/>
             </populationSize>
-            <populationSize spec='PopulationSize' size='100'>
+            <populationSize spec='PopulationSize' size='0'>
                 <population spec='Population' type="@P" location="0 0 1 0"/>
             </populationSize>
             
