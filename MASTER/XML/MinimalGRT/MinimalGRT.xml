@@ -1,0 +1,126 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <run spec='Trajectory'
+         simulationTime='10'
+         nSamples="10">
+        
+        <stepper spec='GillespieStepper'/>
+        <!--<stepper spec='SALStepper' stepSize="0.1" />
+        <stepper spec='RateEquationStepper' stepSize="0.1" />-->
+
+        <model spec='Model' id='model'>
+        
+            <!-- Genes, proteins, gene-protein complexes -->
+            <populationType spec='PopulationType' typeName="G" dim="2 2 2 3" id="G"/>
+            <populationType spec='PopulationType' typeName="P" dim="2 2 2 3" id="P"/>
+            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 3" id="GP1"/>
+            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 3" id="GP2"/>
+
+	    	<!-- Nucleotides and amino acids ('food' molecules) -->
+            <populationType spec='PopulationType' typeName="n" dim="2 3" id="n"/>
+            <populationType spec='PopulationType' typeName="aa" dim="2 3" id="aa"/>
+
+            <!-- Hamming distance between two vectors -->
+            <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
+            
+            <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
+            <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
+            
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence -->
+            <function spec='Function' id="key" params="i a">
+                <![CDATA[
+                  i==0 && a==0 ?  {1,0,1}
+                : i==1 && a==1 ?  {0,1,0}
+                : i==0 && a==1 ?  {0,0,1}
+                :                 {1,1,0}
+                ]]>
+            </function>
+
+            <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity
+            Best replicase is P[0,0,0] -->
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                <rateMultiplier spec='RateMultiplier'> 
+                    exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.1)
+                </rateMultiplier>
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + n[j1,l1] + n[j2,l1] + n[j3,l1] ->  
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
+            </reaction>
+                        
+            <!-- Translation reactions -->
+            <reaction spec='Reaction' reactionName="Translation" rate="1">
+                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i1,e1),{a1,a2,a3})/0.7)^2)"/>
+                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + aa[e1,l1] -> 
+                	GP1[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] + G[i1,i2,i3,l1] 
+            </reaction>          
+            <reaction spec='Reaction' reactionName="TranslationA" rate="9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i2,e2),{a1,a2,a3})/0.7)^2)"/>
+                	GP1[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] + aa[e2,l1] -> 
+                	GP2[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="TranslationB" rate="9">
+                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i3,e3),{a1,a2,a3})/0.7)^2)"/>
+                	GP2[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1] + aa[e3,l1] -> 
+                	P[e1,e2,e3,l1] + P[a1,a2,a3,l1]
+            </reaction>            
+                        
+            <!-- Diffusion (migration) reactions -->
+            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.05">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==2"/>
+                	G[i1,i2,i3,l1] -> G[i1,i2,i3,l2]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.05">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==2"/>
+                	P[a1,a2,a3,l1] -> P[a1,a2,a3,l2]
+            </reaction>
+
+            <!-- Degradation reactions -->  
+            <reaction spec='Reaction' reactionName="DeathToG" rate="1">
+                G[i1,i2,i3,l1] -> n[i1,l1] + n[i2,l1] + n[i3,l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="1">
+                P[a1,a2,a3,l1] -> aa[a1,l1] + aa[a2,l1] + aa[a3,l1]
+            </reaction> 
+        </model>
+
+        <initialState spec='InitState'>
+        	
+        	<!-- Nucleotides -->
+            <populationSize spec='PopulationSize'>
+                n[i1,l1] := 200
+            </populationSize>            
+
+			<!-- Amino acids -->
+            <populationSize spec='PopulationSize'>
+                aa[a1,l1] := 500
+            </populationSize>            
+                        
+            <!-- Genomes -->
+			<populationSize spec='PopulationSize'>
+				G[i1,i2,i3,l1] := 10
+			</populationSize>
+			<!--<populationSize spec='PopulationSize'>
+				G[0,0,0,l1] := 200
+			</populationSize>-->
+	
+			<!-- Proteins -->
+			<populationSize spec='PopulationSize'>
+				P[a1,a2,a3,l1] := 30
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				P[0,0,0,l1] := 600
+			</populationSize>
+	
+			<!-- Genome-Protein complexes -->
+            <populationSize spec='PopulationSize'>
+                GP1[i1,i2,i3,e1,l1] := 0
+            </populationSize>
+            <populationSize spec='PopulationSize'>
+                GP2[i1,i2,i3,e1,e2,l1] := 0
+            </populationSize>
+
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>
