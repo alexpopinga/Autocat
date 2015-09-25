@@ -1,0 +1,169 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <!--<run spec='Ensemble'-->
+    <run spec='Trajectory'
+         simulationTime='1000'
+         nSamples="100">
+         <!--nTraj="100">-->
+        
+        <stepper spec='GillespieStepper'/>
+        <!--stepper spec='SALStepper' stepSize="0.1" /-->
+        <!--stepper spec='RateEquationStepper' stepSize="0.1" /-->
+
+        <model spec='Model' id='model'>
+
+            <!-- Proteins -->
+            <populationType spec='PopulationType' typeName="aaa" dim="3" id="aaa"/>
+            <populationType spec='PopulationType' typeName="abb" dim="3" id="abb"/>
+            <populationType spec='PopulationType' typeName="bba" dim="3" id="bba"/>
+
+            <!-- Genome -->
+            <populationType spec='PopulationType' typeName="ggg_gcc_ccg" dim="3" id="ggg_gcc_ccg"/>
+
+            <!-- Genome-aminoAcid complexes -->
+            <populationType spec='PopulationType' typeName="ggg_a_gcc_ccg" dim="3" id="ggg_a_gcc_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aa_gcc_ccg" dim="3" id="ggg_aa_gcc_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_ccg" dim="3" id="ggg_aaa_gcc_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_a_ccg" dim="3" id="ggg_aaa_gcc_a_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_ab_ccg" dim="3" id="ggg_aaa_gcc_ab_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_abb_ccg" dim="3" id="ggg_aaa_gcc_abb_ccg"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_abb_ccg_b" dim="3" id="ggg_aaa_gcc_abb_ccg_b"/>
+            <populationType spec='PopulationType' typeName="ggg_aaa_gcc_abb_ccg_bb" dim="3" id="ggg_aaa_gcc_abb_ccg_bb"/>
+            
+	    	<!-- Spaces to be occupied by genomes (SG) or proteins (3Saa) -->
+			<populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
+			<populationType spec='PopulationType' typeName="Saa" dim="3" id="Saa"/>
+
+            <!-- Replication reaction -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.1">
+                	SG[l1] + ggg_gcc_ccg[l1] + aaa[l1] ->  ggg_gcc_ccg[l1] + ggg_gcc_ccg[l1] + aaa[l1]
+            </reaction>
+
+            <!-- Translation reactions -->            
+            <reaction spec='Reaction' reactionName="Translation0" rate="0.05">
+                Saa[l1] + ggg_gcc_ccg[l1] + bba[l1] -> ggg_a_gcc_ccg[l1] + bba[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation1" rate="0.05">
+                Saa[l1] + ggg_a_gcc_ccg[l1] + bba[l1] -> ggg_aa_gcc_ccg[l1] + bba[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation2" rate="0.05">
+                Saa[l1] + ggg_aa_gcc_ccg[l1] + bba[l1] -> ggg_aaa_gcc_ccg[l1] + bba[l1]
+            </reaction>
+            
+            <reaction spec='Reaction' reactionName="Translation3" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_ccg[l1] + bba[l1] -> ggg_aaa_gcc_a_ccg[l1] + bba[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation4" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_a_ccg[l1] + abb[l1] -> ggg_aaa_gcc_ab_ccg[l1] + abb[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation5" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_ab_ccg[l1] + abb[l1] -> ggg_aaa_gcc_abb_ccg[l1] + abb[l1]
+            </reaction> 
+              
+            <reaction spec='Reaction' reactionName="Translation6" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_abb_ccg_b[l1] + abb[l1] -> ggg_aaa_gcc_abb_ccg_b[l1] + abb[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation7" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_abb_ccg_b[l1] + abb[l1] -> ggg_aaa_gcc_abb_ccg_bb[l1] + abb[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation8" rate="0.9">
+                Saa[l1] + ggg_aaa_gcc_abb_ccg_bb[l1] + bba[l1] -> ggg_gcc_ccg[l1] + bba[l1] + aaa[l1] + abb[l1] + bba[l1]
+            </reaction>                  
+            
+            <!-- Degradation reactions -->
+            <reaction spec='Reaction' reactionName="DeathToaaa" rate="0.001">
+                aaa[l1] -> 3Saa[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathTobba" rate="0.001">
+                bba[l1] -> 3Saa[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToabb" rate="0.001">
+                abb[l1] -> 3Saa[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToggg" rate="0.001">
+                ggg_gcc_ccg[l1] -> SG[l1]
+            </reaction>
+
+            <!-- Genome-aminoAcid complex degradation negligible (think of them as phase transitions) -->
+
+            
+            <!-- Diffusion (migration) reactions -->
+            <reaction spec='Reaction' reactionName="Diffusion_genome" rate="0.003">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==3"/>
+                	ggg_gcc_ccg[l1] + SG[l2] -> ggg_gcc_ccg[l2] + SG[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_genome" rate="0.003">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==3"/>
+                	aaa[l1] + 3Saa[l2] -> aaa[l2] + 3Saa[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_genome" rate="0.003">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==3"/>
+                	bba[l1] + 3Saa[l2] -> bba[l2] + 3Saa[l1]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion_genome" rate="0.003">
+                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==3"/>
+                	abb[l1] + 3Saa[l2] -> abb[l2] + 3Saa[l1]
+            </reaction>
+        </model>
+
+        <initialState spec='InitState'>
+            <populationSize spec='PopulationSize' size='5000'>
+            	<population spec='Population' type="@SG" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+            	<population spec='Population' type="@Saa" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+            	<population spec='Population' type="@SG" location="1"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+            	<population spec='Population' type="@Saa" location="1"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+            	<population spec='Population' type="@SG" location="2"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+            	<population spec='Population' type="@Saa" location="2"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+            	<population spec='Population' type="@ggg_gcc_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+            	<population spec='Population' type="@aaa" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+            	<population spec='Population' type="@bba" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='200'>
+            	<population spec='Population' type="@abb" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_a_gcc_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aa_gcc_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_a_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_ab_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_abb_ccg" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_abb_ccg_b" location="0"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='0'>
+            	<population spec='Population' type="@ggg_aaa_gcc_abb_ccg_bb" location="0"/>
+            </populationSize>
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>

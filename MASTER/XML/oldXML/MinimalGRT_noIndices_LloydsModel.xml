@@ -1,0 +1,1071 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <run spec='Trajectory'
+         simulationTime='1000'
+         nSamples="100">
+         <!--verbosity='2'-->
+        
+        <!--<stepper spec='GillespieStepper'/>-->
+        <stepper spec='SALStepper' stepSize="0.00001"/>
+        <!--<stepper spec='RateEquationStepper' stepSize="0.1" />-->
+
+        <model spec='Model' id='model'>
+        
+            <!-- Genes, proteins, gene-protein complexes -->
+            <populationType spec='PopulationType' typeName="G000" id="G000"/>
+            <populationType spec='PopulationType' typeName="G001" id="G001"/>
+            <populationType spec='PopulationType' typeName="G011" id="G011"/>
+            <populationType spec='PopulationType' typeName="G111" id="G111"/>
+            <populationType spec='PopulationType' typeName="G110" id="G110"/>
+            <populationType spec='PopulationType' typeName="G100" id="G100"/>
+            <populationType spec='PopulationType' typeName="G101" id="G101"/>
+            <populationType spec='PopulationType' typeName="G010" id="G010"/>
+            <populationType spec='PopulationType' typeName="P000" id="P000"/>
+            <populationType spec='PopulationType' typeName="P001" id="P001"/>
+            <populationType spec='PopulationType' typeName="P011" id="P011"/>
+            <populationType spec='PopulationType' typeName="P111" id="P111"/>
+            <populationType spec='PopulationType' typeName="P110" id="P110"/>
+            <populationType spec='PopulationType' typeName="P100" id="P100"/>
+            <populationType spec='PopulationType' typeName="P101" id="P101"/>
+            <populationType spec='PopulationType' typeName="P010" id="P010"/>
+
+	    	<!-- Spaces to be occupied by genes (SG) or proteins (SP) -->
+            <populationType spec='PopulationType' typeName="SG" id="SG"/>
+            <populationType spec='PopulationType' typeName="SP" id="SP"/>
+
+            <!-- Hamming distance between two vectors -->
+            <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
+            
+            <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
+            <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
+            
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence -->
+            <function spec='Function' id="key" params="i a">
+                <![CDATA[
+                  i==0 && a==0 ?  {1,1,0}
+                : i==1 && a==1 ?  {0,1,1}
+                : i==0 && a==1 ?  {1,0,1}
+                :                 {0,1,0}
+                ]]>
+            </function>
+
+            <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity -->
+<!-- P[0,0,0] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.001">
+                SG + G000 + P000 -> G000 + G000 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.001">
+                SG + G011 + P000 -> G011 + G011 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.001">
+                SG + G001 + P000 -> G001 + G001 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0005">
+                SG + G010 + P000 -> G010 + G010 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0005">
+                SG + G100 + P000 -> G100 + G100 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0005">
+                SG + G101 + P000 -> G101 + G101 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0005">
+                SG + G110 + P000 -> G110 + G110 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0005">
+                SG + G111 + P000 -> G111 + G111 + P000
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P000 -> G000 + G100 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P000 -> G011 + G111 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P000 -> G001 + G101 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P000 -> G010 + G110 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P000 -> G100 + G000 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P000 -> G101 + G001 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P000 -> G110 + G010 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P000 -> G111 + G011 + P000
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P000 -> G000 + G010 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P000 -> G011 + G001 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P000 -> G001 + G011 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P000 -> G010 + G000 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P000 -> G100 + G110 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P000 -> G101 + G111 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P000 -> G110 + G100 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P000 -> G111 + G101 + P000
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P000 -> G000 + G001 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P000 -> G011 + G010 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P000 -> G001 + G000 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P000 -> G010 + G011 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P000 -> G100 + G101 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P000 -> G101 + G100 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P000 -> G110 + G111 + P000
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P000 -> G111 + G110 + P000
+            </reaction>
+            
+<!-- P[1,1,1] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P111 -> G000 + G000 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P111 -> G011 + G011 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P111 -> G001 + G001 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P111 -> G010 + G010 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P111 -> G100 + G100 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P111 -> G101 + G101 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P111 -> G110 + G110 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P111 -> G111 + G111 + P111
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P111 -> G000 + G100 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P111 -> G011 + G111 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P111 -> G001 + G101 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P111 -> G010 + G110 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P111 -> G100 + G000 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P111 -> G101 + G001 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P111 -> G110 + G010 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P111 -> G111 + G011 + P111
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P111 -> G000 + G010 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P111 -> G011 + G001 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P111 -> G001 + G011 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P111 -> G010 + G000 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P111 -> G100 + G110 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P111 -> G101 + G111 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P111 -> G110 + G100 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P111 -> G111 + G101 + P111
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P111 -> G000 + G001 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P111 -> G011 + G010 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P111 -> G001 + G000 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P111 -> G010 + G011 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P111 -> G100 + G101 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P111 -> G101 + G100 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P111 -> G110 + G111 + P111
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P111 -> G111 + G110 + P111
+            </reaction>
+            
+<!-- P[0,1,0] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P010 -> G000 + G000 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P010 -> G011 + G011 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P010 -> G001 + G001 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P010 -> G010 + G010 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P010 -> G100 + G100 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P010 -> G101 + G101 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P010 -> G110 + G110 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P010 -> G111 + G111 + P010
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P010 -> G000 + G100 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P010 -> G011 + G111 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P010 -> G001 + G101 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P010 -> G010 + G110 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P010 -> G100 + G000 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P010 -> G101 + G001 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P010 -> G110 + G010 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P010 -> G111 + G011 + P010
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P010 -> G000 + G010 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P010 -> G011 + G001 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P010 -> G001 + G011 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P010 -> G010 + G000 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P010 -> G100 + G110 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P010 -> G101 + G111 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P010 -> G110 + G100 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P010 -> G111 + G101 + P010
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P010 -> G000 + G001 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P010 -> G011 + G010 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P010 -> G001 + G000 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P010 -> G010 + G011 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P010 -> G100 + G101 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P010 -> G101 + G100 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P010 -> G110 + G111 + P010
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P010 -> G111 + G110 + P010
+            </reaction>
+            
+<!-- P[0,1,1] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P011 -> G000 + G000 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P011 -> G011 + G011 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P011 -> G001 + G001 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P011 -> G010 + G010 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P011 -> G100 + G100 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P011 -> G101 + G101 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P011 -> G110 + G110 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P011 -> G111 + G111 + P011
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P011 -> G000 + G100 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P011 -> G011 + G111 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P011 -> G001 + G101 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P011 -> G010 + G110 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P011 -> G100 + G000 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P011 -> G101 + G001 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P011 -> G110 + G010 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P011 -> G111 + G011 + P011
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P011 -> G000 + G010 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P011 -> G011 + G001 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P011 -> G001 + G011 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P011 -> G010 + G000 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P011 -> G100 + G110 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P011 -> G101 + G111 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P011 -> G110 + G100 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P011 -> G111 + G101 + P011
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P011 -> G000 + G001 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P011 -> G011 + G010 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P011 -> G001 + G000 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P011 -> G010 + G011 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P011 -> G100 + G101 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P011 -> G101 + G100 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P011 -> G110 + G111 + P011
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P011 -> G111 + G110 + P011
+            </reaction>
+            
+<!-- P[0,0,1] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P001 -> G000 + G000 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P001 -> G011 + G011 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P001 -> G001 + G001 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P001 -> G010 + G010 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P001 -> G100 + G100 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P001 -> G101 + G101 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P001 -> G110 + G110 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P001 -> G111 + G111 + P001
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P001 -> G000 + G100 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P001 -> G011 + G111 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P001 -> G001 + G101 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P001 -> G010 + G110 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P001 -> G100 + G000 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P001 -> G101 + G001 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P001 -> G110 + G010 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P001 -> G111 + G011 + P001
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P001 -> G000 + G010 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P001 -> G011 + G001 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P001 -> G001 + G011 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P001 -> G010 + G000 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P001 -> G100 + G110 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P001 -> G101 + G111 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P001 -> G110 + G100 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P001 -> G111 + G101 + P001
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P001 -> G000 + G001 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P001 -> G011 + G010 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P001 -> G001 + G000 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P001 -> G010 + G011 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P001 -> G100 + G101 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P001 -> G101 + G100 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P001 -> G110 + G111 + P001
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P001 -> G111 + G110 + P001
+            </reaction>
+            
+<!-- P[1,1,0] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P110 -> G000 + G000 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P110 -> G011 + G011 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P110 -> G001 + G001 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P110 -> G010 + G010 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P110 -> G100 + G100 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P110 -> G101 + G101 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P110 -> G110 + G110 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P110 -> G111 + G111 + P110
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P110 -> G000 + G100 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P110 -> G011 + G111 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P110 -> G001 + G101 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P110 -> G010 + G110 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P110 -> G100 + G000 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P110 -> G101 + G001 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P110 -> G110 + G010 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P110 -> G111 + G011 + P110
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P110 -> G000 + G010 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P110 -> G011 + G001 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P110 -> G001 + G011 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P110 -> G010 + G000 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P110 -> G100 + G110 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P110 -> G101 + G111 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P110 -> G110 + G100 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P110 -> G111 + G101 + P110
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P110 -> G000 + G001 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P110 -> G011 + G010 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P110 -> G001 + G000 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P110 -> G010 + G011 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P110 -> G100 + G101 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P110 -> G101 + G100 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P110 -> G110 + G111 + P110
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P110 -> G111 + G110 + P110
+            </reaction>
+            
+<!-- P[1,0,1] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P101 -> G000 + G000 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P101 -> G011 + G011 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P101 -> G001 + G001 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P101 -> G010 + G010 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P101 -> G100 + G100 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P101 -> G101 + G101 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P101 -> G110 + G110 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P101 -> G111 + G111 + P101
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P101 -> G000 + G100 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P101 -> G011 + G111 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P101 -> G001 + G101 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P101 -> G010 + G110 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P101 -> G100 + G000 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P101 -> G101 + G001 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P101 -> G110 + G010 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P101 -> G111 + G011 + P101
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P101 -> G000 + G010 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P101 -> G011 + G001 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P101 -> G001 + G011 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P101 -> G010 + G000 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P101 -> G100 + G110 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P101 -> G101 + G111 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P101 -> G110 + G100 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P101 -> G111 + G101 + P101
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P101 -> G000 + G001 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P101 -> G011 + G010 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P101 -> G001 + G000 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P101 -> G010 + G011 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P101 -> G100 + G101 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P101 -> G101 + G100 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P101 -> G110 + G111 + P101
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P101 -> G111 + G110 + P101
+            </reaction>
+            
+<!-- P[1,0,0] -->
+
+		<!-- Flawless -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P100 -> G000 + G000 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P100 -> G011 + G011 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P100 -> G001 + G001 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P100 -> G010 + G010 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P100 -> G100 + G100 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P100 -> G101 + G101 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P100 -> G110 + G110 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P100 -> G111 + G111 + P100
+            </reaction>
+            
+		<!-- Flawed at i1 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P100 -> G000 + G100 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P100 -> G011 + G111 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P100 -> G001 + G101 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P100 -> G010 + G110 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P100 -> G100 + G000 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P100 -> G101 + G001 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P100 -> G110 + G010 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P100 -> G111 + G011 + P100
+            </reaction>
+
+		<!-- Flawed at i2 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P100 -> G000 + G010 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P100 -> G011 + G001 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P100 -> G001 + G011 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P100 -> G010 + G000 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P100 -> G100 + G110 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P100 -> G101 + G111 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P100 -> G110 + G100 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P100 -> G111 + G101 + P100
+            </reaction>
+
+		<!-- Flawed at i3 -->
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G000 + P100 -> G000 + G001 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G011 + P100 -> G011 + G010 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G001 + P100 -> G001 + G000 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G010 + P100 -> G010 + G011 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G100 + P100 -> G100 + G101 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G101 + P100 -> G101 + G100 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G110 + P100 -> G110 + G111 + P100
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="0.0001">
+                SG + G111 + P100 -> G111 + G110 + P100
+            </reaction>
+            
+            <!-- Translation reactions -->
+
+                        
+            <!-- Degradation reactions -->
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G000 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G001 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G011 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G111 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G110 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G100 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G101 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToG" rate="10">
+                	G010 -> SG
+            </reaction>
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P001 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P011 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P111 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P110 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P100 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P101 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P010 -> SP
+            </reaction> 
+            <reaction spec='Reaction' reactionName="DeathToP" rate="10">
+                	P111 -> SP
+            </reaction>    
+        </model>
+
+        <initialState spec='InitState'>
+        	<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP"/>
+            </populationSize>
+        	<!--<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="3"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="3"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="4"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="4"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="5"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="5"/>
+            </populationSize>
+        	<populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="6"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="6"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="7"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="7"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='5000'>
+                <population spec='Population' type="@SG" location="8"/>
+            </populationSize>
+            <populationSize spec='PopulationSize' size='8000'>
+                <population spec='Population' type="@SP" location="8"/>
+            </populationSize>-->            
+            
+            <!-- Genomes -->
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G000" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G001" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G011" />
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G111" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G110" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G100" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G101" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='2'>
+                <population spec='Population' type="@G010" />
+            </populationSize>
+            
+            
+            <!-- Proteins -->
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P000" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P001" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P011" />
+            </populationSize>
+            
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P111" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P110" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P100" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P101" />
+            </populationSize>
+            <populationSize spec='PopulationSize' size='10'>
+                <population spec='Population' type="@P010" />
+            </populationSize>
+            
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>
