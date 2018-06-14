@@ -12,14 +12,14 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="Gaaa" dim="3" id="Gaaa"/>
-            <populationType spec='PopulationType' typeName="Gbbb" dim="3" id="Gbbb"/>
-            <populationType spec='PopulationType' typeName="Gaab" dim="3" id="Gaab"/>
-            <populationType spec='PopulationType' typeName="Gabb" dim="3" id="Gabb"/>
-            <populationType spec='PopulationType' typeName="Gbab" dim="3" id="Gbab"/>
-            <populationType spec='PopulationType' typeName="Gbaa" dim="3" id="Gbaa"/>
-            <populationType spec='PopulationType' typeName="Gaba" dim="3" id="Gaba"/>
-            <populationType spec='PopulationType' typeName="Gbba" dim="3" id="Gbba"/>
+            <populationType spec='PopulationType' typeName="Gaaa" dim="3" id="Gmmm"/>
+            <populationType spec='PopulationType' typeName="Gbbb" dim="3" id="Gnnn"/>
+            <populationType spec='PopulationType' typeName="Gaab" dim="3" id="Gmmn"/>
+            <populationType spec='PopulationType' typeName="Gabb" dim="3" id="Gmnn"/>
+            <populationType spec='PopulationType' typeName="Gbab" dim="3" id="Gnmn"/>
+            <populationType spec='PopulationType' typeName="Gbaa" dim="3" id="Gnmm"/>
+            <populationType spec='PopulationType' typeName="Gaba" dim="3" id="Gnmn"/>
+            <populationType spec='PopulationType' typeName="Gbba" dim="3" id="Gnnm"/>
             <populationType spec='PopulationType' typeName="Paaa" dim="3" id="Paaa"/>
             <populationType spec='PopulationType' typeName="Pbbb" dim="3" id="Pbbb"/>
             <populationType spec='PopulationType' typeName="Paab" dim="3" id="Paab"/>
@@ -31,9 +31,9 @@
             <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 3" id="GP1"/>
             <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 3" id="GP2"/>
 
-	    	<!-- Nucleotides and amino acids ('food' molecules)
+	    	<!-- Nucleotides and amino acids ('food' molecules) -->
             <populationType spec='PopulationType' typeName="n" dim="2 3" id="n"/>
-            <populationType spec='PopulationType' typeName="aa" dim="2 3" id="aa"/> -->
+            <populationType spec='PopulationType' typeName="aa" dim="2 3" id="aa"/>
             
             <!-- Space -->
             <populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
@@ -55,14 +55,38 @@
                 ]]>
             </function>
 
-            <!-- Replication reaction, i and j are genes, a is amino acid for protein with replicase activity
-            Best replicase is P[0,0,0] -->
+            <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                <rateMultiplier spec='RateMultiplier'> 
-                    exp(-a1-a2-a3)*dpois(HD({i1,i2,i3},{j1,j2,j3}),0.001)
-                </rateMultiplier>
-                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SG[l1] ->  
-                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + G[j1,j2,j3,l1]
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gnnn + Paaa + n + n + n ->  
+                	Gnnn + Paaa + Gnnn
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + m + m + m ->  
+                	Gmmm + Paaa + Gmmm
             </reaction>
                         
             <!-- Translation reactions -->
