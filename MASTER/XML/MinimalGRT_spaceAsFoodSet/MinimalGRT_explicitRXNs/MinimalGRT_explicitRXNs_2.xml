@@ -15,9 +15,11 @@
             <populationType spec='PopulationType' typeName="Gmm" dim="3" id="Gmm"/>
             <populationType spec='PopulationType' typeName="Gnn" dim="3" id="Gnn"/>
             <populationType spec='PopulationType' typeName="Gmn" dim="3" id="Gmn"/>
+            <populationType spec='PopulationType' typeName="Gnm" dim="3" id="Gnm"/>
             <populationType spec='PopulationType' typeName="Paa" dim="3" id="Paa"/>
             <populationType spec='PopulationType' typeName="Pbb" dim="3" id="Pbb"/>
             <populationType spec='PopulationType' typeName="Pab" dim="3" id="Pab"/>
+            <populationType spec='PopulationType' typeName="Pba" dim="3" id="Pba"/>
 
 	    	<!-- Nucleotides and amino acids ('food' molecules) -->
             <populationType spec='PopulationType' typeName="m" dim="3" id="m"/>
