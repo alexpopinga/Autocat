@@ -122,12 +122,55 @@
             </reaction>
                         
             <!-- Diffusion (migration) reactions
-            <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.05">
-					
+            <reaction spec='Reaction' reactionName="Diffusion" rate="0.05">
+					Gmmm[c] -> Gmmm[d]		
             </reaction>
-            <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.05">
-
+            <reaction spec='Reaction' reactionName="Diffusion1" rate="0.05">
+					Gnnn[c] -> Gnnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion2" rate="0.05">
+					Gmmn[c] -> Gmmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion3" rate="0.05">
+					Gmnn[c] -> Gmnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion4" rate="0.05">
+					Gnmn[c] -> Gnmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion5" rate="0.05">
+					Gnnm[c] -> Gnnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion6" rate="0.05">
+					Gnmm[c] -> Gnmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion7" rate="0.05">
+					Gmnm[c] -> Gmnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion8" rate="0.05">
+					Pmmm[c] -> Pmmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion9" rate="0.05">
+					Pnnn[c] -> Pnnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion10" rate="0.05">
+					Pmmn[c] -> Pmmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion11" rate="0.05">
+					Pmnn[c] -> Pmnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion12" rate="0.05">
+					Pnmn[c] -> Pnmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion13" rate="0.05">
+					Pnnm[c] -> Pnnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion14" rate="0.05">
+					Pnmm[c] -> Pnmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion15" rate="0.05">
+					Pmnm[c] -> Pmnm[d]		
             </reaction> -->
+
 
             <!-- Degradation reactions -->  
             <reaction spec='Reaction' reactionName="Death" rate="1">
@@ -184,74 +227,71 @@
         	
         	<!-- Nucleotides -->
             <populationSize spec='PopulationSize'>
-                m := 
-            </populationSize>            
+                m := 10
+            </populationSize> 
+            <populationSize spec='PopulationSize'>
+                n := 10
+            </populationSize>           
 
 			<!-- Amino acids -->
             <populationSize spec='PopulationSize'>
-                SP[l1] := 500
+                a := 10
+            </populationSize>
+            <populationSize spec='PopulationSize'>
+                b := 10
             </populationSize>            
                         
             <!-- Genomes -->
 			<populationSize spec='PopulationSize'>
-				Gaaa[l1] := 10
+				Gaaa[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gbbb[l1] := 10
+				Gbbb[c] := 10
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				Gaab[l1] := 10
+				Gaab[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gabb[l1] := 10
+				Gabb[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gaba[l1] := 10
+				Gaba[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gbab[l1] := 10
+				Gbab[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gbaa[l1] := 10
+				Gbaa[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gbba[l1] := 10
+				Gbba[c] := 10
 			</populationSize>		
 	
 			<!-- Proteins -->
 			<populationSize spec='PopulationSize'>
-				Pbbb[l1] := 10
+				Pbbb[c] := 10
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				Paab[l1] := 10
+				Paab[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pabb[l1] := 10
+				Pabb[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Paba[l1] := 10
+				Paba[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbab[l1] := 10
+				Pbab[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbaa[l1] := 10
+				Pbaa[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbba[l1] := 10
-			</populationSize>
-			
+				Pbba[c] := 10
+			</populationSize>			
 			<populationSize spec='PopulationSize'>
-				Paaa[l1] := 600
+				Paaa[c] := 10
 			</populationSize>
-	
-			<!-- Genome-Protein complexes -->
-            <populationSize spec='PopulationSize'>
-                GP1[i1,i2,i3,e1,l1] := 0
-            </populationSize>
-            <populationSize spec='PopulationSize'>
-                GP2[i1,i2,i3,e1,e2,l1] := 0
-            </populationSize>
 
         </initialState>
         
