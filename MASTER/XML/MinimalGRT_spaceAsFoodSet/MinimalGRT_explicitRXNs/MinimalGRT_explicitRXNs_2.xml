@@ -12,20 +12,20 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="Gmm" dim="3" id="Gmm"/>
-            <populationType spec='PopulationType' typeName="Gnn" dim="3" id="Gnn"/>
-            <populationType spec='PopulationType' typeName="Gmn" dim="3" id="Gmn"/>
-            <populationType spec='PopulationType' typeName="Gnm" dim="3" id="Gnm"/>
-            <populationType spec='PopulationType' typeName="Paa" dim="3" id="Paa"/>
-            <populationType spec='PopulationType' typeName="Pbb" dim="3" id="Pbb"/>
-            <populationType spec='PopulationType' typeName="Pab" dim="3" id="Pab"/>
-            <populationType spec='PopulationType' typeName="Pba" dim="3" id="Pba"/>
+            <populationType spec='PopulationType' typeName="Gmm" dim="10" id="Gmm"/>
+            <populationType spec='PopulationType' typeName="Gnn" dim="10" id="Gnn"/>
+            <populationType spec='PopulationType' typeName="Gmn" dim="10" id="Gmn"/>
+            <populationType spec='PopulationType' typeName="Gnm" dim="10" id="Gnm"/>
+            <populationType spec='PopulationType' typeName="Paa" dim="10" id="Paa"/>
+            <populationType spec='PopulationType' typeName="Pbb" dim="10" id="Pbb"/>
+            <populationType spec='PopulationType' typeName="Pab" dim="10" id="Pab"/>
+            <populationType spec='PopulationType' typeName="Pba" dim="10" id="Pba"/>
 
 	    	<!-- Nucleotides and amino acids ('food' molecules) -->
-            <populationType spec='PopulationType' typeName="m" dim="3" id="m"/>
-            <populationType spec='PopulationType' typeName="n" dim="3" id="n"/>
-            <populationType spec='PopulationType' typeName="a" dim="3" id="a"/>
-            <populationType spec='PopulationType' typeName="b" dim="3" id="b"/>
+            <populationType spec='PopulationType' typeName="m" dim="10" id="m"/>
+            <populationType spec='PopulationType' typeName="n" dim="10" id="n"/>
+            <populationType spec='PopulationType' typeName="a" dim="10" id="a"/>
+            <populationType spec='PopulationType' typeName="b" dim="10" id="b"/>
             
             <!-- Space
             <populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
@@ -83,32 +83,55 @@
                 	Gnm[c] + Pbb[c] + Paa[c] + Pba[c]
             </reaction>
                         
-            <!-- Diffusion (migration) reactions -->
-
+            <!-- Diffusion (migration) reactions
+            <reaction spec='Reaction' reactionName="Diffusion" rate="1">
+                Gmm[c] -> Gmm[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion1" rate="1">
+                Gnn[c] -> Gnn[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion2" rate="1">
+                Gmn[c] -> Gmn[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion3" rate="1">
+                Gnm[c] -> Gnm[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion4" rate="1">
+                Paa[c] -> Paa[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion5" rate="1">
+                Pbb[c] -> Pbb[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion6" rate="1">
+                Pab[c] -> Pab[d]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion7" rate="1">
+                Pba[c] -> Pba[d]
+            </reaction> -->
 
             <!-- Degradation reactions -->  
-            <reaction spec='Reaction' reactionName="Death" rate="1">
+            <reaction spec='Reaction' reactionName="Death" rate="0.5">
                 Gmm[c] -> m[c] + m[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death1" rate="1">
+            <reaction spec='Reaction' reactionName="Death1" rate="0.5">
                 Gnn[c] -> n[c] + n[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death2" rate="1">
+            <reaction spec='Reaction' reactionName="Death2" rate="0.5">
                 Gmn[c] -> m[c] + m[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death3" rate="1">
+            <reaction spec='Reaction' reactionName="Death3" rate="0.5">
                 Gnm[c] -> m[c] + n[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death4" rate="1">
+            <reaction spec='Reaction' reactionName="Death4" rate="0.5">
                 Paa[c] -> a[c] + a[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death5" rate="1">
+            <reaction spec='Reaction' reactionName="Death5" rate="0.5">
                 Pbb[c] -> b[c] + b[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death6" rate="1">
+            <reaction spec='Reaction' reactionName="Death6" rate="0.5">
                 Pab[c] -> a[c] + b[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Death7" rate="1">
+            <reaction spec='Reaction' reactionName="Death7" rate="0.5">
                 Pba[c] -> b[c] + a[c]
             </reaction>
         </model>
