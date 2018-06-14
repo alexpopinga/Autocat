@@ -58,7 +58,7 @@
             <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
                 	Gmmm[c] + Paab[c] + m[c] + m[c] + m[c] ->  
-                	Gmmm[c] + Pab[c] + Gmmm[c]
+                	Gmmm[c] + Paab[c] + Gmmm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication1" rate="1">
                 	Gnnn[c] + Paab[c] + n[c] + n[c] + n[c] ->  
