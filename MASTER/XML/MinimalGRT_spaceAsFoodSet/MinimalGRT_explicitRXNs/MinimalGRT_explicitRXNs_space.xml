@@ -32,8 +32,8 @@
             <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 3" id="GP2"/>
 
 	    	<!-- Nucleotides and amino acids ('food' molecules) -->
-            <populationType spec='PopulationType' typeName="n" dim="2 3" id="n"/>
-            <populationType spec='PopulationType' typeName="aa" dim="2 3" id="aa"/>
+            <populationType spec='PopulationType' typeName="n" dim="3" id="n"/>
+            <populationType spec='PopulationType' typeName="aa" dim="3" id="aa"/>
             
             <!-- Space -->
             <populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
@@ -45,7 +45,7 @@
             <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
             <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
             
-	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence -->
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence 
             <function spec='Function' id="key" params="i a">
                 <![CDATA[
                   i==0 && a==0 ?  {1,0,1}
@@ -53,58 +53,75 @@
                 : i==0 && a==1 ?  {0,0,1}
                 :                 {1,1,0}
                 ]]>
-            </function>
+            </function> -->
 
             <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+                	Gmmm + Pab + m + m + m ->  
+                	Gmmm + Pab + Gmmm
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gnnn + Paaa + n + n + n ->  
-                	Gnnn + Paaa + Gnnn
+            <reaction spec='Reaction' reactionName="Replication1" rate="1">
+                	Gnnn + Pab + n + n + n ->  
+                	Gnnn + Pab + Gnnn
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication2" rate="1">
+                	Gmmn + Pab + m + m + n ->  
+                	Gmmn + Pab + Gmmn
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication3" rate="1">
+                	Gmnn + Pab + m + n + n ->  
+                	Gmnn + Pab + Gmnn
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication4" rate="1">
+                	Gnnm + Pab + n + n + m ->  
+                	Gnnm + Pab + Gnnm
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication5" rate="1">
+                	Gnmm + Pab + n + m + m ->  
+                	Gnmm + Pab + Gnmm
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication6" rate="1">
+                	Gmnm + Pab + m + n + m ->  
+                	Gmnm + Pab + Gmnm
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + m + m + m ->  
-                	Gmmm + Paaa + Gmmm
+            <reaction spec='Reaction' reactionName="Replication7" rate="1">
+                	Gnmn + Pab + n + m + n ->  
+                	Gnmn + Pab + Gnmn
             </reaction>
                         
             <!-- Translation reactions -->
-            <reaction spec='Reaction' reactionName="Translation" rate="1">
-                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i1,e1),{a1,a2,a3})/0.7)^2)"/>
-                	G[i1,i2,i3,l1] + P[a1,a2,a3,l1] + SP[l1] -> 
-                	GP1[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] + G[i1,i2,i3,l1] 
-            </reaction>          
-            <reaction spec='Reaction' reactionName="TranslationA" rate="9">
-                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i2,e2),{a1,a2,a3})/0.7)^2)"/>
-                	GP1[i1,i2,i3,e1,l1] + P[a1,a2,a3,l1] -> 
-                	GP2[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1]
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm + Paaa + Paaa + Paaa + a + a + a ->  
+                	Gmmm + Paaa + Paaa + Paaa + Paaa
             </reaction>
-            <reaction spec='Reaction' reactionName="TranslationB" rate="9">
-                <rateMultiplier spec='RateMultiplier' value="exp(-(HD(key(i3,e3),{a1,a2,a3})/0.7)^2)"/>
-                	GP2[i1,i2,i3,e1,e2,l1] + P[a1,a2,a3,l1] -> 
-                	P[e1,e2,e3,l1] + P[a1,a2,a3,l1]
-            </reaction>            
+            <reaction spec='Reaction' reactionName="Replication1" rate="1">
+                	Gnnn + Pbbb + Pbbb + Pbbb + b + b + b ->  
+                	Gnnn + Pbbb + Pbbb + Pbbb + Paaa
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication2" rate="1">
+                	Gmmn + Paaa + Paaa + Pbbb + a + a + b ->  
+                	Gmmn + Paaa + Paaa + Pbbb + Paab
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication3" rate="1">
+                	Gmnn + Paaa + Pbbb + Pbbb + a + b + b ->  
+                	Gmnn + Paaa + Pbbb + Pbbb + Pabb
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication4" rate="1">
+                	Gnmm + Pbbb + Paaa + Paaa + b + a + a ->  
+                	Gnmm + Pbbb + Paaa + Paaa + Pbaa
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication5" rate="1">
+                	Gnnm + Pbbb + Pbbb + Paaa + b + b + a ->  
+                	Gnnm + Pbbb + Pbbb + Paaa + Pbba
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication6" rate="1">
+                	Gmnm + Paaa + Pbbb + Paaa + a + b + a ->  
+                	Gmnm + Paaa + Pbbb + Paaa + Paba
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication7" rate="1">
+                	Gnmn + Pbbb + Paaa + Pbbb + b + a + b ->  
+                	Gnmn + Pbbb + Paaa + Pbbb + Pbab
+            </reaction>
                         
             <!-- Diffusion (migration) reactions -->
             <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.05">
