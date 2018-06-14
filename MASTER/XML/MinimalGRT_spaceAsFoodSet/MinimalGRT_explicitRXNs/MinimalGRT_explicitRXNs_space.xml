@@ -28,16 +28,14 @@
             <populationType spec='PopulationType' typeName="Pbaa" dim="3" id="Pbaa"/>
             <populationType spec='PopulationType' typeName="Paba" dim="3" id="Paba"/>
             <populationType spec='PopulationType' typeName="Pbba" dim="3" id="Pbba"/>
-            <populationType spec='PopulationType' typeName="GP1" dim="2 2 2 2 3" id="GP1"/>
-            <populationType spec='PopulationType' typeName="GP2" dim="2 2 2 2 2 3" id="GP2"/>
 
 	    	<!-- Nucleotides and amino acids ('food' molecules) -->
             <populationType spec='PopulationType' typeName="n" dim="3" id="n"/>
             <populationType spec='PopulationType' typeName="aa" dim="3" id="aa"/>
             
-            <!-- Space -->
+            <!-- Space
             <populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
-            <populationType spec='PopulationType' typeName="SP" dim="3" id="SP"/>
+            <populationType spec='PopulationType' typeName="SP" dim="3" id="SP"/> -->
 
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
@@ -57,96 +55,136 @@
 
             <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Pab + m + m + m ->  
-                	Gmmm + Pab + Gmmm
+                	Gmmm[c] + Pab[c] + m[c] + m[c] + m[c] ->  
+                	Gmmm[c] + Pab[c] + Gmmm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication1" rate="1">
-                	Gnnn + Pab + n + n + n ->  
-                	Gnnn + Pab + Gnnn
+                	Gnnn[c] + Pab[c] + n[c] + n[c] + n[c] ->  
+                	Gnnn[c] + Pab[c] + Gnnn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication2" rate="1">
-                	Gmmn + Pab + m + m + n ->  
-                	Gmmn + Pab + Gmmn
+                	Gmmn[c] + Pab[c] + m[c] + m[c] + n[c] ->  
+                	Gmmn[c] + Pab[c] + Gmmn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication3" rate="1">
-                	Gmnn + Pab + m + n + n ->  
-                	Gmnn + Pab + Gmnn
+                	Gmnn[c] + Pab[c] + m[c] + n[c] + n[c] ->  
+                	Gmnn[c] + Pab[c] + Gmnn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication4" rate="1">
-                	Gnnm + Pab + n + n + m ->  
-                	Gnnm + Pab + Gnnm
+                	Gnnm[c] + Pab[c] + n[c] + n[c] + m[c] ->  
+                	Gnnm[c] + Pab[c] + Gnnm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication5" rate="1">
-                	Gnmm + Pab + n + m + m ->  
-                	Gnmm + Pab + Gnmm
+                	Gnmm[c] + Pab[c] + n[c] + m[c] + m[c] ->  
+                	Gnmm[c] + Pab[c] + Gnmm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication6" rate="1">
-                	Gmnm + Pab + m + n + m ->  
-                	Gmnm + Pab + Gmnm
+                	Gmnm[c] + Pab[c] + m[c] + n[c] + m[c] ->  
+                	Gmnm[c] + Pab[c] + Gmnm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication7" rate="1">
-                	Gnmn + Pab + n + m + n ->  
-                	Gnmn + Pab + Gnmn
+                	Gnmn[c] + Pab[c] + n[c] + m[c] + n[c] ->  
+                	Gnmn[c] + Pab[c] + Gnmn[c]
             </reaction>
                         
             <!-- Translation reactions -->
-            <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm + Paaa + Paaa + Paaa + a + a + a ->  
-                	Gmmm + Paaa + Paaa + Paaa + Paaa
+            <reaction spec='Reaction' reactionName="Translation" rate="1">
+                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] + a[c] + a[c] + a[c] ->  
+                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] + Paaa[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication1" rate="1">
-                	Gnnn + Pbbb + Pbbb + Pbbb + b + b + b ->  
-                	Gnnn + Pbbb + Pbbb + Pbbb + Paaa
+            <reaction spec='Reaction' reactionName="Translation1" rate="1">
+                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] + b[c] + b[c] + b[c] ->  
+                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] + Pbbb[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication2" rate="1">
-                	Gmmn + Paaa + Paaa + Pbbb + a + a + b ->  
-                	Gmmn + Paaa + Paaa + Pbbb + Paab
+            <reaction spec='Reaction' reactionName="Translation2" rate="1">
+                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] + a[c] + a[c] + b[c] ->  
+                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] + Paab[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication3" rate="1">
-                	Gmnn + Paaa + Pbbb + Pbbb + a + b + b ->  
-                	Gmnn + Paaa + Pbbb + Pbbb + Pabb
+            <reaction spec='Reaction' reactionName="Translation3" rate="1">
+                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] + a[c] + b[c] + b[c] ->  
+                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] + Pabb[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication4" rate="1">
-                	Gnmm + Pbbb + Paaa + Paaa + b + a + a ->  
-                	Gnmm + Pbbb + Paaa + Paaa + Pbaa
+            <reaction spec='Reaction' reactionName="Translation4" rate="1">
+                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] + b[c] + a[c] + a[c] ->  
+                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] + Pbaa[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication5" rate="1">
-                	Gnnm + Pbbb + Pbbb + Paaa + b + b + a ->  
-                	Gnnm + Pbbb + Pbbb + Paaa + Pbba
+            <reaction spec='Reaction' reactionName="Translation5" rate="1">
+                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] + b[c] + b[c] + a[c] ->  
+                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] + Pbba[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication6" rate="1">
-                	Gmnm + Paaa + Pbbb + Paaa + a + b + a ->  
-                	Gmnm + Paaa + Pbbb + Paaa + Paba
+            <reaction spec='Reaction' reactionName="Translation6" rate="1">
+                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] + a[c] + b[c] + a[c] ->  
+                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] + Paba[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="Replication7" rate="1">
-                	Gnmn + Pbbb + Paaa + Pbbb + b + a + b ->  
-                	Gnmn + Pbbb + Paaa + Pbbb + Pbab
+            <reaction spec='Reaction' reactionName="Translation7" rate="1">
+                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] + b[c] + a[c] + b[c] ->  
+                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] + Pbab[c]
             </reaction>
                         
-            <!-- Diffusion (migration) reactions -->
+            <!-- Diffusion (migration) reactions
             <reaction spec='Reaction' reactionName="Diffusion_G" rate="0.05">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==2"/>
-                	G[i1,i2,i3,l1] + SG[l2] -> G[i1,i2,i3,l2] + SG[l1]
+					
             </reaction>
             <reaction spec='Reaction' reactionName="Diffusion_P" rate="0.05">
-                <predicate spec='Predicate' value="abs(l1-l2)==1 || abs(l1-l2)==2"/>
-                	P[a1,a2,a3,l1] + SP[l2] -> P[a1,a2,a3,l2] + SP[l1]
-            </reaction>
+
+            </reaction> -->
 
             <!-- Degradation reactions -->  
-            <reaction spec='Reaction' reactionName="DeathToG" rate="1">
-                G[i1,i2,i3,l1] -> SG[l1]
+            <reaction spec='Reaction' reactionName="Death" rate="1">
+                Gmmm[c] -> m[c] + m[c] + m[c]
             </reaction>
-            <reaction spec='Reaction' reactionName="DeathToP" rate="1">
-                P[a1,a2,a3,l1] -> SP[l1]
-            </reaction> 
+            <reaction spec='Reaction' reactionName="Death1" rate="1">
+                Gnnn[c] -> n[c] + n[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death2" rate="1">
+                Gmmn[c] -> m[c] + m[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death3" rate="1">
+                Gmnn[c] -> m[c] + n[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death4" rate="1">
+                Gnmm[c] -> n[c] + m[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death5" rate="1">
+                Gnnm[c] -> n[c] + n[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death6" rate="1">
+                Gnmn[c] -> n[c] + m[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death7" rate="1">
+                Gmnm[c] -> m[c] + n[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death8" rate="1">
+                Pmmm[c] -> m[c] + m[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death9" rate="1">
+                Pnnn[c] -> n[c] + n[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death10" rate="1">
+                Pmmn[c] -> m[c] + m[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death11" rate="1">
+                Pmnn[c] -> m[c] + n[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death12" rate="1">
+                Pnmm[c] -> n[c] + m[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death13" rate="1">
+                Pnnm[c] -> n[c] + n[c] + m[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death14" rate="1">
+                Pnmn[c] -> n[c] + m[c] + n[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Death15" rate="1">
+                Pmnm[c] -> m[c] + n[c] + m[c]
+            </reaction>
         </model>
 
         <initialState spec='InitState'>
         	
         	<!-- Nucleotides -->
             <populationSize spec='PopulationSize'>
-                SG[l1] := 200
+                m := 
             </populationSize>            
 
 			<!-- Amino acids -->
