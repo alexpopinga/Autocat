@@ -1,0 +1,243 @@
+<!-- Simple discrete 2D diffusion model -->
+
+<beast version='2.0' namespace='master:master.model:master.outputs:master.steppers'>
+    <run spec='Trajectory'
+         simulationTime='10000'
+         nSamples="1000">
+        
+        <stepper spec='GillespieStepper'/>
+        <!--<stepper spec='SALStepper' stepSize="0.1" />
+        <stepper spec='RateEquationStepper' stepSize="0.1" />-->
+
+        <model spec='Model' id='model'>
+        
+            <!-- Genes, proteins, gene-protein complexes -->
+            <populationType spec='PopulationType' typeName="Gmmm" dim="20" id="Gmmm"/>
+            <populationType spec='PopulationType' typeName="Gnnn" dim="20" id="Gnnn"/>
+            <populationType spec='PopulationType' typeName="Gmmn" dim="20" id="Gmmn"/>
+            <populationType spec='PopulationType' typeName="Gmnn" dim="20" id="Gmnn"/>
+            <populationType spec='PopulationType' typeName="Gnmn" dim="20" id="Gnmn"/>
+            <populationType spec='PopulationType' typeName="Gnmm" dim="20" id="Gnmm"/>
+            <populationType spec='PopulationType' typeName="Gmnm" dim="20" id="Gmnm"/>
+            <populationType spec='PopulationType' typeName="Gnnm" dim="20" id="Gnnm"/>
+            <populationType spec='PopulationType' typeName="Paaa" dim="20" id="Paaa"/>
+            <populationType spec='PopulationType' typeName="Pbbb" dim="20" id="Pbbb"/>
+            <populationType spec='PopulationType' typeName="Paab" dim="20" id="Paab"/>
+            <populationType spec='PopulationType' typeName="Pabb" dim="20" id="Pabb"/>
+            <populationType spec='PopulationType' typeName="Pbab" dim="20" id="Pbab"/>
+            <populationType spec='PopulationType' typeName="Pbaa" dim="20" id="Pbaa"/>
+            <populationType spec='PopulationType' typeName="Paba" dim="20" id="Paba"/>
+            <populationType spec='PopulationType' typeName="Pbba" dim="20" id="Pbba"/>
+            
+            <!-- Hamming distance between two vectors -->
+            <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
+            
+            <!-- The Poisson probability distribution, n outcomes given expectation lambdat -->
+            <function spec='Function' id="dpois" params="n lambdat" value="exp(-lambdat)*lambdat^n/n!"/>
+            
+	    <!-- Translation enzyme lookup: i is nucleotide, a is amino acid, returns optimal protein catalyst sequence 
+            <function spec='Function' id="key" params="i a">
+                <![CDATA[
+                  i==0 && a==0 ?  {0,0,0}
+                : i==1 && a==1 ?  {1,1,1}
+                : i==0 && a==1 ?  {0,0,1}
+                :                 {1,1,0}
+                ]]>
+            </function> -->
+
+            <!-- Replication reaction -->
+            <reaction spec='Reaction' reactionName="Replication" rate="1">
+                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] ->  
+                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] + Gmmm[c] + Gnnn[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication1" rate="1">
+                	Gmmn[c] + Gnnm[c] + Paab[c] + Pbba[c] ->  
+                	Gmmn[c] + Gnnm[c] + Paab[c] + Pbba[c] + Gmmn[c] + Gnnm[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication2" rate="1">
+                	Gmnn[c] + Gnmm[c] + Pabb[c] + Pbaa[c] ->  
+                	Gmnn[c] + Gnmm[c] + Pabb[c] + Pbaa[c] + Gmnn[c] + Gnmm[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication3" rate="1">
+                	Gmnm[c] + Gnmn[c] + Paba[c] + Pbab[c] ->  
+                	Gmnm[c] + Gnmn[c] + Paba[c] + Pbab[c] + Gmnm[c] + Gnmn[c]
+            </reaction>
+                        
+            <!-- Translation reactions -->           
+            <!-- Code 1 -->
+            <reaction spec='Reaction' reactionName="Translation" rate="1">
+                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] ->  
+                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] + Paaa[c] 
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation1" rate="1">
+                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] ->  
+                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] + Pbbb[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation2" rate="1">
+                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] ->  
+                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] + Paab[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation3" rate="1">
+                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] ->  
+                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] + Pbaa[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation4" rate="1">
+                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] ->  
+                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] + Pbaa[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation5" rate="1">
+                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] ->  
+                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] + Pbba[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation6" rate="1">
+                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] ->  
+                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] + Paba[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation7" rate="1">
+                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] ->  
+                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] + Pbab[c]
+            </reaction>            
+            <!-- Code 2 -->
+            <reaction spec='Reaction' reactionName="Translation8" rate="1">
+                	Gmmm[c] + Pbab[c] + Pbab[c] + Pbab[c] ->  
+                	Gmmm[c] + Pbab[c] + Pbab[c] + Pbab[c] + Paaa[c] 
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation9" rate="1">
+                	Gnnn[c] + Paba[c] + Paba[c] + Paba[c] ->  
+                	Gnnn[c] + Paba[c] + Paba[c] + Paba[c] + Pbbb[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation10" rate="1">
+                	Gmmn[c] + Pbab[c] + Pbab[c] + Paba[c] ->  
+                	Gmmn[c] + Pbab[c] + Pbab[c] + Paba[c] + Paab[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation11" rate="1">
+                	Gmnn[c] + Pbab[c] + Paba[c] + Paba[c] ->  
+                	Gmnn[c] + Pbab[c] + Paba[c] + Paba[c] + Pbaa[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation12" rate="1">
+                	Gnmm[c] + Paba[c] + Pbab[c] + Pbab[c] ->  
+                	Gnmm[c] + Paba[c] + Pbab[c] + Pbab[c] + Pbaa[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation13" rate="1">
+                	Gnnm[c] + Paba[c] + Paba[c] + Pbab[c] ->  
+                	Gnnm[c] + Paba[c] + Paba[c] + Pbab[c] + Pbba[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation14" rate="1">
+                	Gmnm[c] + Pbab[c] + Paba[c] + Pbab[c] ->  
+                	Gmnm[c] + Pbab[c] + Paba[c] + Pbab[c] + Paba[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation15" rate="1">
+                	Gnmn[c] + Paba[c] + Pbab[c] + Paba[c] ->  
+                	Gnmn[c] + Paba[c] + Pbab[c] + Paba[c] + Pbab[c]
+            </reaction>
+                        
+            <!-- Diffusion (migration) reactions
+            <reaction spec='Reaction' reactionName="Diffusion" rate="0.05">
+					Gmmm[c] -> Gmmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion1" rate="0.05">
+					Gnnn[c] -> Gnnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion2" rate="0.05">
+					Gmmn[c] -> Gmmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion3" rate="0.05">
+					Gmnn[c] -> Gmnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion4" rate="0.05">
+					Gnmn[c] -> Gnmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion5" rate="0.05">
+					Gnnm[c] -> Gnnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion6" rate="0.05">
+					Gnmm[c] -> Gnmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion7" rate="0.05">
+					Gmnm[c] -> Gmnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion8" rate="0.05">
+					Pmmm[c] -> Pmmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion9" rate="0.05">
+					Pnnn[c] -> Pnnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion10" rate="0.05">
+					Pmmn[c] -> Pmmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion11" rate="0.05">
+					Pmnn[c] -> Pmnn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion12" rate="0.05">
+					Pnmn[c] -> Pnmn[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion13" rate="0.05">
+					Pnnm[c] -> Pnnm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion14" rate="0.05">
+					Pnmm[c] -> Pnmm[d]		
+            </reaction>
+            <reaction spec='Reaction' reactionName="Diffusion15" rate="0.05">
+					Pmnm[c] -> Pmnm[d]		
+            </reaction>   -->
+        </model>
+
+        <initialState spec='InitState'>
+        	                        
+            <!-- Genomes -->
+			<populationSize spec='PopulationSize'>
+				Gmmm[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gnnn[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gmmn[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gmnn[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gmnm[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gnmn[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gnmm[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gnnm[c] := 10
+			</populationSize>		
+	
+			<!-- Proteins -->
+			<populationSize spec='PopulationSize'>
+				Pbbb[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Paab[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pabb[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Paba[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pbab[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pbaa[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pbba[c] := 10
+			</populationSize>			
+			<populationSize spec='PopulationSize'>
+				Paaa[c] := 10
+			</populationSize>
+
+        </initialState>
+        
+        <output spec='JsonOutput' fileName='$(filebase)_output.json'/>
+    </run>
+</beast>
