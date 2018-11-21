@@ -132,10 +132,19 @@
 	
 			<!-- Genome-Protein complexes -->
             <populationSize spec='PopulationSize'>
-                GP1[i1,i2,i3,e1,l1] := 0
+                GP[i1,i2,i3,e1,l1] := 0
             </populationSize>
             <populationSize spec='PopulationSize'>
-                GP2[i1,i2,i3,e1,e2,l1] := 0
+                GP1[i1,i2,i3,e1,e2,l1] := 0
+            </populationSize>
+            <populationSize spec='PopulationSize'>
+                GP2[i1,i2,i3,e1,e2,e3,l1] := 0
+            </populationSize>
+            <populationSize spec='PopulationSize'>
+                GP3[i1,i2,i3,e1,e2,e3,e4,l1] := 0
+            </populationSize>
+            <populationSize spec='PopulationSize'>
+                GP4[i1,i2,i3,e1,e2,e3,e4,e5,l1] := 0
             </populationSize>
 
         </initialState>
