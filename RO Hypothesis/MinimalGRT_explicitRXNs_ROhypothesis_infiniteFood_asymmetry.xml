@@ -11,7 +11,7 @@
 
         <model spec='Model' id='model'>
         
-            <!-- Genes, proteins, gene-protein complexes -->
+            <!-- Genes and proteins -->
             <populationType spec='PopulationType' typeName="Gmmm" dim="100" id="Gmmm"/>
             <populationType spec='PopulationType' typeName="Gnnn" dim="100" id="Gnnn"/>
             <populationType spec='PopulationType' typeName="Gmmn" dim="100" id="Gmmn"/>
