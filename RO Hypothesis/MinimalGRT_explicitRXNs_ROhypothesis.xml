@@ -12,33 +12,29 @@
         <model spec='Model' id='model'>
         
             <!-- Genes, proteins, gene-protein complexes -->
-            <populationType spec='PopulationType' typeName="Gmmm" dim="30" id="Gmmm"/>
-            <populationType spec='PopulationType' typeName="Gnnn" dim="30" id="Gnnn"/>
-            <populationType spec='PopulationType' typeName="Gmmn" dim="30" id="Gmmn"/>
-            <populationType spec='PopulationType' typeName="Gmnn" dim="30" id="Gmnn"/>
-            <populationType spec='PopulationType' typeName="Gnmn" dim="30" id="Gnmn"/>
-            <populationType spec='PopulationType' typeName="Gnmm" dim="30" id="Gnmm"/>
-            <populationType spec='PopulationType' typeName="Gmnm" dim="30" id="Gmnm"/>
-            <populationType spec='PopulationType' typeName="Gnnm" dim="30" id="Gnnm"/>
-            <populationType spec='PopulationType' typeName="Paaa" dim="30" id="Paaa"/>
-            <populationType spec='PopulationType' typeName="Pbbb" dim="30" id="Pbbb"/>
-            <populationType spec='PopulationType' typeName="Paab" dim="30" id="Paab"/>
-            <populationType spec='PopulationType' typeName="Pabb" dim="30" id="Pabb"/>
-            <populationType spec='PopulationType' typeName="Pbab" dim="30" id="Pbab"/>
-            <populationType spec='PopulationType' typeName="Pbaa" dim="30" id="Pbaa"/>
-            <populationType spec='PopulationType' typeName="Paba" dim="30" id="Paba"/>
-            <populationType spec='PopulationType' typeName="Pbba" dim="30" id="Pbba"/>
+            <populationType spec='PopulationType' typeName="Gmmm" dim="100" id="Gmmm"/>
+            <populationType spec='PopulationType' typeName="Gnnn" dim="100" id="Gnnn"/>
+            <populationType spec='PopulationType' typeName="Gmmn" dim="100" id="Gmmn"/>
+            <populationType spec='PopulationType' typeName="Gmnn" dim="100" id="Gmnn"/>
+            <populationType spec='PopulationType' typeName="Gnmn" dim="100" id="Gnmn"/>
+            <populationType spec='PopulationType' typeName="Gnmm" dim="100" id="Gnmm"/>
+            <populationType spec='PopulationType' typeName="Gmnm" dim="100" id="Gmnm"/>
+            <populationType spec='PopulationType' typeName="Gnnm" dim="100" id="Gnnm"/>
+            <populationType spec='PopulationType' typeName="Paaa" dim="100" id="Paaa"/>
+            <populationType spec='PopulationType' typeName="Pbbb" dim="100" id="Pbbb"/>
+            <populationType spec='PopulationType' typeName="Paab" dim="100" id="Paab"/>
+            <populationType spec='PopulationType' typeName="Pabb" dim="100" id="Pabb"/>
+            <populationType spec='PopulationType' typeName="Pbab" dim="100" id="Pbab"/>
+            <populationType spec='PopulationType' typeName="Pbaa" dim="100" id="Pbaa"/>
+            <populationType spec='PopulationType' typeName="Paba" dim="100" id="Paba"/>
+            <populationType spec='PopulationType' typeName="Pbba" dim="100" id="Pbba"/>
 
 	    	<!-- Nucleotides and amino acids ('food' molecules) -->
-            <populationType spec='PopulationType' typeName="m" dim="30" id="m"/>
-            <populationType spec='PopulationType' typeName="n" dim="30" id="n"/>
-            <populationType spec='PopulationType' typeName="a" dim="30" id="a"/>
-            <populationType spec='PopulationType' typeName="b" dim="30" id="b"/>
+            <populationType spec='PopulationType' typeName="m" dim="100" id="m"/>
+            <populationType spec='PopulationType' typeName="n" dim="100" id="n"/>
+            <populationType spec='PopulationType' typeName="a" dim="100" id="a"/>
+            <populationType spec='PopulationType' typeName="b" dim="100" id="b"/>
             
-            <!-- Space
-            <populationType spec='PopulationType' typeName="SG" dim="3" id="SG"/>
-            <populationType spec='PopulationType' typeName="SP" dim="3" id="SP"/> -->
-
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
             
@@ -57,54 +53,54 @@
 
             <!-- Replication reaction -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] + m[c] + m[c] + m[c] + n[c] + n[c] + n[c] ->  
-                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] + Gmmm[c] + Gnnn[c]
+                	Gmmm[c] + Gnnn[c] + Paaa[c] + m[c] + m[c] + m[c] + n[c] + n[c] + n[c] ->  
+                	Gmmm[c] + Gnnn[c] + Paaa[c] + Gmmm[c] + Gnnn[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication1" rate="1">
+                	Gmmn[c] + Gnnm[c] + Paaa[c] + m[c] + m[c] + n[c] + n[c] + n[c] + m[c] ->  
+                	Gmmn[c] + Gnnm[c] + Paaa[c] + Gmmn[c] + Gnnm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication2" rate="1">
-                	Gmmn[c] + Gnnm[c] + Paab[c] + Pbba[c] + m[c] + m[c] + n[c] + n[c] + n[c] + m[c] ->  
-                	Gmmn[c] + Gnnm[c] + Paab[c] + Pbba[c] + Gmmn[c] + Gnnm[c]
+                	Gmnn[c] + Gnmm[c] + Paaa[c] + m[c] + n[c] + n[c] + n[c] + m[c] + m[c] ->  
+                	Gmnn[c] + Gnmm[c] + Paaa[c] + Gmnn[c] + Gnmm[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication3" rate="1">
-                	Gmnn[c] + Gnmm[c] + Pabb[c] + Pbaa[c] + m[c] + n[c] + n[c] + n[c] + m[c] + m[c] ->  
-                	Gmnn[c] + Gnmm[c] + Pabb[c] + Pbaa[c] + Gmnn[c] + Gnmm[c]
-            </reaction>
-            <reaction spec='Reaction' reactionName="Replication6" rate="1">
-                	Gmnm[c] + Gnmn[c] + Paba[c] + Pbab[c] + m[c] + n[c] + m[c] + n[c] + m[c] + n[c] ->  
-                	Gmnm[c] + Gnmn[c] + Paba[c] + Pbab[c] + Gmnm[c] + Gnmn[c]
+                	Gmnm[c] + Gnmn[c] + Paaa[c] + m[c] + n[c] + m[c] + n[c] + m[c] + n[c] ->  
+                	Gmnm[c] + Gnmn[c] + Paaa[c] + Gmnm[c] + Gnmn[c]
             </reaction>
                         
             <!-- Translation reactions -->
             <reaction spec='Reaction' reactionName="Translation" rate="1">
-                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] + a[c] + a[c] + a[c] ->  
-                	Gmmm[c] + Paaa[c] + Paaa[c] + Paaa[c] + Paaa[c]
+                	Gmmm[c] + Pbbb[c] + a[c] + a[c] + a[c] ->  
+                	Gmmm[c] + Pbbb[c] + Paaa[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation1" rate="1">
-                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] + b[c] + b[c] + b[c] ->  
-                	Gnnn[c] + Pbbb[c] + Pbbb[c] + Pbbb[c] + Pbbb[c]
+                	Gnnn[c] + Pabb[c] + b[c] + b[c] + b[c] ->  
+                	Gnnn[c] + Pabb[c] + Pbbb[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation2" rate="1">
-                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] + a[c] + a[c] + b[c] ->  
-                	Gmmn[c] + Paaa[c] + Paaa[c] + Pbbb[c] + Paab[c]
+                	Gmmn[c] + Pbbb[c] + Pbbb[c] + Pabb[c] + a[c] + a[c] + b[c] ->  
+                	Gmmn[c] + Pbbb[c] + Pbbb[c] + Pabb[c] + Paab[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation3" rate="1">
-                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] + a[c] + b[c] + b[c] ->  
-                	Gmnn[c] + Paaa[c] + Pbbb[c] + Pbbb[c] + Pabb[c]
+                	Gmnn[c] + Pbbb[c] + Pabb[c] + Pabb[c] + a[c] + b[c] + b[c] ->  
+                	Gmnn[c] + Pbbb[c] + Pabb[c] + Pabb[c] + Pabb[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation4" rate="1">
-                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] + b[c] + a[c] + a[c] ->  
-                	Gnmm[c] + Pbbb[c] + Paaa[c] + Paaa[c] + Pbaa[c]
+                	Gnmm[c] + Pabb[c] + Pbbb[c] + Pbbb[c] + b[c] + a[c] + a[c] ->  
+                	Gnmm[c] + Pabb[c] + Pbbb[c] + Pbbb[c] + Pbaa[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation5" rate="1">
-                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] + b[c] + b[c] + a[c] ->  
-                	Gnnm[c] + Pbbb[c] + Pbbb[c] + Paaa[c] + Pbba[c]
+                	Gnnm[c] + Pabb[c] + Pabb[c] + Pbbb[c] + b[c] + b[c] + a[c] ->  
+                	Gnnm[c] + Pabb[c] + Pabb[c] + Pbbb[c] + Pbba[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation6" rate="1">
-                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] + a[c] + b[c] + a[c] ->  
-                	Gmnm[c] + Paaa[c] + Pbbb[c] + Paaa[c] + Paba[c]
+                	Gmnm[c] + Pbbb[c] + Pabb[c] + Pbbb[c] + a[c] + b[c] + a[c] ->  
+                	Gmnm[c] + Pbbb[c] + Pabb[c] + Pbbb[c] + Paba[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation7" rate="1">
-                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] + b[c] + a[c] + b[c] ->  
-                	Gnmn[c] + Pbbb[c] + Paaa[c] + Pbbb[c] + Pbab[c]
+                	Gnmn[c] + Pabb[c] + Pbbb[c] + Pabb[c] + b[c] + a[c] + b[c] ->  
+                	Gnmn[c] + Pabb[c] + Pbbb[c] + Pabb[c] + Pbab[c]
             </reaction>
                         
             <!-- Diffusion (migration) reactions
