@@ -12,23 +12,119 @@
         <model spec='Model' id='model'>
         
             <!-- Genes and proteins -->
-            <populationType spec='PopulationType' typeName="Gmmm" dim="100" id="Gmmm"/>
-            <populationType spec='PopulationType' typeName="Gnnn" dim="100" id="Gnnn"/>
-            <populationType spec='PopulationType' typeName="Gmmn" dim="100" id="Gmmn"/>
-            <populationType spec='PopulationType' typeName="Gmnn" dim="100" id="Gmnn"/>
-            <populationType spec='PopulationType' typeName="Gnmn" dim="100" id="Gnmn"/>
-            <populationType spec='PopulationType' typeName="Gnmm" dim="100" id="Gnmm"/>
-            <populationType spec='PopulationType' typeName="Gmnm" dim="100" id="Gmnm"/>
-            <populationType spec='PopulationType' typeName="Gnnm" dim="100" id="Gnnm"/>
-            <populationType spec='PopulationType' typeName="Paaa" dim="100" id="Paaa"/>
-            <populationType spec='PopulationType' typeName="Pbbb" dim="100" id="Pbbb"/>
-            <populationType spec='PopulationType' typeName="Paab" dim="100" id="Paab"/>
-            <populationType spec='PopulationType' typeName="Pabb" dim="100" id="Pabb"/>
-            <populationType spec='PopulationType' typeName="Pbab" dim="100" id="Pbab"/>
-            <populationType spec='PopulationType' typeName="Pbaa" dim="100" id="Pbaa"/>
-            <populationType spec='PopulationType' typeName="Paba" dim="100" id="Paba"/>
-            <populationType spec='PopulationType' typeName="Pbba" dim="100" id="Pbba"/>
+            <populationType spec='PopulationType' typeName="Guuu" dim="100" id="Guuu"/>
+            <populationType spec='PopulationType' typeName="Guuc" dim="100" id="Guuc"/>
+            <populationType spec='PopulationType' typeName="Guua" dim="100" id="Guua"/>
+            <populationType spec='PopulationType' typeName="Guug" dim="100" id="Guug"/>
+            <populationType spec='PopulationType' typeName="Gucu" dim="100" id="Gucu"/>
+            <populationType spec='PopulationType' typeName="Gucc" dim="100" id="Gucc"/>
+            <populationType spec='PopulationType' typeName="Guca" dim="100" id="Guca"/>
+            <populationType spec='PopulationType' typeName="Gucg" dim="100" id="Gucg"/>
+            <populationType spec='PopulationType' typeName="Guau" dim="100" id="Guau"/>
+            <populationType spec='PopulationType' typeName="Guac" dim="100" id="Guac"/>
+            <populationType spec='PopulationType' typeName="Guaa" dim="100" id="Guaa"/>
+            <populationType spec='PopulationType' typeName="Guag" dim="100" id="Guag"/>
+            <populationType spec='PopulationType' typeName="Gugu" dim="100" id="Gugu"/>
+            <populationType spec='PopulationType' typeName="Gugc" dim="100" id="Gugc"/>
+            <populationType spec='PopulationType' typeName="Guga" dim="100" id="Guga"/>
+            <populationType spec='PopulationType' typeName="Gugg" dim="100" id="Gugg"/>
             
+            <populationType spec='PopulationType' typeName="Gcuu" dim="100" id="Guuu"/>
+            <populationType spec='PopulationType' typeName="Gcuc" dim="100" id="Guuc"/>
+            <populationType spec='PopulationType' typeName="Gcua" dim="100" id="Guua"/>
+            <populationType spec='PopulationType' typeName="Gcug" dim="100" id="Guug"/>
+            <populationType spec='PopulationType' typeName="Gccu" dim="100" id="Gucu"/>
+            <populationType spec='PopulationType' typeName="Gccc" dim="100" id="Gucc"/>
+            <populationType spec='PopulationType' typeName="Gcca" dim="100" id="Guca"/>
+            <populationType spec='PopulationType' typeName="Gccg" dim="100" id="Gucg"/>
+            <populationType spec='PopulationType' typeName="Gcau" dim="100" id="Guau"/>
+            <populationType spec='PopulationType' typeName="Gcac" dim="100" id="Guac"/>
+            <populationType spec='PopulationType' typeName="Gcaa" dim="100" id="Guaa"/>
+            <populationType spec='PopulationType' typeName="Gcag" dim="100" id="Guag"/>
+            <populationType spec='PopulationType' typeName="Gcgu" dim="100" id="Gugu"/>
+            <populationType spec='PopulationType' typeName="Gcgc" dim="100" id="Gugc"/>
+            <populationType spec='PopulationType' typeName="Gcga" dim="100" id="Guga"/>
+            <populationType spec='PopulationType' typeName="Gcgg" dim="100" id="Gugg"/>
+
+            <populationType spec='PopulationType' typeName="Gauu" dim="100" id="Guuu"/>
+            <populationType spec='PopulationType' typeName="Gauc" dim="100" id="Guuc"/>
+            <populationType spec='PopulationType' typeName="Gaua" dim="100" id="Guua"/>
+            <populationType spec='PopulationType' typeName="Gaug" dim="100" id="Guug"/>
+            <populationType spec='PopulationType' typeName="Gacu" dim="100" id="Gucu"/>
+            <populationType spec='PopulationType' typeName="Gacc" dim="100" id="Gucc"/>
+            <populationType spec='PopulationType' typeName="Gaca" dim="100" id="Guca"/>
+            <populationType spec='PopulationType' typeName="Gacg" dim="100" id="Gucg"/>
+            <populationType spec='PopulationType' typeName="Gaau" dim="100" id="Guau"/>
+            <populationType spec='PopulationType' typeName="Gaac" dim="100" id="Guac"/>
+            <populationType spec='PopulationType' typeName="Gaaa" dim="100" id="Guaa"/>
+            <populationType spec='PopulationType' typeName="Gaag" dim="100" id="Guag"/>
+            <populationType spec='PopulationType' typeName="Gagu" dim="100" id="Gugu"/>
+            <populationType spec='PopulationType' typeName="Gagc" dim="100" id="Gugc"/>
+            <populationType spec='PopulationType' typeName="Gaga" dim="100" id="Guga"/>
+            <populationType spec='PopulationType' typeName="Gagg" dim="100" id="Gugg"/>
+
+            <populationType spec='PopulationType' typeName="Gguu" dim="100" id="Guuu"/>
+            <populationType spec='PopulationType' typeName="Gguc" dim="100" id="Guuc"/>
+            <populationType spec='PopulationType' typeName="Ggua" dim="100" id="Guua"/>
+            <populationType spec='PopulationType' typeName="Ggug" dim="100" id="Guug"/>
+            <populationType spec='PopulationType' typeName="Ggcu" dim="100" id="Gucu"/>
+            <populationType spec='PopulationType' typeName="Ggcc" dim="100" id="Gucc"/>
+            <populationType spec='PopulationType' typeName="Ggca" dim="100" id="Guca"/>
+            <populationType spec='PopulationType' typeName="Ggcg" dim="100" id="Gucg"/>
+            <populationType spec='PopulationType' typeName="Ggau" dim="100" id="Guau"/>
+            <populationType spec='PopulationType' typeName="Ggac" dim="100" id="Guac"/>
+            <populationType spec='PopulationType' typeName="Ggaa" dim="100" id="Guaa"/>
+            <populationType spec='PopulationType' typeName="Ggag" dim="100" id="Guag"/>
+            <populationType spec='PopulationType' typeName="Gggu" dim="100" id="Gugu"/>
+            <populationType spec='PopulationType' typeName="Gggc" dim="100" id="Gugc"/>
+            <populationType spec='PopulationType' typeName="Ggga" dim="100" id="Guga"/>
+            <populationType spec='PopulationType' typeName="Gggg" dim="100" id="Gugg"/>
+
+            <populationType spec='PopulationType' typeName="Pphe" dim="100" id="Pphe"/>
+            <populationType spec='PopulationType' typeName="Pleu" dim="100" id="Pleu"/>
+            <populationType spec='PopulationType' typeName="Pser" dim="100" id="Pser"/>
+            <populationType spec='PopulationType' typeName="Ptyr" dim="100" id="Ptyr"/>
+            <populationType spec='PopulationType' typeName="Pcys" dim="100" id="Pcys"/>
+            <populationType spec='PopulationType' typeName="Ptrp" dim="100" id="Ptrp"/>
+            <populationType spec='PopulationType' typeName="Ppro" dim="100" id="Ppro"/>
+            <populationType spec='PopulationType' typeName="Phis" dim="100" id="Phis"/>
+            <populationType spec='PopulationType' typeName="Pgln" dim="100" id="Pgln"/>
+            <populationType spec='PopulationType' typeName="Parg" dim="100" id="Parg"/>
+            <populationType spec='PopulationType' typeName="Pile" dim="100" id="Pile"/>
+            <populationType spec='PopulationType' typeName="Pmet" dim="100" id="Pmet"/>
+            <populationType spec='PopulationType' typeName="Pthr" dim="100" id="Pthr"/>
+            <populationType spec='PopulationType' typeName="Pasn" dim="100" id="Pasn"/>
+            <populationType spec='PopulationType' typeName="Plys" dim="100" id="Plys"/>
+            <populationType spec='PopulationType' typeName="Pval" dim="100" id="Pval"/>
+            <populationType spec='PopulationType' typeName="Pasp" dim="100" id="Pasp"/>
+            <populationType spec='PopulationType' typeName="Pala" dim="100" id="Pala"/>
+            <populationType spec='PopulationType' typeName="Pglu" dim="100" id="Pglu"/>
+            <populationType spec='PopulationType' typeName="Pgly" dim="100" id="Pgly"/>
+            
+            
+            <!-- Food set: nucleotides and amino acids -->
+            <populationType spec='PopulationType' typeName="a" dim="100" id="a"/>
+            <populationType spec='PopulationType' typeName="c" dim="100" id="c"/>
+            <populationType spec='PopulationType' typeName="u" dim="100" id="u"/>
+            <populationType spec='PopulationType' typeName="g" dim="100" id="g"/>
+            <populationType spec='PopulationType' typeName="cys" dim="100" id="cys"/>
+            <populationType spec='PopulationType' typeName="trp" dim="100" id="trp"/>
+            <populationType spec='PopulationType' typeName="pro" dim="100" id="pro"/>
+            <populationType spec='PopulationType' typeName="his" dim="100" id="his"/>
+            <populationType spec='PopulationType' typeName="gln" dim="100" id="gln"/>
+            <populationType spec='PopulationType' typeName="arg" dim="100" id="arg"/>
+            <populationType spec='PopulationType' typeName="ile" dim="100" id="ile"/>
+            <populationType spec='PopulationType' typeName="met" dim="100" id="met"/>
+            <populationType spec='PopulationType' typeName="thr" dim="100" id="thr"/>
+            <populationType spec='PopulationType' typeName="asn" dim="100" id="asn"/>
+            <populationType spec='PopulationType' typeName="lys" dim="100" id="lys"/>
+            <populationType spec='PopulationType' typeName="val" dim="100" id="val"/>
+            <populationType spec='PopulationType' typeName="asp" dim="100" id="asp"/>
+            <populationType spec='PopulationType' typeName="ala" dim="100" id="ala"/>
+            <populationType spec='PopulationType' typeName="glu" dim="100" id="glu"/>
+            <populationType spec='PopulationType' typeName="gly" dim="100" id="gly"/>
+
+
             <!-- Hamming distance between two vectors -->
             <function spec='Function' id="HD" params="x y" value="sum(abs(x-y))"/>
             
@@ -47,38 +143,264 @@
 
             <!-- Replication reaction, one helicase and one primase -->
             <reaction spec='Reaction' reactionName="Replication" rate="1">
-                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] ->  
-                	Gmmm[c] + Gnnn[c] + Paaa[c] + Pbbb[c] + Gmmm[c] + Gnnn[c]
+                	Guuu[c] + Gaaa[c] + Paaa[c] + u[c] + u[c] + u[c] + a[c] + a[c] + a[c] ->  
+                	Guuu[c] + Gaaa[c] + Paaa[c] + Guuu[c] + Gaaa[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication1" rate="1">
-                	Gmmn[c] + Gnnm[c] + Paaa[c] + Pbbb[c] ->  
-                	Gmmn[c] + Gnnm[c] + Paaa[c] + Pbbb[c] + Gmmn[c] + Gnnm[c]
+                	Guuc[c] + Gaag[c] + Paaa[c] + u[c] + u[c] + c[c] + a[c] + a[c] + g[c] ->  
+                	Guuc[c] + Gaag[c] + Paaa[c] + Guuc[c] + Gaag[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication2" rate="1">
-                	Gmnn[c] + Gnmm[c] + Paaa[c] + Pbbb[c] ->  
-                	Gmnn[c] + Gnmm[c] + Paaa[c] + Pbbb[c] + Gmnn[c] + Gnmm[c]
+                	Guua[c] + Gaau[c] + Paaa[c] + u[c] + u[c] + a[c] + a[c] + a[c] + u[c] ->  
+                	Guua[c] + Gaau[c] + Paaa[c] + Guua[c] + Gaau[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Replication3" rate="1">
-                	Gmnm[c] + Gnmn[c] + Paaa[c] + Pbbb[c] ->  
-                	Gmnm[c] + Gnmn[c] + Paaa[c] + Pbbb[c] + Gmnm[c] + Gnmn[c]
+                	Guug[c] + Gaac[c] + Paaa[c] + u[c] + u[c] + g[c] + a[c] + a[c] + c[c] ->  
+                	Guug[c] + Gaac[c] + Paaa[c] + Guug[c] + Gaac[c]
             </reaction>
-                        
+            <reaction spec='Reaction' reactionName="Replication4" rate="1">
+                	Gucu[c] + Gaga[c] + Paaa[c] + u[c] + c[c] + u[c] + a[c] + g[c] + a[c] ->  
+                	Gucu[c] + Gaga[c] + Paaa[c] + Gucu[c] + Gaga[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication5" rate="1">
+                	Gucc[c] + Gagg[c] + Paaa[c] + u[c] + c[c] + c[c] + a[c] + g[c] + g[c] ->  
+                	Gucc[c] + Gagg[c] + Paaa[c] + Gucc[c] + Gagg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication6" rate="1">
+                	Guca[c] + Gagu[c] + Paaa[c] + u[c] + c[c] + a[c] + a[c] + g[c] + u[c] ->  
+                	Guca[c] + Gagu[c] + Paaa[c] + Guca[c] + Gagu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication7" rate="1">
+                	Gucg[c] + Gagc[c] + Paaa[c] + u[c] + c[c] + g[c] + a[c] + g[c] + c[c] ->  
+                	Gucg[c] + Gagc[c] + Paaa[c] + Gucg[c] + Gagc[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication8" rate="1">
+                	Guau[c] + Gaua[c] + Paaa[c] + u[c] + a[c] + u[c] + a[c] + u[c] + a[c] ->  
+                	Guau[c] + Gaua[c] + Paaa[c] + Guau[c] + Gaua[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication9" rate="1">
+                	Guac[c] + Gaug[c] + Paaa[c] + u[c] + a[c] + c[c] + a[c] + u[c] + g[c] ->  
+                	Guac[c] + Gaug[c] + Paaa[c] + Guac[c] + Gaug[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication10" rate="1">
+                	Guaa[c] + Gauu[c] + Paaa[c] + u[c] + a[c] + a[c] + a[c] + u[c] + u[c] ->  
+                	Guaa[c] + Gauu[c] + Paaa[c] + Guaa[c] + Gauu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication11" rate="1">
+                	Guag[c] + Gauc[c] + Paaa[c] + u[c] + a[c] + g[c] + a[c] + u[c] + c[c] ->  
+                	Guag[c] + Gauc[c] + Paaa[c] + Guag[c] + Gauc[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication12" rate="1">
+                	Gugu[c] + Gaca[c] + Paaa[c] + u[c] + g[c] + u[c] + a[c] + c[c] + a[c] ->  
+                	Gugu[c] + Gaca[c] + Paaa[c] + Gugu[c] + Gaca[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication13" rate="1">
+                	Gugc[c] + Gacg[c] + Paaa[c] + u[c] + g[c] + c[c] + a[c] + c[c] + g[c] ->  
+                	Gugc[c] + Gacg[c] + Paaa[c] + Gugc[c] + Gacg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication14" rate="1">
+                	Guga[c] + Gacu[c] + Paaa[c] + u[c] + g[c] + a[c] + a[c] + c[c] + u[c] ->  
+                	Guga[c] + Gacu[c] + Paaa[c] + Guga[c] + Gacu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication15" rate="1">
+                	Gugg[c] + Gacc[c] + Paaa[c] + u[c] + g[c] + g[c] + a[c] + c[c] + c[c] ->  
+                	Gugg[c] + Gacc[c] + Paaa[c] + Gugg[c] + Gacc[c]
+            </reaction>
+            
+            <reaction spec='Reaction' reactionName="Replication16" rate="1">
+                	Gcuu[c] + Ggaa[c] + Paaa[c] + c[c] + u[c] + u[c] + g[c] + a[c] + a[c] ->  
+                	Gcuu[c] + Ggaa[c] + Paaa[c] + Gcuu[c] + Ggaa[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication17" rate="1">
+                	Gcuc[c] + Ggag[c] + Paaa[c] + c[c] + u[c] + c[c] + g[c] + a[c] + g[c] ->  
+                	Gcuc[c] + Ggag[c] + Paaa[c] + Gcuc[c] + Ggag[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication18" rate="1">
+                	Gcua[c] + Ggau[c] + Paaa[c] + c[c] + u[c] + a[c] + g[c] + a[c] + u[c] ->  
+                	Gcua[c] + Ggau[c] + Paaa[c] + Gcua[c] + Ggau[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication19" rate="1">
+                	Gcug[c] + Ggac[c] + Paaa[c] + c[c] + u[c] + g[c] + g[c] + a[c] + c[c] ->  
+                	Gcug[c] + Ggac[c] + Paaa[c] + Gcug[c] + Ggac[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication20" rate="1">
+                	Gccu[c] + Ggga[c] + Paaa[c] + c[c] + c[c] + u[c] + g[c] + g[c] + a[c] ->  
+                	Gccu[c] + Ggga[c] + Paaa[c] + Gccu[c] + Ggga[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication21" rate="1">
+                	Gccc[c] + Gggg[c] + Paaa[c] + c[c] + c[c] + c[c] + g[c] + g[c] + g[c] ->  
+                	Gccc[c] + Gggg[c] + Paaa[c] + Gccc[c] + Gggg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication22" rate="1">
+                	Gcca[c] + Gggu[c] + Paaa[c] + c[c] + c[c] + a[c] + g[c] + g[c] + u[c] ->  
+                	Gcca[c] + Gggu[c] + Paaa[c] + Gcca[c] + Gggu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication23" rate="1">
+                	Gccg[c] + Gggc[c] + Paaa[c] + c[c] + c[c] + g[c] + g[c] + g[c] + c[c] ->  
+                	Gccg[c] + Gggc[c] + Paaa[c] + Gccg[c] + Gggc[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication24" rate="1">
+                	Gcau[c] + Ggua[c] + Paaa[c] + c[c] + a[c] + u[c] + g[c] + u[c] + a[c] ->  
+                	Gcau[c] + Ggua[c] + Paaa[c] + Gcau[c] + Ggua[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication25" rate="1">
+                	Gcac[c] + Ggug[c] + Paaa[c] + c[c] + a[c] + c[c] + g[c] + u[c] + g[c] ->  
+                	Gcac[c] + Ggug[c] + Paaa[c] + Gcac[c] + Ggug[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication26" rate="1">
+                	Gcaa[c] + Gguu[c] + Paaa[c] + c[c] + a[c] + a[c] + g[c] + u[c] + u[c] ->  
+                	Gcaa[c] + Gguu[c] + Paaa[c] + Gcaa[c] + Gguu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication27" rate="1">
+                	Gcag[c] + Gguc[c] + Paaa[c] + c[c] + a[c] + g[c] + g[c] + u[c] + c[c] ->  
+                	Gcag[c] + Gguc[c] + Paaa[c] + Gcag[c] + Gguc[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication28" rate="1">
+                	Gcgu[c] + Ggca[c] + Paaa[c] + c[c] + g[c] + u[c] + g[c] + c[c] + a[c] ->  
+                	Gcgu[c] + Ggca[c] + Paaa[c] + Gcgu[c] + Ggca[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication29" rate="1">
+                	Gcgc[c] + Ggcg[c] + Paaa[c] + c[c] + g[c] + c[c] + g[c] + c[c] + g[c] ->  
+                	Gcgc[c] + Ggcg[c] + Paaa[c] + Gcgc[c] + Ggcg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication30" rate="1">
+                	Gcga[c] + Ggcu[c] + Paaa[c] + c[c] + g[c] + a[c] + g[c] + c[c] + u[c] ->  
+                	Gcga[c] + Ggcu[c] + Paaa[c] + Gcga[c] + Ggcu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Replication31" rate="1">
+                	Gcgg[c] + Ggcc[c] + Paaa[c] + c[c] + g[c] + g[c] + g[c] + c[c] + c[c] ->  
+                	Gcgg[c] + Ggcc[c] + Paaa[c] + Gcgg[c] + Ggcc[c]
+            </reaction>
+
             <!-- Translation reactions, one Class I aaRS and one Class II aaRS -->
             <reaction spec='Reaction' reactionName="Translation" rate="1">
-                	Gmmm[c] + Gnnn[c] + Pbaa[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pabb[c] + Pabb[c] ->  
-                	Gmmm[c] + Gnnn[c] + Pbaa[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pabb[c] + Pabb[c] + Paaa[c] + Pbbb[c]
+                	Guuu[c] + Gaaa[c] + Paaa[c] + phe[c] + lys[c] ->  
+                	Guuu[c] + Gaaa[c] + Paaa[c] + Guuu[c] + Gaaa[c] + Pphe[c] + Plys[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation1" rate="1">
-                	Gmmn[c] + Gmnn[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] + Pabb[c] ->  
-                	Gmmn[c] + Gmnn[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] + Pabb[c] + Paab[c] + Pabb[c]
+                	Guuc[c] + Gaag[c] + Paaa[c] + phe[c] + lys[c] ->  
+                	Guuc[c] + Gaag[c] + Paaa[c] + Guuc[c] + Gaag[c] + Pphe[c] + Plys[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation2" rate="1">
-                	Gnmm[c] + Gnnm[c] + Pabb[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pabb[c] + Pbaa[c] ->  
-                	Gnmm[c] + Gnnm[c] + Pabb[c] + Pbaa[c] + Pbaa[c] + Pabb[c] + Pabb[c] + Pbaa[c] + Pbaa[c] + Pbba[c]
+                	Guua[c] + Gaau[c] + Paaa[c] + leu[c] + asn[c] ->  
+                	Guua[c] + Gaau[c] + Paaa[c] + Guua[c] + Gaau[c] + Pleu[c] + Pasn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation3" rate="1">
-                	Gmnm[c] + Gnmn[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] ->  
-                	Gmnm[c] + Gnmn[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] + Pbaa[c] + Pabb[c] + Paba[c] + Pbab[c]
+                	Guug[c] + Gaac[c] + Paaa[c] + leu[c] + asn[c] ->  
+                	Guug[c] + Gaac[c] + Paaa[c] + Guug[c] + Gaac[c] + Pleu[c] + Pasn[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation4" rate="1">
+                	Gucu[c] + Gaga[c] + Paaa[c] + ser[c] + arg[c] ->  
+                	Gucu[c] + Gaga[c] + Paaa[c] + Gucu[c] + Gaga[c] + Pser[c] + Parg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation5" rate="1">
+                	Gucc[c] + Gagg[c] + Paaa[c] + ser[c] + arg[c] ->  
+                	Gucc[c] + Gagg[c] + Paaa[c] + Gucc[c] + Gagg[c] + Pser[c] + Parg[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation6" rate="1">
+                	Guca[c] + Gagu[c] + Paaa[c] + ser[c] + ser[c] ->  
+                	Guca[c] + Gagu[c] + Paaa[c] + Guca[c] + Gagu[c] + Pser[c] + Pser[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation7" rate="1">
+                	Gucg[c] + Gagc[c] + Paaa[c] + ser[c] + ser[c] ->  
+                	Gucg[c] + Gagc[c] + Paaa[c] + Gucg[c] + Gagc[c] + Pser[c] + Pser[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation8" rate="1">
+                	Guau[c] + Gaua[c] + Paaa[c] + tyr[c] + ile[c] ->  
+                	Guau[c] + Gaua[c] + Paaa[c] + Guau[c] + Gaua[c] + Ptyr[c] + Pile[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation9" rate="1">
+                	Guac[c] + Gaug[c] + Paaa[c] + tyr[c] + met[c] ->  
+                	Guac[c] + Gaug[c] + Paaa[c] + Guac[c] + Gaug[c] + Ptyr[c] + Pmet[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation10" rate="1">
+                	Guaa[c] + Gauu[c] + Paaa[c] + ile[c] ->  
+                	Guaa[c] + Gauu[c] + Paaa[c] + Guaa[c] + Gauu[c] <!--+ STOP--> + Pile[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation11" rate="1">
+                	Guag[c] + Gauc[c] + Paaa[c] + ile[c] ->  
+                	Guag[c] + Gauc[c] + Paaa[c] + Guag[c] + Gauc[c] <!--+ STOP--> + Pile[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation12" rate="1">
+                	Gugu[c] + Gaca[c] + Paaa[c] + cys[c] + thr[c] ->  
+                	Gugu[c] + Gaca[c] + Paaa[c] + Gugu[c] + Gaca[c] + Pcys[c] + Pthr[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation13" rate="1">
+                	Gugc[c] + Gacg[c] + Paaa[c] + cys[c] + thr[c] ->  
+                	Gugc[c] + Gacg[c] + Paaa[c] + Gugc[c] + Gacg[c] + Pcys[c] + Pthr[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation14" rate="1">
+                	Guga[c] + Gacu[c] + Paaa[c] + thr[c] ->  
+                	Guga[c] + Gacu[c] + Paaa[c] + Guga[c] + Gacu[c] <!--+ STOP--> + Pthr[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation15" rate="1">
+                	Gugg[c] + Gacc[c] + Paaa[c] + trp[c] + thr[c] ->  
+                	Gugg[c] + Gacc[c] + Paaa[c] + Gugg[c] + Gacc[c] + Ptrp[c] + Pthr[c]
+            </reaction>
+            
+            <reaction spec='Reaction' reactionName="Translation16" rate="1">
+                	Gcuu[c] + Ggaa[c] + Paaa[c] + leu[c] + glu[c] ->  
+                	Gcuu[c] + Ggaa[c] + Paaa[c] + Gcuu[c] + Ggaa[c] + Pleu[c] + Pglu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation17" rate="1">
+                	Gcuc[c] + Ggag[c] + Paaa[c] + leu[c] + glu[c] ->  
+                	Gcuc[c] + Ggag[c] + Paaa[c] + Gcuc[c] + Ggag[c] + Pleu[c] + Pglu[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation18" rate="1">
+                	Gcua[c] + Ggau[c] + Paaa[c] + leu[c] + asp[c] ->  
+                	Gcua[c] + Ggau[c] + Paaa[c] + Gcua[c] + Ggau[c] + Pleu[c] + Pasp[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation19" rate="1">
+                	Gcug[c] + Ggac[c] + Paaa[c] + leu[c] + asp[c] ->  
+                	Gcug[c] + Ggac[c] + Paaa[c] + Gcug[c] + Ggac[c] + Pleu[c] + Pasp[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation20" rate="1">
+                	Gccu[c] + Ggga[c] + Paaa[c] + pro[c] + gly[c] ->  
+                	Gccu[c] + Ggga[c] + Paaa[c] + Gccu[c] + Ggga[c] + Ppro[c] + Pgly[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation21" rate="1">
+                	Gccc[c] + Gggg[c] + Paaa[c] + pro[c] + gly[c] ->  
+                	Gccc[c] + Gggg[c] + Paaa[c] + Gccc[c] + Gggg[c] + Ppro[c] + Pgly[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation22" rate="1">
+                	Gcca[c] + Gggu[c] + Paaa[c] + pro[c] + gly[c] ->  
+                	Gcca[c] + Gggu[c] + Paaa[c] + Gcca[c] + Gggu[c] + Ppro[c] + Pgly[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation23" rate="1">
+                	Gccg[c] + Gggc[c] + Paaa[c] + pro[c] + gly[c] ->  
+                	Gccg[c] + Gggc[c] + Paaa[c] + Gccg[c] + Gggc[c] + Ppro[c] + Pgly[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation24" rate="1">
+                	Gcau[c] + Ggua[c] + Paaa[c] + his[c] + val[c] ->  
+                	Gcau[c] + Ggua[c] + Paaa[c] + Gcau[c] + Ggua[c] + Phis[c] + Pval[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation25" rate="1">
+                	Gcac[c] + Ggug[c] + Paaa[c] + his[c] + val[c] ->  
+                	Gcac[c] + Ggug[c] + Paaa[c] + Gcac[c] + Ggug[c] + Phis[c] + Pval[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation26" rate="1">
+                	Gcaa[c] + Gguu[c] + Paaa[c] + gln[c] + val[c] ->  
+                	Gcaa[c] + Gguu[c] + Paaa[c] + Gcaa[c] + Gguu[c] + Pgln[c] + Pval[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation27" rate="1">
+                	Gcag[c] + Gguc[c] + Paaa[c] + gln[c] + val[c] ->  
+                	Gcag[c] + Gguc[c] + Paaa[c] + Gcag[c] + Gguc[c] + Pgln[c] + Pval[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation28" rate="1">
+                	Gcgu[c] + Ggca[c] + Paaa[c] + arg[c] + ala[c] ->  
+                	Gcgu[c] + Ggca[c] + Paaa[c] + Gcgu[c] + Ggca[c] + Parg[c] + Pala[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation29" rate="1">
+                	Gcgc[c] + Ggcg[c] + Paaa[c] + arg[c] + ala[c] ->  
+                	Gcgc[c] + Ggcg[c] + Paaa[c] + Gcgc[c] + Ggcg[c] + Parg[c] + Pala[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation30" rate="1">
+                	Gcga[c] + Ggcu[c] + Paaa[c] + arg[c] + ala[c] ->  
+                	Gcga[c] + Ggcu[c] + Paaa[c] + Gcga[c] + Ggcu[c] + Parg[c] + Pala[c]
+            </reaction>
+            <reaction spec='Reaction' reactionName="Translation31" rate="1">
+                	Gcgg[c] + Ggcc[c] + Paaa[c] + pro[c] + ala[c] ->  
+                	Gcgg[c] + Ggcc[c] + Paaa[c] + Gcgg[c] + Ggcc[c] + Ppro[c] + Pala[c]
             </reaction>
 
             <!-- Diffusion (migration) reactions
@@ -137,54 +459,334 @@
         	                        
             <!-- Genomes -->
 			<populationSize spec='PopulationSize'>
-				Gmmm[c] := 10
+				Guuu[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gnnn[c] := 10
+				Guuc[c] := 10
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				Gmmn[c] := 10
+				Guua[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gmnn[c] := 10
+				Guug[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gmnm[c] := 10
+				Gucu[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gnmn[c] := 10
+				Gucc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Guca[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gnmm[c] := 10
+				Gucg[c] := 10
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Gnnm[c] := 10
-			</populationSize>		
+				Guau[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Guac[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Guaa[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Guag[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gugu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gugc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Guga[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gugg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcuu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcuc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gcua[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcug[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gccu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gccc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gcca[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gccg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcau[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcac[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gcaa[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcag[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcgu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcgc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gcga[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gcgg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gauu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gauc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gaua[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gaug[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gacu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gacc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gaca[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gacg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gaau[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gaac[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gaaa[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gaag[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gagu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gagc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Gaga[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gagg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gguu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gguc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Ggua[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggug[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggcu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggcc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Ggca[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggcg[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggau[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggac[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Ggaa[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Ggag[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gggu[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gggc[c] := 10
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Ggga[c] := 10
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Gggg[c] := 10
+			</populationSize>
 	
 			<!-- Proteins -->
 			<populationSize spec='PopulationSize'>
-				Pbbb[c] := 50
+				Pphe[c] := 50
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				Paab[c] := 50
+				Pleu[c] := 50
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pabb[c] := 50
+				Pser[c] := 50
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Paba[c] := 50
+				Pthr[c] := 50
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbab[c] := 50
+				Ptyr[c] := 50
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbaa[c] := 50
+				Pcys[c] := 50
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				Pbba[c] := 50
+				Ptrp[c] := 50
 			</populationSize>			
 			<populationSize spec='PopulationSize'>
-				Paaa[c] := 50
+				Ppro[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Phis[c] := 50
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				Pgln[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Parg[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pile[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pmet[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pasn[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Plys[c] := 50
+			</populationSize>			
+			<populationSize spec='PopulationSize'>
+				Pval[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pala[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pasp[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pglu[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				Pgly[c] := 50
+			</populationSize>
+
+			<!-- Nucleotides -->
+			<populationSize spec='PopulationSize'>
+				a[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				c[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				u[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				g[c] := 50
+			</populationSize>
+			
+			<!-- Amino acids -->
+			<populationSize spec='PopulationSize'>
+				phe[c] := 50
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				leu[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				ser[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				thr[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				tyr[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				cys[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				trp[c] := 50
+			</populationSize>			
+			<populationSize spec='PopulationSize'>
+				pro[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				his[c] := 50
+			</populationSize>	
+			<populationSize spec='PopulationSize'>
+				gln[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				arg[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				ile[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				met[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				asn[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				lys[c] := 50
+			</populationSize>			
+			<populationSize spec='PopulationSize'>
+				val[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				ala[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				asp[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				glu[c] := 50
+			</populationSize>
+			<populationSize spec='PopulationSize'>
+				gly[c] := 50
 			</populationSize>
 
         </initialState>
