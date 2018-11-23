@@ -80,27 +80,8 @@
             <populationType spec='PopulationType' typeName="Ggga" dim="100" id="Guga"/>
             <populationType spec='PopulationType' typeName="Gggg" dim="100" id="Gugg"/>
 
-            <populationType spec='PopulationType' typeName="Pphe" dim="100" id="Pphe"/>
-            <populationType spec='PopulationType' typeName="Pleu" dim="100" id="Pleu"/>
-            <populationType spec='PopulationType' typeName="Pser" dim="100" id="Pser"/>
-            <populationType spec='PopulationType' typeName="Ptyr" dim="100" id="Ptyr"/>
-            <populationType spec='PopulationType' typeName="Pcys" dim="100" id="Pcys"/>
-            <populationType spec='PopulationType' typeName="Ptrp" dim="100" id="Ptrp"/>
-            <populationType spec='PopulationType' typeName="Ppro" dim="100" id="Ppro"/>
-            <populationType spec='PopulationType' typeName="Phis" dim="100" id="Phis"/>
-            <populationType spec='PopulationType' typeName="Pgln" dim="100" id="Pgln"/>
-            <populationType spec='PopulationType' typeName="Parg" dim="100" id="Parg"/>
-            <populationType spec='PopulationType' typeName="Pile" dim="100" id="Pile"/>
-            <populationType spec='PopulationType' typeName="Pmet" dim="100" id="Pmet"/>
-            <populationType spec='PopulationType' typeName="Pthr" dim="100" id="Pthr"/>
-            <populationType spec='PopulationType' typeName="Pasn" dim="100" id="Pasn"/>
-            <populationType spec='PopulationType' typeName="Plys" dim="100" id="Plys"/>
-            <populationType spec='PopulationType' typeName="Pval" dim="100" id="Pval"/>
-            <populationType spec='PopulationType' typeName="Pasp" dim="100" id="Pasp"/>
-            <populationType spec='PopulationType' typeName="Pala" dim="100" id="Pala"/>
-            <populationType spec='PopulationType' typeName="Pglu" dim="100" id="Pglu"/>
-            <populationType spec='PopulationType' typeName="Pgly" dim="100" id="Pgly"/>
-            
+            <populationType spec='PopulationType' typeName="PI" dim="100" id="PI"/>
+            <populationType spec='PopulationType' typeName="PII" dim="100" id="PII"/>            
             
             <!-- Food set: nucleotides and amino acids -->
             <populationType spec='PopulationType' typeName="a" dim="100" id="a"/>
@@ -274,133 +255,133 @@
 
             <!-- Translation reactions, one Class I aaRS and one Class II aaRS -->
             <reaction spec='Reaction' reactionName="Translation" rate="1">
-                	Guuu[c] + Gaaa[c] + Paaa[c] + phe[c] + lys[c] ->  
-                	Guuu[c] + Gaaa[c] + Paaa[c] + Guuu[c] + Gaaa[c] + Pphe[c] + Plys[c]
+                	Guuu[c] + Gaaa[c] + PII[c] + PII[c] + phe[c] + lys[c] ->  
+                	Guuu[c] + Gaaa[c] + PII[c] + PII[c] + Guuu[c] + Gaaa[c] + Pphe[c] + Plys[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation1" rate="1">
-                	Guuc[c] + Gaag[c] + Paaa[c] + phe[c] + lys[c] ->  
-                	Guuc[c] + Gaag[c] + Paaa[c] + Guuc[c] + Gaag[c] + Pphe[c] + Plys[c]
+                	Guuc[c] + Gaag[c] + PII[c] + PII[c] + phe[c] + lys[c] ->  
+                	Guuc[c] + Gaag[c] + PII[c] + PII[c] + Guuc[c] + Gaag[c] + Pphe[c] + Plys[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation2" rate="1">
-                	Guua[c] + Gaau[c] + Paaa[c] + leu[c] + asn[c] ->  
-                	Guua[c] + Gaau[c] + Paaa[c] + Guua[c] + Gaau[c] + Pleu[c] + Pasn[c]
+                	Guua[c] + Gaau[c] + PI[c] + PII[c] + leu[c] + asn[c] ->  
+                	Guua[c] + Gaau[c] + PI[c] + PII[c] + Guua[c] + Gaau[c] + Pleu[c] + Pasn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation3" rate="1">
-                	Guug[c] + Gaac[c] + Paaa[c] + leu[c] + asn[c] ->  
-                	Guug[c] + Gaac[c] + Paaa[c] + Guug[c] + Gaac[c] + Pleu[c] + Pasn[c]
+                	Guug[c] + Gaac[c] + PI[c] + PII[c] + leu[c] + asn[c] ->  
+                	Guug[c] + Gaac[c] + PI[c] + PII[c] + Guug[c] + Gaac[c] + Pleu[c] + Pasn[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation4" rate="1">
-                	Gucu[c] + Gaga[c] + Paaa[c] + ser[c] + arg[c] ->  
-                	Gucu[c] + Gaga[c] + Paaa[c] + Gucu[c] + Gaga[c] + Pser[c] + Parg[c]
+                	Gucu[c] + Gaga[c] + PI[c] + PII[c] + ser[c] + arg[c] ->  
+                	Gucu[c] + Gaga[c] + PI[c] + PII[c] + Gucu[c] + Gaga[c] + Pser[c] + Parg[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation5" rate="1">
-                	Gucc[c] + Gagg[c] + Paaa[c] + ser[c] + arg[c] ->  
-                	Gucc[c] + Gagg[c] + Paaa[c] + Gucc[c] + Gagg[c] + Pser[c] + Parg[c]
+                	Gucc[c] + Gagg[c] + PI[c] + PII[c] + ser[c] + arg[c] ->  
+                	Gucc[c] + Gagg[c] + PI[c] + PII[c] + Gucc[c] + Gagg[c] + Pser[c] + Parg[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation6" rate="1">
-                	Guca[c] + Gagu[c] + Paaa[c] + ser[c] + ser[c] ->  
-                	Guca[c] + Gagu[c] + Paaa[c] + Guca[c] + Gagu[c] + Pser[c] + Pser[c]
+                	Guca[c] + Gagu[c] + PII[c] + PII[c] + ser[c] + ser[c] ->  
+                	Guca[c] + Gagu[c] + PII[c] + PII[c] + Guca[c] + Gagu[c] + Pser[c] + Pser[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation7" rate="1">
-                	Gucg[c] + Gagc[c] + Paaa[c] + ser[c] + ser[c] ->  
-                	Gucg[c] + Gagc[c] + Paaa[c] + Gucg[c] + Gagc[c] + Pser[c] + Pser[c]
+                	Gucg[c] + Gagc[c] + PII[c] + PII[c] + ser[c] + ser[c] ->  
+                	Gucg[c] + Gagc[c] + PII[c] + PII[c] + Gucg[c] + Gagc[c] + Pser[c] + Pser[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation8" rate="1">
-                	Guau[c] + Gaua[c] + Paaa[c] + tyr[c] + ile[c] ->  
-                	Guau[c] + Gaua[c] + Paaa[c] + Guau[c] + Gaua[c] + Ptyr[c] + Pile[c]
+                	Guau[c] + Gaua[c] + PI[c] + PI[c] + tyr[c] + ile[c] ->  
+                	Guau[c] + Gaua[c] + PI[c] + PI[c] + Guau[c] + Gaua[c] + Ptyr[c] + Pile[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation9" rate="1">
-                	Guac[c] + Gaug[c] + Paaa[c] + tyr[c] + met[c] ->  
-                	Guac[c] + Gaug[c] + Paaa[c] + Guac[c] + Gaug[c] + Ptyr[c] + Pmet[c]
+                	Guac[c] + Gaug[c] + PI[c] + PI[c] + tyr[c] + met[c] ->  
+                	Guac[c] + Gaug[c] + PI[c] + PI[c] + Guac[c] + Gaug[c] + Ptyr[c] + Pmet[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation10" rate="1">
-                	Guaa[c] + Gauu[c] + Paaa[c] + ile[c] ->  
-                	Guaa[c] + Gauu[c] + Paaa[c] + Guaa[c] + Gauu[c] <!--+ STOP--> + Pile[c]
+                	Guaa[c] + Gauu[c] + PI[c] + ile[c] ->  
+                	Guaa[c] + Gauu[c] + PI[c] + Guaa[c] + Gauu[c] <!--+ STOP--> + Pile[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation11" rate="1">
-                	Guag[c] + Gauc[c] + Paaa[c] + ile[c] ->  
-                	Guag[c] + Gauc[c] + Paaa[c] + Guag[c] + Gauc[c] <!--+ STOP--> + Pile[c]
+                	Guag[c] + Gauc[c] + PI[c] + ile[c] ->  
+                	Guag[c] + Gauc[c] + PI[c] + Guag[c] + Gauc[c] <!--+ STOP--> + Pile[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation12" rate="1">
-                	Gugu[c] + Gaca[c] + Paaa[c] + cys[c] + thr[c] ->  
-                	Gugu[c] + Gaca[c] + Paaa[c] + Gugu[c] + Gaca[c] + Pcys[c] + Pthr[c]
+                	Gugu[c] + Gaca[c] + PI[c] + PII[c] + cys[c] + thr[c] ->  
+                	Gugu[c] + Gaca[c] + PI[c] + PII[c] + Gugu[c] + Gaca[c] + Pcys[c] + Pthr[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation13" rate="1">
-                	Gugc[c] + Gacg[c] + Paaa[c] + cys[c] + thr[c] ->  
-                	Gugc[c] + Gacg[c] + Paaa[c] + Gugc[c] + Gacg[c] + Pcys[c] + Pthr[c]
+                	Gugc[c] + Gacg[c] + PI[c] + PII[c] + cys[c] + thr[c] ->  
+                	Gugc[c] + Gacg[c] + PI[c] + PII[c] + Gugc[c] + Gacg[c] + Pcys[c] + Pthr[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation14" rate="1">
-                	Guga[c] + Gacu[c] + Paaa[c] + thr[c] ->  
-                	Guga[c] + Gacu[c] + Paaa[c] + Guga[c] + Gacu[c] <!--+ STOP--> + Pthr[c]
+                	Guga[c] + Gacu[c] + PII[c] + thr[c] ->  
+                	Guga[c] + Gacu[c] + PII[c] + Guga[c] + Gacu[c] <!--+ STOP--> + Pthr[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation15" rate="1">
-                	Gugg[c] + Gacc[c] + Paaa[c] + trp[c] + thr[c] ->  
-                	Gugg[c] + Gacc[c] + Paaa[c] + Gugg[c] + Gacc[c] + Ptrp[c] + Pthr[c]
+                	Gugg[c] + Gacc[c] + PI[c] + PII[c] + trp[c] + thr[c] ->  
+                	Gugg[c] + Gacc[c] + PI[c] + PII[c] + Gugg[c] + Gacc[c] + Ptrp[c] + Pthr[c]
             </reaction>
             
             <reaction spec='Reaction' reactionName="Translation16" rate="1">
-                	Gcuu[c] + Ggaa[c] + Paaa[c] + leu[c] + glu[c] ->  
-                	Gcuu[c] + Ggaa[c] + Paaa[c] + Gcuu[c] + Ggaa[c] + Pleu[c] + Pglu[c]
+                	Gcuu[c] + Ggaa[c] + PI[c] + PI[c] + leu[c] + glu[c] ->  
+                	Gcuu[c] + Ggaa[c] + PI[c] + PI[c] + Gcuu[c] + Ggaa[c] + Pleu[c] + Pglu[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation17" rate="1">
-                	Gcuc[c] + Ggag[c] + Paaa[c] + leu[c] + glu[c] ->  
-                	Gcuc[c] + Ggag[c] + Paaa[c] + Gcuc[c] + Ggag[c] + Pleu[c] + Pglu[c]
+                	Gcuc[c] + Ggag[c] + PI[c] + PI[c] + leu[c] + glu[c] ->  
+                	Gcuc[c] + Ggag[c] + PI[c] + PI[c] + Gcuc[c] + Ggag[c] + Pleu[c] + Pglu[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation18" rate="1">
-                	Gcua[c] + Ggau[c] + Paaa[c] + leu[c] + asp[c] ->  
-                	Gcua[c] + Ggau[c] + Paaa[c] + Gcua[c] + Ggau[c] + Pleu[c] + Pasp[c]
+                	Gcua[c] + Ggau[c] + PI[c] + PII[c] + leu[c] + asp[c] ->  
+                	Gcua[c] + Ggau[c] + PI[c] + PII[c] + Gcua[c] + Ggau[c] + Pleu[c] + Pasp[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation19" rate="1">
-                	Gcug[c] + Ggac[c] + Paaa[c] + leu[c] + asp[c] ->  
-                	Gcug[c] + Ggac[c] + Paaa[c] + Gcug[c] + Ggac[c] + Pleu[c] + Pasp[c]
+                	Gcug[c] + Ggac[c] + PI[c] + PII[c] + leu[c] + asp[c] ->  
+                	Gcug[c] + Ggac[c] + PI[c] + PII[c] + Gcug[c] + Ggac[c] + Pleu[c] + Pasp[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation20" rate="1">
-                	Gccu[c] + Ggga[c] + Paaa[c] + pro[c] + gly[c] ->  
-                	Gccu[c] + Ggga[c] + Paaa[c] + Gccu[c] + Ggga[c] + Ppro[c] + Pgly[c]
+                	Gccu[c] + Ggga[c] + PII[c] + PII[c] + pro[c] + gly[c] ->  
+                	Gccu[c] + Ggga[c] + PII[c] + PII[c] + Gccu[c] + Ggga[c] + Ppro[c] + Pgly[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation21" rate="1">
-                	Gccc[c] + Gggg[c] + Paaa[c] + pro[c] + gly[c] ->  
-                	Gccc[c] + Gggg[c] + Paaa[c] + Gccc[c] + Gggg[c] + Ppro[c] + Pgly[c]
+                	Gccc[c] + Gggg[c] + PII[c] + PII[c] + pro[c] + gly[c] ->  
+                	Gccc[c] + Gggg[c] + PII[c] + PII[c] + Gccc[c] + Gggg[c] + Ppro[c] + Pgly[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation22" rate="1">
-                	Gcca[c] + Gggu[c] + Paaa[c] + pro[c] + gly[c] ->  
-                	Gcca[c] + Gggu[c] + Paaa[c] + Gcca[c] + Gggu[c] + Ppro[c] + Pgly[c]
+                	Gcca[c] + Gggu[c] + PII[c] + PII[c] + pro[c] + gly[c] ->  
+                	Gcca[c] + Gggu[c] + PII[c] + PII[c] + Gcca[c] + Gggu[c] + Ppro[c] + Pgly[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation23" rate="1">
-                	Gccg[c] + Gggc[c] + Paaa[c] + pro[c] + gly[c] ->  
-                	Gccg[c] + Gggc[c] + Paaa[c] + Gccg[c] + Gggc[c] + Ppro[c] + Pgly[c]
+                	Gccg[c] + Gggc[c] + PII[c] + PII[c] + pro[c] + gly[c] ->  
+                	Gccg[c] + Gggc[c] + PII[c] + PII[c] + Gccg[c] + Gggc[c] + Ppro[c] + Pgly[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation24" rate="1">
-                	Gcau[c] + Ggua[c] + Paaa[c] + his[c] + val[c] ->  
-                	Gcau[c] + Ggua[c] + Paaa[c] + Gcau[c] + Ggua[c] + Phis[c] + Pval[c]
+                	Gcau[c] + Ggua[c] + PI[c] + PII[c] + his[c] + val[c] ->  
+                	Gcau[c] + Ggua[c] + PI[c] + PII[c] + Gcau[c] + Ggua[c] + Phis[c] + Pval[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation25" rate="1">
-                	Gcac[c] + Ggug[c] + Paaa[c] + his[c] + val[c] ->  
-                	Gcac[c] + Ggug[c] + Paaa[c] + Gcac[c] + Ggug[c] + Phis[c] + Pval[c]
+                	Gcac[c] + Ggug[c] + PI[c] + PII[c] + his[c] + val[c] ->  
+                	Gcac[c] + Ggug[c] + PI[c] + PII[c] + Gcac[c] + Ggug[c] + Phis[c] + Pval[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation26" rate="1">
-                	Gcaa[c] + Gguu[c] + Paaa[c] + gln[c] + val[c] ->  
-                	Gcaa[c] + Gguu[c] + Paaa[c] + Gcaa[c] + Gguu[c] + Pgln[c] + Pval[c]
+                	Gcaa[c] + Gguu[c] + PI[c] + PI[c] + gln[c] + val[c] ->  
+                	Gcaa[c] + Gguu[c] + PI[c] + PI[c] + Gcaa[c] + Gguu[c] + Pgln[c] + Pval[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation27" rate="1">
-                	Gcag[c] + Gguc[c] + Paaa[c] + gln[c] + val[c] ->  
-                	Gcag[c] + Gguc[c] + Paaa[c] + Gcag[c] + Gguc[c] + Pgln[c] + Pval[c]
+                	Gcag[c] + Gguc[c] + PI[c] + PI[c] + gln[c] + val[c] ->  
+                	Gcag[c] + Gguc[c] + PI[c] + PI[c] + Gcag[c] + Gguc[c] + Pgln[c] + Pval[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation28" rate="1">
-                	Gcgu[c] + Ggca[c] + Paaa[c] + arg[c] + ala[c] ->  
-                	Gcgu[c] + Ggca[c] + Paaa[c] + Gcgu[c] + Ggca[c] + Parg[c] + Pala[c]
+                	Gcgu[c] + Ggca[c] + PI[c] + PII[c] + arg[c] + ala[c] ->  
+                	Gcgu[c] + Ggca[c] + PI[c] + PII[c] + Gcgu[c] + Ggca[c] + Parg[c] + Pala[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation29" rate="1">
-                	Gcgc[c] + Ggcg[c] + Paaa[c] + arg[c] + ala[c] ->  
-                	Gcgc[c] + Ggcg[c] + Paaa[c] + Gcgc[c] + Ggcg[c] + Parg[c] + Pala[c]
+                	Gcgc[c] + Ggcg[c] + PI[c] + PII[c] + arg[c] + ala[c] ->  
+                	Gcgc[c] + Ggcg[c] + PI[c] + PII[c] + Gcgc[c] + Ggcg[c] + Parg[c] + Pala[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation30" rate="1">
-                	Gcga[c] + Ggcu[c] + Paaa[c] + arg[c] + ala[c] ->  
-                	Gcga[c] + Ggcu[c] + Paaa[c] + Gcga[c] + Ggcu[c] + Parg[c] + Pala[c]
+                	Gcga[c] + Ggcu[c] + PI[c] + PII[c] + arg[c] + ala[c] ->  
+                	Gcga[c] + Ggcu[c] + PI[c] + PII[c] + Gcga[c] + Ggcu[c] + Parg[c] + Pala[c]
             </reaction>
             <reaction spec='Reaction' reactionName="Translation31" rate="1">
-                	Gcgg[c] + Ggcc[c] + Paaa[c] + pro[c] + ala[c] ->  
-                	Gcgg[c] + Ggcc[c] + Paaa[c] + Gcgg[c] + Ggcc[c] + Ppro[c] + Pala[c]
+                	Gcgg[c] + Ggcc[c] + PII[c] + PII[c] + pro[c] + ala[c] ->  
+                	Gcgg[c] + Ggcc[c] + PII[c] + PII[c] + Gcgg[c] + Ggcc[c] + Ppro[c] + Pala[c]
             </reaction>
 
             <!-- Diffusion (migration) reactions
@@ -653,140 +634,86 @@
 	
 			<!-- Proteins -->
 			<populationSize spec='PopulationSize'>
-				Pphe[c] := 50
+				PI[c] := 50
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				Pleu[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pser[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pthr[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Ptyr[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pcys[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Ptrp[c] := 50
-			</populationSize>			
-			<populationSize spec='PopulationSize'>
-				Ppro[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Phis[c] := 50
-			</populationSize>	
-			<populationSize spec='PopulationSize'>
-				Pgln[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Parg[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pile[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pmet[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pasn[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Plys[c] := 50
-			</populationSize>			
-			<populationSize spec='PopulationSize'>
-				Pval[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pala[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pasp[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pglu[c] := 50
-			</populationSize>
-			<populationSize spec='PopulationSize'>
-				Pgly[c] := 50
+				PII[c] := 50
 			</populationSize>
 
 			<!-- Nucleotides -->
 			<populationSize spec='PopulationSize'>
-				a[c] := 50
+				a[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				c[c] := 50
+				c[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				u[c] := 50
+				u[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				g[c] := 50
+				g[c] := 5000
 			</populationSize>
 			
 			<!-- Amino acids -->
 			<populationSize spec='PopulationSize'>
-				phe[c] := 50
+				phe[c] := 5000
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				leu[c] := 50
+				leu[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				ser[c] := 50
+				ser[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				thr[c] := 50
+				thr[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				tyr[c] := 50
+				tyr[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				cys[c] := 50
+				cys[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				trp[c] := 50
+				trp[c] := 5000
 			</populationSize>			
 			<populationSize spec='PopulationSize'>
-				pro[c] := 50
+				pro[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				his[c] := 50
+				his[c] := 5000
 			</populationSize>	
 			<populationSize spec='PopulationSize'>
-				gln[c] := 50
+				gln[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				arg[c] := 50
+				arg[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				ile[c] := 50
+				ile[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				met[c] := 50
+				met[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				asn[c] := 50
+				asn[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				lys[c] := 50
+				lys[c] := 5000
 			</populationSize>			
 			<populationSize spec='PopulationSize'>
-				val[c] := 50
+				val[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				ala[c] := 50
+				ala[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				asp[c] := 50
+				asp[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				glu[c] := 50
+				glu[c] := 5000
 			</populationSize>
 			<populationSize spec='PopulationSize'>
-				gly[c] := 50
+				gly[c] := 5000
 			</populationSize>
 
         </initialState>
